@@ -3,5 +3,22 @@ ul.checkboxTree li {
 	list-style-type: none;
 	padding: 0;
 }
+
+ul.checkboxTree li span {
+ position: relative;
+ margin-right: 10px;
+ cursor: default;
+}
+
 a.checkboxTree.all {
-    width: 160px; padding: 4px; text-decoration: none; display: block; color: #224059; background-color: #b5c9e2; border-top: 2px #cce3ff solid; border-left: 2px #cce3ff solid; border-bottom: 2px #31557f solid; border-right: 2px #31557f solid; }
+    width: 160px;
+    padding: 4px;
+    text-decoration: none;
+    display: block;
+    color: #224059;
+    background-color: #b5c9e2;
+    border-top: 2px #cce3ff solid;
+    border-left: 2px #cce3ff solid;
+    border-bottom: 2px #31557f solid;
+    border-right: 2px #31557f solid;
+}

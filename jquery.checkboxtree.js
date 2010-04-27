@@ -20,21 +20,25 @@
             collapsed: false,
             collapseDuration: 500,
             collapseEffect: 'slide',
-            collapseImage: 'images/minus.png',
+            collapseImage: '',
             container: 'checkboxTree'+'['+ checkboxTree++ +']',
             cssClass: 'checkboxTree',
             expandAllButton: 'Expande all',
             expandDuration: 500,
             expandEffect: 'slide',
-            expandImage: 'images/plus.png',
-            leafImage: 'images/blank.png'
+            expandImage: '',
+            leafImage: ''
         }, options);
+
+        options.collapseAnchor = (options.collapseImage.length > 0) ? '<img src="'+options.collapseImage+'" />' : '-';
+        options.expandAnchor = (options.expandImage.length > 0) ? '<img src="'+options.expandImage+'" />' : '+';
+        options.leafAnchor = (options.leafImage.length > 0) ? '<img src="'+options.leafImage+'" />' : '';
 
         // build collapse all button
         if (options.collapseAllButton.length > 0) {
 
             $collapseAllButton = $('<a class="'+options.cssClass+' all" id="'+options.container+'collapseAll" href="javascript:void(0);">'+options.collapseAllButton+'</a>').bind('click', function(){
-                $('[class*=' + options.container + '] img').each(function(){
+                $('[class*=' + options.container + '] span').each(function(){
                     if ($(this).data("collapsed") === 1) {
                         collapse($(this), options);
                     }
@@ -48,7 +52,7 @@
         if (options.expandAllButton.length > 0) {
 
             $expandAllButton = $('<a class="'+options.cssClass+' all" id="'+options.container+'expandAll" href="javascript:void(0);">'+options.expandAllButton+'</a>').bind('click', function(){
-                $('[class*=' + options.container + '] img').each(function(){
+                $('[class*=' + options.container + '] span').each(function(){
                     if ($(this).data("collapsed") === 0) {
                         expand($(this), options);
                     }
@@ -62,25 +66,26 @@
         $("li", this).each(function() {
 
             if (options.collapsable) {
-                var $img;
+
+                var $a;
 
                 if ($(this).is(":has(ul)")) {
                     if (options.collapsed) {
                         $(this).find("ul").hide();
-                        $img = $('<img src="'+options.expandImage+'" />').data("collapsed",0);
+                        $a = $('<span></span>').html(options.expandAnchor).data("collapsed",0);
                     } else {
-                        $img = $('<img src="'+options.collapseImage+'" />').data("collapsed",1)
+                        $a = $('<span></span>').html(options.collapseAnchor).data("collapsed",1);
                     }
                 } else {
-                     $img = $('<img src="'+options.leafImage+'" />');
+                     $a = $('<span></span>').html(options.leafAnchor);
                 }
 
-                $(this).prepend($img);
+                $(this).prepend($a);
             }
         });
 
         // handle single expand/collapse
-        this.find('img').bind("click", function(e, a){
+        this.find('span').bind("click", function(e, a){
 
             if ($(this).data("collapsed") == undefined) {
                 return;
@@ -144,8 +149,7 @@
             listItem.children("ul").hide(options.collapseDuration);
         }
 
-        listItem.children("img").attr("src",options.expandImage);
-        img.data("collapsed",0)
+        listItem.children("span").html(options.expandAnchor).data("collapsed",0);
     }
 
     /**
@@ -161,8 +165,7 @@
             listItem.children("ul").show(options.expandDuration);
         }
 
-        listItem.children("img").attr("src",options.collapseImage);
-        img.data("collapsed",1)
+        listItem.children("span").html(options.collapseAnchor).data("collapsed",1);
     }
 
     /**
