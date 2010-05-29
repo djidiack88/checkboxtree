@@ -10,14 +10,15 @@
         <script type="text/javascript">
         //<!--
             $(document).ready(function() {
-                $('#tree').checkboxTree({
-                    checkParents: true,
-                    checkChildren: true,
-                    collapsable: true,
-                    collapsed: false/*,
+                $('#tree').checkboxTree();
+                $('#imageTree').checkboxTree({
                     collapseImage: 'images/minus.png',
                     expandImage: 'images/plus.png',
-                    leafImage: 'images/blank.png'//'*/
+                    leafImage: 'images/blank.png'
+                });
+                $('#collapseAllButtonsTree').checkboxTree({
+                    collapseAllButton: 'Collapse all',
+                    expandAllButton: 'Expande all'
                 });
             });
         //-->
@@ -28,6 +29,9 @@
         <hr>
         <table>
             <caption>jQuery checkboxTree plugin demo</caption>
+
+            <tr>
+                <th>Example
             <tr>
                 <td>
                     <ul id="tree">
@@ -54,6 +58,84 @@
                             </ul>
                         </ul>
                     </ul>
+                <td>
+                    <p>This example show default script behaviour.</p>
+
+            <tr>
+                <th>Example
+            <tr>
+                <td>
+                    <ul id="imageTree">
+                        <li><input type="checkbox">Root
+                        <ul>
+                            <li><input type="checkbox">Node 1
+                            <ul>
+                                <li><input type="checkbox">Node 1.1
+                            </ul>
+                        </ul>
+                        <ul>
+                            <li><input type="checkbox">Node 2
+                            <ul>
+                                <li><input type="checkbox">Node 2.1
+                                <li><input type="checkbox">Node 2.2
+                                <li><input type="checkbox">Node 2.3
+                                <ul>
+                                    <li><input type="checkbox">Node 2.3.1
+                                    <li><input type="checkbox">Node 2.3.2
+                                </ul>
+                                <li><input type="checkbox">Node 2.4
+                                <li><input type="checkbox">Node 2.5
+                                <li><input type="checkbox">Node 2.6
+                            </ul>
+                        </ul>
+                    </ul>
+                <td>
+                    <p>This example show how to use images to handle collapse/expande feature.</p>
+                    <dl>
+                        <dt>collapseImage
+                        <dd>'images/minus.png'
+                        <dt>expandImage
+                        <dd>'images/plus.png'
+                        <dt>leafImage
+                        <dd>'images/blank.png'
+                    <dl>
+
+            <tr>
+                <th>Example
+            <tr>
+                <td>
+                    <ul id="collapseAllButtonsTree">
+                        <li><input type="checkbox">Root
+                        <ul>
+                            <li><input type="checkbox">Node 1
+                            <ul>
+                                <li><input type="checkbox">Node 1.1
+                            </ul>
+                        </ul>
+                        <ul>
+                            <li><input type="checkbox">Node 2
+                            <ul>
+                                <li><input type="checkbox">Node 2.1
+                                <li><input type="checkbox">Node 2.2
+                                <li><input type="checkbox">Node 2.3
+                                <ul>
+                                    <li><input type="checkbox">Node 2.3.1
+                                    <li><input type="checkbox">Node 2.3.2
+                                </ul>
+                                <li><input type="checkbox">Node 2.4
+                                <li><input type="checkbox">Node 2.5
+                                <li><input type="checkbox">Node 2.6
+                            </ul>
+                        </ul>
+                    </ul>
+                <td>
+                    <p>This example show how to add buttons to collapse/expand all tree.</p>
+                    <dl>
+                        <dt>collapseAllButton
+                        <dd>'Collapse all'
+                        <dt>expandAllButton
+                        <dd>'Expande all'
+                    <dl>
 
         </table>
     </body>
