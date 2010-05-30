@@ -3,7 +3,7 @@
  *
  * @author Valerio Galano <valerio.galano@gmail.com>
  *
- * @version 0.2
+ * @version 0.3
  */
 (function($){
 
@@ -37,12 +37,18 @@
         // build collapse all button
         if (options.collapseAllButton.length > 0) {
 
-            $collapseAllButton = $('<a class="'+options.cssClass+' all" id="'+options.container+'collapseAll" href="javascript:void(0);">'+options.collapseAllButton+'</a>').bind('click', function(){
-                $('[class*=' + options.container + '] span').each(function(){
-                    if ($(this).data("collapsed") === 1) {
-                        collapse($(this), options);
-                    }
-                });
+            $collapseAllButton = $('<a/>', {
+                class: options.cssClass+' all',
+                id:    options.container+'collapseAll',
+                href:  'javascript:void(0);',
+                html:  options.collapseAllButton,
+                click: function(){
+                    $('[class*=' + options.container + '] span').each(function(){
+                        if ($(this).data("collapsed") === 1) {
+                            collapse($(this), options);
+                        }
+                    });
+                }
             });
 
             this.parent().prepend($collapseAllButton);
@@ -51,12 +57,18 @@
         // build expand all button
         if (options.expandAllButton.length > 0) {
 
-            $expandAllButton = $('<a class="'+options.cssClass+' all" id="'+options.container+'expandAll" href="javascript:void(0);">'+options.expandAllButton+'</a>').bind('click', function(){
-                $('[class*=' + options.container + '] span').each(function(){
-                    if ($(this).data("collapsed") === 0) {
-                        expand($(this), options);
-                    }
-                });
+            $expandAllButton = $('<a/>', {
+                class: options.cssClass+' all',
+                id:    options.container+'expandAll',
+                href:  'javascript:void(0);',
+                html:  options.expandAllButton,
+                click: function(){
+                    $('[class*=' + options.container + '] span').each(function(){
+                        if ($(this).data("collapsed") === 0) {
+                            expand($(this), options);
+                        }
+                    });
+                }
             });
 
             this.parent().prepend($expandAllButton);
