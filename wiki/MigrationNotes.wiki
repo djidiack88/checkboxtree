@@ -1,7 +1,17 @@
-#summary checkboxTree-0.2 user documentation
+#summary checkboxTree migrations notes
 #labels Featured
 
-==Options==
+===Migration from 0.2 to 0.3 ===
+With release 0.3, a lot of default options are changed. To preserve your script behaviour, please be sure to follow next steps:
+ * if not just setted, set "collapseAllButton: 'Collapse All'"
+ * if not just setted, set "expandAllButton: 'Expande All'"
+ * if not just setted, set "collapseEffect: 'slide'"
+ * if not just setted, set "expandEffect: 'slide'"
+ * if not just setted, set "collapseImage: 'images/minus.png'"
+ * if not just setted, set "expandImage: 'images/plus.png'"
+ * if not just setted, set "leafImage: 'images/blank.png'"
+
+=Default options values for version 0.2=
 
 || *options*         || *type*  || *default value*     || *description* ||
 || checkChildren     || boolean || true                || If node's children must be checked when node is checked. ||
