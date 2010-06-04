@@ -13,7 +13,7 @@
 || collapseEffect    || string  || 'blind'             || Effect to use for node collapse. Requires jQueryUI. See jQueryUI effect documentation for effect list. ||
 || collapseImage     || string  || ''                  || Image to use as anchor for expanded node. ||
 || container         || string  || 'checkboxTree`[n]`' || Class to contain tree. ||
-|| cssClass          || string  || 'CheckboxTree'      || Class for css linking. ||
+|| cssClass          || string  || 'checkboxTree'      || Class for css linking. ||
 || expandAllButton   || string  || ''                  || Label of Expand All button. If null, button is ignored. ||
 || expandDuration    || integer || 500                 || Collapse effect duration in ms. ||
 || expandeEffect     || string  || 'blind'             || Effect to use for node collapse. Requires jQueryUI. See jQueryUI effect documentation for effect list. ||
