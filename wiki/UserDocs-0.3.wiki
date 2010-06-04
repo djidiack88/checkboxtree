@@ -1,4 +1,4 @@
-#summary checkbox tree user documentation
+#summary checkboxTree-0.3 user documentation
 #labels Featured
 
 ==Options==
