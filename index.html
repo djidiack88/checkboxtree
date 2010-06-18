@@ -20,12 +20,17 @@
                     collapseAllButton: 'Collapse all',
                     expandAllButton: 'Expande all'
                 });
+                $('#imageTree2').checkboxTree({
+                    collapseImage: 'images/downArrow.gif',
+                    expandImage: 'images/rightArrow.gif',
+                    leafImage: 'images/blank.png'
+                });
             });
         //-->
         </script>
     </head>
     <body>
-        <a href="https://checkboxtree.googlecode.com/">Project Home</a>
+        <a href="http://checkboxtree.googlecode.com/">Project Home</a>
         <hr>
         <table>
             <caption>jQuery checkboxTree plugin demo</caption>
@@ -96,6 +101,44 @@
                         <dd>'images/minus.png'
                         <dt>expandImage
                         <dd>'images/plus.png'
+                        <dt>leafImage
+                        <dd>'images/blank.png'
+                    <dl>
+ <tr>
+                <th>Example
+            <tr>
+                <td>
+                    <ul id="imageTree2">
+                        <li><input type="checkbox">Root
+                        <ul>
+                            <li><input type="checkbox">Node 1
+                            <ul>
+                                <li><input type="checkbox">Node 1.1
+                            </ul>
+                        </ul>
+                        <ul>
+                            <li><input type="checkbox">Node 2
+                            <ul>
+                                <li><input type="checkbox">Node 2.1
+                                <li><input type="checkbox">Node 2.2
+                                <li><input type="checkbox">Node 2.3
+                                <ul>
+                                    <li><input type="checkbox">Node 2.3.1
+                                    <li><input type="checkbox">Node 2.3.2
+                                </ul>
+                                <li><input type="checkbox">Node 2.4
+                                <li><input type="checkbox">Node 2.5
+                                <li><input type="checkbox">Node 2.6
+                            </ul>
+                        </ul>
+                    </ul>
+                <td>
+                    <p>This example show how to use images to handle collapse/expande feature.</p>
+                    <dl>
+                        <dt>collapseImage
+                        <dd>'images/downArrow.gif'
+                        <dt>expandImage
+                        <dd>'images/rightArrow.gif'
                         <dt>leafImage
                         <dd>'images/blank.png'
                     <dl>
