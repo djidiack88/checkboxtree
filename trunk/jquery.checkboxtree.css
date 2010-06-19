@@ -5,9 +5,9 @@ ul.checkboxTree li {
 }
 
 ul.checkboxTree li span {
- position: relative;
- margin-right: 10px;
- cursor: default;
+    position: relative;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 a.checkboxTree.all {
