@@ -3,7 +3,9 @@
  *
  * @author Valerio Galano <valerio.galano@gmail.com>
  *
- * @version 0.3
+ * @see http://checkboxtree.googlecode.com
+ *
+ * @version 0.3.1
  */
 (function($){
 
@@ -94,6 +96,7 @@
 
                 $(this).prepend($a);
             }
+
         });
 
         // handle single expand/collapse
