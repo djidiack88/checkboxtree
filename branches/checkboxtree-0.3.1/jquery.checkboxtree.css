@@ -1,13 +1,26 @@
 ul.checkboxTree,
 ul.checkboxTree li {
+    font-family:verdana,arial;
+    font-size:0.8em;
 	list-style-type: none;
 	padding: 0;
 }
 
 ul.checkboxTree li span {
- position: relative;
- margin-right: 10px;
- cursor: default;
+    position: relative;
+    cursor: default;
+}
+
+ul.checkboxTree li span.collapsed {
+    margin-right: 0px;
+}
+
+ul.checkboxTree li span.expanded {
+    margin-right: 4px;
+}
+
+ul.checkboxTree li span.leaf {
+    margin-right: 5px;
 }
 
 a.checkboxTree.all {
