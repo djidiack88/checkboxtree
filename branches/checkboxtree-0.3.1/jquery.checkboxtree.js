@@ -34,7 +34,7 @@
 
         options.collapseAnchor = (options.collapseImage.length > 0) ? '<img src="'+options.collapseImage+'" />' : '-';
         options.expandAnchor = (options.expandImage.length > 0) ? '<img src="'+options.expandImage+'" />' : '+';
-        options.leafAnchor = (options.leafImage.length > 0) ? '<img src="'+options.leafImage+'" />' : '&nbsp;';
+        options.leafAnchor = (options.leafImage.length > 0) ? '<img src="'+options.leafImage+'" />' : '';
 
         // build collapse all button
         if (options.collapseAllButton.length > 0) {
