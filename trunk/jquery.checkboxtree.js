@@ -3,7 +3,9 @@
  *
  * @author Valerio Galano <valerio.galano@gmail.com>
  *
- * @version 0.3
+ * @see http://checkboxtree.googlecode.com
+ *
+ * @version 0.4
  */
 (function($){
 
@@ -14,22 +16,39 @@
         // build main options before element iteration
         var options = $.extend({
             checkChildren: true,
+//            checkDescendants: true,
             checkParents: true,
+//            checkAscendants: true,
+//            parentShouldAlwaysBeCheckedIfAndOnlyIfAllChildrenAreChecked: true,
             collapsable: true,
             collapseAllButton: '',
-            collapsed: false,
+            collapsed: false, // to replace with initializeTreeCollapsed
+//            collapsedCssClass: 'collapsed',
             collapseDuration: 500,
             collapseEffect: 'blind',
             collapseImage: '',
+//            collapseOnUncheck: '',
             container: 'checkboxTree'+'['+ checkboxTree++ +']',
             cssClass: 'checkboxTree',
             expandAllButton: '',
             expandDuration: 500,
+//            expandedCssClass: 'expanded',
             expandEffect: 'blind',
             expandImage: '',
+//            expandOnCheck: '',
+//            initializeTreeCollapsed: false,
+//            initializeCheckedNodesCollapsed: false,
+//            initializeUncheckedNodesCollapsed: false,
+//            leafCssClass: 'leaf',
             leafImage: ''
         }, options);
 
+        // check jQuery version
+//        if (1.4 >  $().jquery.substr(0,3)) {
+//            alert('jQuery Checkbox Tree need jQuery 1.4+ to work')
+//        }
+
+        // @todo replace following anchor code with customizable option
         options.collapseAnchor = (options.collapseImage.length > 0) ? '<img src="'+options.collapseImage+'" />' : '-';
         options.expandAnchor = (options.expandImage.length > 0) ? '<img src="'+options.expandImage+'" />' : '+';
         options.leafAnchor = (options.leafImage.length > 0) ? '<img src="'+options.leafImage+'" />' : '';
@@ -38,13 +57,13 @@
         if (options.collapseAllButton.length > 0) {
 
             $collapseAllButton = $('<a/>', {
-                class: options.cssClass+' all',
-                id:    options.container+'collapseAll',
-                href:  'javascript:void(0);',
-                html:  options.collapseAllButton,
-                click: function(){
+                'class': options.cssClass+' all',
+                id:      options.container+'collapseAll',
+                href:    'javascript:void(0);',
+                html:    options.collapseAllButton,
+                click:   function(){
                     $('[class*=' + options.container + '] span').each(function(){
-                        if ($(this).data("collapsed") === 1) {
+                        if ($(this).hasClass("expanded")) {
                             collapse($(this), options);
                         }
                     });
@@ -58,13 +77,13 @@
         if (options.expandAllButton.length > 0) {
 
             $expandAllButton = $('<a/>', {
-                class: options.cssClass+' all',
-                id:    options.container+'expandAll',
-                href:  'javascript:void(0);',
-                html:  options.expandAllButton,
-                click: function(){
+                'class': options.cssClass+' all',
+                id:      options.container+'expandAll',
+                href:    'javascript:void(0);',
+                html:    options.expandAllButton,
+                click:   function(){
                     $('[class*=' + options.container + '] span').each(function(){
-                        if ($(this).data("collapsed") === 0) {
+                        if ($(this).hasClass("collapsed")) {
                             expand($(this), options);
                         }
                     });
@@ -84,26 +103,27 @@
                 if ($(this).is(":has(ul)")) {
                     if (options.collapsed) {
                         $(this).find("ul").hide();
-                        $a = $('<span></span>').html(options.expandAnchor).data("collapsed",0);
+                        $a = $('<span></span>').html(options.expandAnchor).addClass("collapsed");
                     } else {
-                        $a = $('<span></span>').html(options.collapseAnchor).data("collapsed",1);
+                        $a = $('<span></span>').html(options.collapseAnchor).addClass("expanded");
                     }
                 } else {
-                     $a = $('<span></span>').html(options.leafAnchor);
+                     $a = $('<span></span>').html(options.leafAnchor).addClass("leaf");
                 }
 
                 $(this).prepend($a);
             }
+
         });
 
         // handle single expand/collapse
         this.find('span').bind("click", function(e, a){
 
-            if ($(this).data("collapsed") == undefined) {
+            if ($(this).hasClass("leaf") == undefined) {
                 return;
             }
 
-            if ($(this).data("collapsed") === 0) {
+            if ($(this).hasClass("collapsed")) {
                 expand($(this), options);
             } else {
                 collapse($(this), options);
@@ -161,7 +181,7 @@
             listItem.children("ul").hide(options.collapseDuration);
         }
 
-        listItem.children("span").html(options.expandAnchor).data("collapsed",0);
+        listItem.children("span").html(options.expandAnchor).addClass("collapsed").removeClass("expanded");
     }
 
     /**
@@ -177,7 +197,7 @@
             listItem.children("ul").show(options.expandDuration);
         }
 
-        listItem.children("span").html(options.collapseAnchor).data("collapsed",1);
+        listItem.children("span").html(options.collapseAnchor).addClass("expanded").removeClass("collapsed");
     }
 
     /**
