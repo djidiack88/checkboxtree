@@ -5,7 +5,7 @@
  *
  * @see http://checkboxtree.googlecode.com
  *
- * @version 0.4
+ * @version 0.3.1
  */
 (function($){
 
@@ -16,39 +16,22 @@
         // build main options before element iteration
         var options = $.extend({
             checkChildren: true,
-//            checkDescendants: true,
             checkParents: true,
-//            checkAscendants: true,
-//            parentShouldAlwaysBeCheckedIfAndOnlyIfAllChildrenAreChecked: true,
             collapsable: true,
             collapseAllButton: '',
-            collapsed: false, // to replace with initializeTreeCollapsed
-//            collapsedCssClass: 'collapsed',
+            collapsed: false,
             collapseDuration: 500,
             collapseEffect: 'blind',
             collapseImage: '',
-//            collapseOnUncheck: '',
             container: 'checkboxTree'+'['+ checkboxTree++ +']',
             cssClass: 'checkboxTree',
             expandAllButton: '',
             expandDuration: 500,
-//            expandedCssClass: 'expanded',
             expandEffect: 'blind',
             expandImage: '',
-//            expandOnCheck: '',
-//            initializeTreeCollapsed: false,
-//            initializeCheckedNodesCollapsed: false,
-//            initializeUncheckedNodesCollapsed: false,
-//            leafCssClass: 'leaf',
             leafImage: ''
         }, options);
 
-        // check jQuery version
-//        if (1.4 >  $().jquery.substr(0,3)) {
-//            alert('jQuery Checkbox Tree need jQuery 1.4+ to work')
-//        }
-
-        // @todo replace following anchor code with customizable option
         options.collapseAnchor = (options.collapseImage.length > 0) ? '<img src="'+options.collapseImage+'" />' : '-';
         options.expandAnchor = (options.expandImage.length > 0) ? '<img src="'+options.expandImage+'" />' : '+';
         options.leafAnchor = (options.leafImage.length > 0) ? '<img src="'+options.leafImage+'" />' : '';
