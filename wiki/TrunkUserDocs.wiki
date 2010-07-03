@@ -1,5 +1,5 @@
 #summary checkboxTree user documentation for trunk version
-#labels Phase-Deploy
+#labels Phase-Deploy,Deprecated
 
 ==Options==
 
