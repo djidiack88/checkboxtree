@@ -1,8 +1,11 @@
 #summary checkboxTree migrations notes
 #labels Featured
 
-===Migration from 0.2 to 0.3 ===
-With release 0.3, a lot of default options are changed. To preserve your script behaviour, please be sure to follow next steps:
+===Migration from release 0.2 to 0.3 ===
+With release 0.3, a lot of default options are changed.
+
+If you have a working release 0.2, please be sure to follow next steps in order to preserve your script behaviour:
+
  * if not just setted, set "collapseAllButton: 'Collapse All'"
  * if not just setted, set "expandAllButton: 'Expande All'"
  * if not just setted, set "collapseEffect: 'slide'"
