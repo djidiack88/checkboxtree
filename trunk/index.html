@@ -25,6 +25,10 @@
                     expandImage: 'images/rightArrow.gif',
                     leafImage: 'images/blank.png'
                 });
+                tree = $('#eventSupportTree').checkboxTree();
+                $('#collapse').click(function(){
+                    tree.collapse($('#node23'));
+                });
             });
         //-->
         </script>
@@ -164,6 +168,44 @@
                                 <li><input type="checkbox">Node 2.1
                                 <li><input type="checkbox">Node 2.2
                                 <li><input type="checkbox">Node 2.3
+                                <ul>
+                                    <li><input type="checkbox">Node 2.3.1
+                                    <li><input type="checkbox">Node 2.3.2
+                                </ul>
+                                <li><input type="checkbox">Node 2.4
+                                <li><input type="checkbox">Node 2.5
+                                <li><input type="checkbox">Node 2.6
+                            </ul>
+                        </ul>
+                    </ul>
+                <td>
+                    <p>This example show how to add buttons to collapse/expand all tree.</p>
+                    <dl>
+                        <dt>collapseAllButton
+                        <dd>'Collapse all'
+                        <dt>expandAllButton
+                        <dd>'Expande all'
+                    <dl>
+
+            <tr>
+                <th>Example
+            <tr>
+                <td>
+                    <a href="javascript:void(0);" id="collapse">Collapse node 2.3</a>
+                    <ul id="eventSupportTree">
+                        <li><input type="checkbox">Root
+                        <ul>
+                            <li><input type="checkbox">Node 1
+                            <ul>
+                                <li><input type="checkbox">Node 1.1
+                            </ul>
+                        </ul>
+                        <ul>
+                            <li><input type="checkbox">Node 2
+                            <ul>
+                                <li><input type="checkbox">Node 2.1
+                                <li><input type="checkbox">Node 2.2
+                                <li id="node23"><input type="checkbox">Node 2.3
                                 <ul>
                                     <li><input type="checkbox">Node 2.3.1
                                     <li><input type="checkbox">Node 2.3.2
