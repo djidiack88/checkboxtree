@@ -49,7 +49,7 @@
         if (options.collapsable) {
 
             // mantain compatibility with old "collapsed" option
-            if (collapsed) {
+            if (options.collapsed) {
                 options.initializeCheckedNodesCollapsed = tree;
                 options.initializeUncheckedNodesCollapsed = tree;
             }
@@ -89,19 +89,19 @@
 
             // initialize leafs
             $("li:not(:has(ul))", this).each(function() {
-                $(this).prepend($('<span></span>'));
+                $(this).prepend($('<span>y</span>'));
                 markAsLeaf($(this), options);
             });
 
             // initialize checked nodes
             $("li:has(ul):has(input:checked)", this).each(function() {
-                $(this).prepend($('<span></span>'));
+                $(this).prepend($('<span>a</span>'));
                 options.initializeCheckedNodesCollapsed ? collapse($(this), options) : expand($(this), options);
             });
 
             // initialize unchecked nodes
-            $("li:has(ul):has(input:not(:checked))", this).each(function() {
-                $(this).prepend($('<span></span>'));
+            $("li:has(ul):not(:has(input:checked))", this).each(function() {
+                $(this).prepend($('<span>o</span>'));
                 options.initializeUncheckedNodesCollapsed ? collapse($(this), options) : expand($(this), options);
             });
 
