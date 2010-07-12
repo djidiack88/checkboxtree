@@ -22,8 +22,7 @@
 //            parentShouldAlwaysBeCheckedIfAndOnlyIfAllChildrenAreChecked: true,
             collapsable: true,
             collapseAllButton: '',
-            collapsed: false, // to replace with initializeTreeCollapsed
-//            collapsedCssClass: 'collapsed',
+            collapsed: false, // deprecated: replaced by initializeCheckedNodesCollapsed and initializeUncheckedNodesCollapsed
             collapseDuration: 500,
             collapseEffect: 'blind',
             collapseImage: '',
@@ -32,14 +31,11 @@
             cssClass: 'checkboxTree',
             expandAllButton: '',
             expandDuration: 500,
-//            expandedCssClass: 'expanded',
             expandEffect: 'blind',
             expandImage: '',
 //            expandOnCheck: '',
-//            initializeTreeCollapsed: false,
-//            initializeCheckedNodesCollapsed: false,
-//            initializeUncheckedNodesCollapsed: false,
-//            leafCssClass: 'leaf',
+            initializeCheckedNodesCollapsed: false,
+            initializeUncheckedNodesCollapsed: false,
             leafImage: ''
         }, options);
 
@@ -47,96 +43,94 @@
 //        if (1.4 >  $().jquery.substr(0,3)) {
 //            alert('jQuery Checkbox Tree need jQuery 1.4+ to work')
 //        }
+//
 
-        // @todo replace following anchor code with customizable option
-        options.collapseAnchor = (options.collapseImage.length > 0) ? '<img src="'+options.collapseImage+'" />' : '-';
-        options.expandAnchor = (options.expandImage.length > 0) ? '<img src="'+options.expandImage+'" />' : '+';
-        options.leafAnchor = (options.leafImage.length > 0) ? '<img src="'+options.leafImage+'" />' : '';
+        // setup collapse engine tree
+        if (options.collapsable) {
 
-        // build collapse all button
-        if (options.collapseAllButton.length > 0) {
+            // mantain compatibility with old "collapsed" option
+            if (collapsed) {
+                options.initializeCheckedNodesCollapsed = tree;
+                options.initializeUncheckedNodesCollapsed = tree;
+            }
 
-            $collapseAllButton = $('<a/>', {
-                'class': options.cssClass+' all',
-                id:      options.container+'collapseAll',
-                href:    'javascript:void(0);',
-                html:    options.collapseAllButton,
-                click:   function(){
-                    $('[class*=' + options.container + '] span').each(function(){
-                        if ($(this).hasClass("expanded")) {
+            // @todo replace following anchor code with customizable option
+            options.collapseAnchor = (options.collapseImage.length > 0) ? '<img src="'+options.collapseImage+'" />' : '-';
+            options.expandAnchor   = (options.expandImage.length > 0)   ? '<img src="'+options.expandImage+'" />'   : '+';
+            options.leafAnchor     = (options.leafImage.length > 0)     ? '<img src="'+options.leafImage+'" />'     : '';
+
+            // build collapse all button
+            if (options.collapseAllButton.length > 0) {
+                this.parent().prepend($('<a/>', {
+                    'class': options.cssClass+' all',
+                    href:    'javascript:void(0);',
+                    html:    options.collapseAllButton,
+                    click:   function(){
+                        $('[class*=' + options.container + '] li.expanded').each(function(){
                             collapse($(this), options);
-                        }
-                    });
-                }
-            });
-
-            this.parent().prepend($collapseAllButton);
-        }
-
-        // build expand all button
-        if (options.expandAllButton.length > 0) {
-
-            $expandAllButton = $('<a/>', {
-                'class': options.cssClass+' all',
-                id:      options.container+'expandAll',
-                href:    'javascript:void(0);',
-                html:    options.expandAllButton,
-                click:   function(){
-                    $('[class*=' + options.container + '] span').each(function(){
-                        if ($(this).hasClass("collapsed")) {
-                            expand($(this), options);
-                        }
-                    });
-                }
-            });
-
-            this.parent().prepend($expandAllButton);
-        }
-
-        // setup tree
-        $("li", this).each(function() {
-
-            if (options.collapsable) {
-
-                var $a;
-
-                if ($(this).is(":has(ul)")) {
-                    if (options.collapsed) {
-                        $(this).find("ul").hide();
-                        $a = $('<span></span>').html(options.expandAnchor).addClass("collapsed");
-                    } else {
-                        $a = $('<span></span>').html(options.collapseAnchor).addClass("expanded");
+                        });
                     }
-                } else {
-                     $a = $('<span></span>').html(options.leafAnchor).addClass("leaf");
-                }
-
-                $(this).prepend($a);
+                }));
             }
 
-        });
-
-        // handle single expand/collapse
-        this.find('span').bind("click", function(e, a){
-
-            if ($(this).hasClass("leaf") == undefined) {
-                return;
+            // build expand all button
+            if (options.expandAllButton.length > 0) {
+                this.parent().prepend($('<a/>', {
+                    'class': options.cssClass+' all',
+                    href:    'javascript:void(0);',
+                    html:    options.expandAllButton,
+                    click:   function(){
+                        $('[class*=' + options.container + '] li.collapsed').each(function(){
+                            expand($(this), options);
+                        });
+                    }
+                }));
             }
 
-            if ($(this).hasClass("collapsed")) {
-                expand($(this), options);
-            } else {
-                collapse($(this), options);
-            }
-        });
+            // initialize leafs
+            $("li:not(:has(ul))", this).each(function() {
+                $(this).prepend($('<span></span>'));
+                markAsLeaf($(this), options);
+            });
 
-        // handle tree select/unselect
+            // initialize checked nodes
+            $("li:has(ul):has(input:checked)", this).each(function() {
+                $(this).prepend($('<span></span>'));
+                options.initializeCheckedNodesCollapsed ? collapse($(this), options) : expand($(this), options);
+            });
+
+            // initialize unchecked nodes
+            $("li:has(ul):has(input:not(:checked))", this).each(function() {
+                $(this).prepend($('<span></span>'));
+                options.initializeUncheckedNodesCollapsed ? collapse($(this), options) : expand($(this), options);
+            });
+
+            // bind expand event
+            this.find('li.collapsed span').live("click", function(){
+                expand($(this).parents("li:first"), options);
+                return false;
+            });
+
+            // bind collapse event
+            this.find('li.expanded span').live("click", function(){
+                collapse($(this).parents("li:first"), options);
+                return false;
+            });
+
+            // bind uncheck event
+//            this.find(':checkbox:not(:checked)').live("click", function() {
+//            });
+
+            // bind check event
+//            this.find(':checkbox:checked').live("click", function() {
+//            });
+        }
+
+        // bind tree check/unckeck
         this.find(':checkbox').bind("click", function(e, a) {
-
             if (options.checkChildren) {
                 toggleChildren($(this));
             }
-
             if (options.checkParents && $(this).is(":checked")) {
                 checkParents($(this), options);
             }
@@ -148,9 +142,24 @@
         // add css class
         this.addClass(options.cssClass);
 
-        return this;
-    };
+        //
+        this.collapse = function(li)
+        {
+            if ($(li).hasClass('expanded')) {
+                collapse(li, options);
+            }
+        }
 
+        //
+        this.expand = function(li)
+        {
+            if ($(li).hasClass('collapsed')) {
+                expand(li, options);
+            }
+        }
+
+        return this;
+    }
 
     /**
      * Recursively check parents of passed checkbox
@@ -169,35 +178,81 @@
     }
 
     /**
-     * Collapse tree element
+     * Collapse node
+     *
+     * @private
+     *
+     * @param li      node to collapse
+     * @param options options object
      */
-    this.collapse = function(img, options)
+    function collapse(li, options)
     {
-        var listItem = img.parents("li:first");
-
         if ($.ui !== undefined) {
-            listItem.children("ul").hide(options.collapseEffect, {}, options.collapseDuration);
+            li.children("ul").hide(options.collapseEffect, {}, options.collapseDuration);
         } else {
-            listItem.children("ul").hide(options.collapseDuration);
+            li.children("ul").hide(options.collapseDuration);
         }
-
-        listItem.children("span").html(options.expandAnchor).addClass("collapsed").removeClass("expanded");
+        markAsCollapsed(li, options);
     }
 
     /**
-     * Expand tree element
+     * Expand node
+     *
+     * @private
+     *
+     * @param li      node to expand
+     * @param options options object
      */
-    this.expand = function(img, options)
+    function expand(li, options)
     {
-        var listItem = img.parents("li:first");
-
         if ($.ui !== undefined) {
-            listItem.children("ul").show(options.expandEffect, {}, options.expandDuration);
+            li.children("ul").show(options.expandEffect, {}, options.expandDuration);
         } else {
-            listItem.children("ul").show(options.expandDuration);
+            li.children("ul").show(options.expandDuration);
         }
+        markAsExpanded(li, options);
+    }
 
-        listItem.children("span").html(options.collapseAnchor).addClass("expanded").removeClass("collapsed");
+    /**
+     * Mark node as collapsed
+     *
+     * @private
+     *
+     * @param li      node to mark
+     * @param options options object
+     */
+    function markAsCollapsed(li, options)
+    {
+        li.children("span").html(options.expandAnchor);
+        li.addClass("collapsed").removeClass("expanded");
+    }
+
+    /**
+     * Mark node as expanded
+     *
+     * @private
+     *
+     * @param li      node to mark
+     * @param options options object
+     */
+    function markAsExpanded(li, options)
+    {
+        li.children("span").html(options.collapseAnchor);
+        li.addClass("expanded").removeClass("collapsed");
+    }
+
+    /**
+     * Mark node as leaf
+     *
+     * @private
+     *
+     * @param li      node to mark
+     * @param options options object
+     */
+    function markAsLeaf(li, options)
+    {
+        li.children("span").html(options.leafAnchor);
+        li.addClass("leaf");
     }
 
     /**
