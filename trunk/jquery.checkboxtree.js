@@ -50,8 +50,8 @@
 
             // mantain compatibility with old "collapsed" option
             if (options.collapsed) {
-                options.initializeCheckedNodesCollapsed = tree;
-                options.initializeUncheckedNodesCollapsed = tree;
+                options.initializeCheckedNodesCollapsed = true;
+                options.initializeUncheckedNodesCollapsed = true;
             }
 
             // @todo replace following anchor code with customizable option
