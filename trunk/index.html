@@ -32,9 +32,15 @@
                 $('#expand').click(function(){
                     tree.expand($('#node23'));
                 });
+                $('#check').click(function(){
+                    tree.check($('#node23'));
+                });
+                $('#uncheck').click(function(){
+                    tree.uncheck($('#node23'));
+                });
                 $('#initializeTree').checkboxTree({
-                    initializeCheckedNodesCollapsed: false,
-                    initializeUncheckedNodesCollapsed: true
+                    initializeChecked: 'expanded',
+                    initializeUnchecked: 'collapsed'
                 });
             });
         //-->
@@ -198,8 +204,10 @@
                 <th>Example
             <tr>
                 <td>
-                    <a href="javascript:void(0);" id="collapse">Collapse node 2.3</a>
-                    <a href="javascript:void(0);" id="expand">Expand node 2.3</a>
+                    <a href="javascript:void(0);" id="collapse">Collapse node 2.3</a> |
+                    <a href="javascript:void(0);" id="expand">Expand node 2.3</a> <br />
+                    <a href="javascript:void(0);" id="check">Check node 2.3</a> |
+                    <a href="javascript:void(0);" id="uncheck">Uncheck node 2.3</a> <br />
                     <ul id="eventSupportTree">
                         <li><input type="checkbox">Root
                         <ul>
@@ -258,10 +266,10 @@
                 <td>
                     <p>This example show how to initialize a tree.</p>
                     <dl>
-                        <dt>initializeCheckedNodesCollapsed
-                        <dd>false
-                        <dt>initializeUncheckedNodesCollapsed
-                        <dd>true
+                        <dt>initializeChecked
+                        <dd>'expanded'
+                        <dt>initializeUnchecked
+                        <dd>'collapsed'
                     <dl>
 
         </table>

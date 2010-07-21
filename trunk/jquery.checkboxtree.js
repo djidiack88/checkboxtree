@@ -22,22 +22,25 @@
 //            parentShouldAlwaysBeCheckedIfAndOnlyIfAllChildrenAreChecked: true,
             collapsable: true,
             collapseAllButton: '',
-            collapsed: false, // deprecated: replaced by initializeCheckedNodesCollapsed and initializeUncheckedNodesCollapsed
+            // @todo remove next option as soon as possible
+            collapsed: false, // deprecated: replaced by initializeChecked and initializeUnchecked
             collapseDuration: 500,
             collapseEffect: 'blind',
             collapseImage: '',
-//            collapseOnUncheck: '',
             container: 'checkboxTree'+'['+ checkboxTree++ +']',
             cssClass: 'checkboxTree',
             expandAllButton: '',
             expandDuration: 500,
             expandEffect: 'blind',
             expandImage: '',
-//            expandOnCheck: '',
-            initializeCheckedNodesCollapsed: false,
-            initializeUncheckedNodesCollapsed: false,
-            leafImage: ''
+            initializeChecked: 'expanded', // or 'collapsed'
+            initializeUnchecked: 'expanded', // or 'collapsed'
+            leafImage: '',
+//            OnCheck: '', // or 'expand', 'collapse'
+//            OnUncheck: '' // or 'expand', 'collapse'
         }, options);
+
+        // @todo check options
 
         // check jQuery version
 //        if (1.4 >  $().jquery.substr(0,3)) {
@@ -48,10 +51,11 @@
         // setup collapse engine tree
         if (options.collapsable) {
 
+            // @todo remove this as soon as possible
             // mantain compatibility with old "collapsed" option
             if (options.collapsed) {
-                options.initializeCheckedNodesCollapsed = true;
-                options.initializeUncheckedNodesCollapsed = true;
+                options.initializeChecked = 'collapsed';
+                options.initializeUnchecked = 'collapsed';
             }
 
             // @todo replace following anchor code with customizable option
@@ -89,20 +93,20 @@
 
             // initialize leafs
             $("li:not(:has(ul))", this).each(function() {
-                $(this).prepend($('<span>y</span>'));
+                $(this).prepend($('<span></span>'));
                 markAsLeaf($(this), options);
             });
 
             // initialize checked nodes
             $("li:has(ul):has(input:checked)", this).each(function() {
-                $(this).prepend($('<span>a</span>'));
-                options.initializeCheckedNodesCollapsed ? collapse($(this), options) : expand($(this), options);
+                $(this).prepend($('<span></span>'));
+                options.initializeChecked == 'collapsed' ? collapse($(this), options) : expand($(this), options);
             });
 
             // initialize unchecked nodes
             $("li:has(ul):not(:has(input:checked))", this).each(function() {
-                $(this).prepend($('<span>o</span>'));
-                options.initializeUncheckedNodesCollapsed ? collapse($(this), options) : expand($(this), options);
+                $(this).prepend($('<span></span>'));
+                options.initializeUnchecked == 'collapsed' ? collapse($(this), options) : expand($(this), options);
             });
 
             // bind expand event
@@ -117,23 +121,62 @@
                 return false;
             });
 
-            // bind uncheck event
+            // bind collapse/expand uncheck event
 //            this.find(':checkbox:not(:checked)').live("click", function() {
 //            });
 
-            // bind check event
+            // bind collapse/expand check event
 //            this.find(':checkbox:checked').live("click", function() {
 //            });
+
+            /**
+             * Collapse node
+             *
+             * @public
+             *
+             * @param li node to collapse
+             */
+            this.collapse = function(li)
+            {
+                if ($(li).hasClass('expanded')) {
+                    collapse(li, options);
+                }
+            }
+
+            /**
+             * Expand node
+             *
+             * @public
+             *
+             * @param li node to expand
+             */
+            this.expand = function(li)
+            {
+                if ($(li).hasClass('collapsed')) {
+                    expand(li, options);
+                }
+            }
+
         }
 
         // bind tree check/unckeck
-        this.find(':checkbox').bind("click", function(e, a) {
+/*        this.find(':checkbox').bind("click", function(e, a) {
             if (options.checkChildren) {
                 toggleChildren($(this));
             }
             if (options.checkParents && $(this).is(":checked")) {
                 checkParents($(this), options);
             }
+        });//*/
+
+        $(':checkbox:not(:checked)', this).live('click', function() {
+            var li = $(this).parents('li:first');
+            uncheck(li, options);
+        });
+
+        $(':checkbox:checked', this).live('click', function() {
+            var li = $(this).parents('li:first');
+            check(li, options);
         });
 
         // add container class
@@ -143,19 +186,14 @@
         this.addClass(options.cssClass);
 
         //
-        this.collapse = function(li)
+        this.check = function(li)
         {
-            if ($(li).hasClass('expanded')) {
-                collapse(li, options);
-            }
+            check(li, options);
         }
 
-        //
-        this.expand = function(li)
+        this.uncheck = function(li)
         {
-            if ($(li).hasClass('collapsed')) {
-                expand(li, options);
-            }
+            uncheck(li, options);
         }
 
         return this;
@@ -258,9 +296,46 @@
     /**
      * Check/uncheck children of passed checkbox
      */
-    this.toggleChildren = function(checkbox)
+/*    this.toggleChildren = function(checkbox)
     {
         checkbox.parents('li:first').find('li :checkbox').attr('checked',checkbox.attr('checked') ? 'checked' : '');
+    }*/
+
+    /**
+     * Check node
+     *
+     * @private
+     *
+     * @param li      node to check
+     * @param options options object
+     */
+    this.check = function(li, options)
+    {
+        if (options.checkChildren) {
+            $(li).find('input').attr('checked', 'checked');
+        } else {
+            $(li).find('input:first').attr('checked', 'checked');
+        }
+        if (options.checkParents) {
+            checkParents($(li).find('input:first'), options);
+        }
+    }
+
+    /**
+     * Uncheck node
+     *
+     * @private
+     *
+     * @param li      node to uncheck
+     * @param options options object
+     */
+    this.uncheck = function(li, options)
+    {
+        if (options.checkChildren) {
+            $(li).find('input').attr('checked', '');
+        } else {
+            $(li).find('input:first').attr('checked', '');
+        }
     }
 
 })(jQuery);
