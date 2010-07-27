@@ -1,7 +1,7 @@
 /**
  * jQuery Checkbox Tree
  *
- * @author Valerio Galano <valerio.galano@gmail.com>
+ * @author Valerio Galano <v.galano@daredevel.it>
  *
  * @see http://checkboxtree.googlecode.com
  *
@@ -15,15 +15,9 @@
 
         // build main options before element iteration
         var options = $.extend({
-            checkChildren: true,
-//            checkDescendants: true,
-            checkParents: true,
-//            checkAscendants: true,
 //            parentShouldAlwaysBeCheckedIfAndOnlyIfAllChildrenAreChecked: true,
             collapsable: true,
             collapseAllButton: '',
-            // @todo remove next option as soon as possible
-            collapsed: false, // deprecated: replaced by initializeChecked and initializeUnchecked
             collapseDuration: 500,
             collapseEffect: 'blind',
             collapseImage: '',
@@ -36,8 +30,23 @@
             initializeChecked: 'expanded', // or 'collapsed'
             initializeUnchecked: 'expanded', // or 'collapsed'
             leafImage: '',
-            onCheck: '', // or 'expand', 'collapse'
-            onUncheck: '' // or 'expand', 'collapse'
+//            onCheckAscendantsWill: 'check', // or '' or 'uncheck'
+//            onUncheckAscendantsWill: 'check', // or '' or 'uncheck'
+//            onCheckDescendantsWill: 'check', // or '' or 'uncheck'
+//            onUncheckDescendantsWill: 'check', // or '' or 'uncheck'
+/*onCheckNodeWill?*/onCheck: '', // or 'expand', 'collapse'
+/*onUncheckNodeWill?*/onUncheck: '', // or 'expand', 'collapse'
+
+            // shortcut options
+            checkChildren: true, // shortcut:
+                                 // true ->
+                                 // false ->
+            checkParents: true, // shortcut:
+                                // true ->
+                                // false ->
+            collapsed: false // shortcut:
+                             // true ->  initializeChecked: 'collapsed', initializeUnchecked: 'collapsed'
+                             // false -> initializeChecked: 'expanded',  initializeUnchecked: 'expanded'
         }, options);
 
         // @todo check options
@@ -165,11 +174,13 @@
 
         }
 
+        // bind node uncheck event
         $(':checkbox:not(:checked)', this).live('click', function() {
             var li = $(this).parents('li:first');
             uncheck(li, options);
         });
 
+        // bind node check event
         $(':checkbox:checked', this).live('click', function() {
             var li = $(this).parents('li:first');
             check(li, options);
