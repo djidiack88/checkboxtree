@@ -10,22 +10,24 @@
         <script type="text/javascript">
         //<!--
             $(document).ready(function() {
-                $('#tree').checkboxTree();
-                $('#imageTree').checkboxTree({
+                $('#tree1').checkboxTree();
+                $('#tree2').checkboxTree({
                     collapseImage: 'images/minus.png',
                     expandImage: 'images/plus.png',
                     leafImage: 'images/blank.png'
                 });
-                $('#collapseAllButtonsTree').checkboxTree({
-                    collapseAllButton: 'Collapse all',
-                    expandAllButton: 'Expande all'
-                });
-                $('#imageTree2').checkboxTree({
+                $('#tree3').checkboxTree({
+                    onCheck: 'expand',
+                    onUncheck: 'collapse',
                     collapseImage: 'images/downArrow.gif',
                     expandImage: 'images/rightArrow.gif',
                     leafImage: 'images/blank.png'
                 });
-                tree = $('#eventSupportTree').checkboxTree();
+                $('#tree4').checkboxTree({
+                    collapseAllButton: 'Collapse all',
+                    expandAllButton: 'Expande all'
+                });
+                tree = $('#tree5').checkboxTree();
                 $('#collapse').click(function(){
                     tree.collapse($('#node23'));
                 });
@@ -38,7 +40,7 @@
                 $('#uncheck').click(function(){
                     tree.uncheck($('#node23'));
                 });
-                $('#initializeTree').checkboxTree({
+                $('#tree6').checkboxTree({
                     initializeChecked: 'expanded',
                     initializeUnchecked: 'collapsed'
                 });
@@ -59,7 +61,7 @@
                 <th>Example
             <tr>
                 <td>
-                    <ul id="tree">
+                    <ul id="tree1">
                         <li><input type="checkbox">Root
                         <ul>
                             <li><input type="checkbox">Node 1
@@ -90,7 +92,7 @@
                 <th>Example
             <tr>
                 <td>
-                    <ul id="imageTree">
+                    <ul id="tree2">
                         <li><input type="checkbox">Root
                         <ul>
                             <li><input type="checkbox">Node 1
@@ -128,7 +130,7 @@
                 <th>Example
             <tr>
                 <td>
-                    <ul id="imageTree2">
+                    <ul id="tree3">
                         <li><input type="checkbox">Root
                         <ul>
                             <li><input type="checkbox">Node 1
@@ -153,8 +155,16 @@
                         </ul>
                     </ul>
                 <td>
-                    <p>This example show how to use images to handle collapse/expande feature.</p>
+                    <p>This example show:</p>
+                    <ul>
+                        <li>how to automatically collapse/expand on check/unchek events
+                        <li>how to use images to handle collapse/expande feature
+                    </ul>
                     <dl>
+                        <dt>onCheck
+                        <dd>'expand'
+                        <dt>onUncheck
+                        <dd>'collapse'
                         <dt>collapseImage
                         <dd>'images/downArrow.gif'
                         <dt>expandImage
@@ -167,7 +177,7 @@
                 <th>Example
             <tr>
                 <td>
-                    <ul id="collapseAllButtonsTree">
+                    <ul id="tree4">
                         <li><input type="checkbox">Root
                         <ul>
                             <li><input type="checkbox">Node 1
@@ -208,7 +218,7 @@
                     <a href="javascript:void(0);" id="expand">Expand node 2.3</a> <br />
                     <a href="javascript:void(0);" id="check">Check node 2.3</a> |
                     <a href="javascript:void(0);" id="uncheck">Uncheck node 2.3</a> <br />
-                    <ul id="eventSupportTree">
+                    <ul id="tree5">
                         <li><input type="checkbox">Root
                         <ul>
                             <li><input type="checkbox">Node 1
@@ -239,7 +249,7 @@
                 <th>Example
             <tr>
                 <td>
-                    <ul id="initializeTree">
+                    <ul id="tree6">
                         <li><input type="checkbox" checked>Root
                         <ul>
                             <li><input type="checkbox">Node 1
