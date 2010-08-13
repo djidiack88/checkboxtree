@@ -12,12 +12,18 @@
     var checkboxTree = 0;
 
     $.fn.checkboxTree = function(options) {
-
-        // build main options before element iteration
-        var options = $.extend({
+var defaults = {
+//            checkAllButton: '',
+            checkChildren: true, // shortcut:
+            checkParents: true, // shortcut:
+//ancestors: '', //or 'check', 'uncheck'
+//descendants: '', //or 'check', 'uncheck'
 //            parentShouldAlwaysBeCheckedIfAndOnlyIfAllChildrenAreChecked: true,
             collapsable: true,
             collapseAllButton: '',
+            collapsed: false, // shortcut:
+                              // true ->  initializeChecked: 'collapsed', initializeUnchecked: 'collapsed'
+                              // false -> initializeChecked: 'expanded',  initializeUnchecked: 'expanded'
             collapseDuration: 500,
             collapseEffect: 'blind',
             collapseImage: '',
@@ -30,6 +36,7 @@
             initializeChecked: 'expanded', // or 'collapsed'
             initializeUnchecked: 'expanded', // or 'collapsed'
             leafImage: '',
+// node: '', // or 'expand', 'collapse'
 //            onCheckAscendantsWill: 'check', // or '' or 'uncheck'
 //            onUncheckAscendantsWill: 'check', // or '' or 'uncheck'
 //            onCheckDescendantsWill: 'check', // or '' or 'uncheck'
@@ -37,17 +44,14 @@
 /*onCheckNodeWill?*/onCheck: '', // or 'expand', 'collapse'
 /*onUncheckNodeWill?*/onUncheck: '', // or 'expand', 'collapse'
 
-            // shortcut options
-            checkChildren: true, // shortcut:
-                                 // true ->
-                                 // false ->
-            checkParents: true, // shortcut:
-                                // true ->
-                                // false ->
-            collapsed: false // shortcut:
-                             // true ->  initializeChecked: 'collapsed', initializeUnchecked: 'collapsed'
-                             // false -> initializeChecked: 'expanded',  initializeUnchecked: 'expanded'
-        }, options);
+//preserveCheck: false,
+//preserveCollapse: false,
+
+//            uncheckAllButton: '',
+        };
+
+        // build main options before element iteration
+        var options = $.extend(true, defaults, options);
 
         // @todo check options
 
@@ -125,6 +129,7 @@
             });
 
             // bind collapse/expand uncheck event
+            // if (options.node.onUncheck != undefined) {
             $(':checkbox:not(:checked)', this).live("click", function() {
                 if (options.onUncheck == 'collapse') {
                     collapse($(this).parents("li:first"), options);
@@ -133,6 +138,7 @@
                     expand($(this).parents("li:first"), options);
                 }
             });
+            //}
 
             // bind collapse/expand check event
             $(':checkbox:checked', this).live("click", function() {
