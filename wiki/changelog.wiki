@@ -1,3 +1,9 @@
+=== 0.4 (trunk): ===
+ * fixed issue 3
+ * fixed issue 4
+ * fixed issue 5
+ * fixed issue 9
+ * fixed issue 6
 === 0.3.1: ===
  * fixed issue 7
  * fixed issue 2
