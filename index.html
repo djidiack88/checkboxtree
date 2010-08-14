@@ -17,8 +17,12 @@
                     leafImage: 'images/blank.png'
                 });
                 $('#tree3').checkboxTree({
-                    onCheck: 'expand',
-                    onUncheck: 'collapse',
+                    onCheck: {
+                        node: 'expand'
+                    },
+                    onUncheck: {
+                        node: 'collapse'
+                    },
                     collapseImage: 'images/downArrow.gif',
                     expandImage: 'images/rightArrow.gif',
                     leafImage: 'images/blank.png'

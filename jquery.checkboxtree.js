@@ -12,18 +12,14 @@
     var checkboxTree = 0;
 
     $.fn.checkboxTree = function(options) {
-var defaults = {
+        var defaults = {
 //            checkAllButton: '',
-            checkChildren: true, // shortcut:
-            checkParents: true, // shortcut:
-//ancestors: '', //or 'check', 'uncheck'
-//descendants: '', //or 'check', 'uncheck'
+            checkChildren: true,
+            checkParents: true,
 //            parentShouldAlwaysBeCheckedIfAndOnlyIfAllChildrenAreChecked: true,
             collapsable: true,
             collapseAllButton: '',
-            collapsed: false, // shortcut:
-                              // true ->  initializeChecked: 'collapsed', initializeUnchecked: 'collapsed'
-                              // false -> initializeChecked: 'expanded',  initializeUnchecked: 'expanded'
+            collapsed: false,
             collapseDuration: 500,
             collapseEffect: 'blind',
             collapseImage: '',
@@ -36,18 +32,24 @@ var defaults = {
             initializeChecked: 'expanded', // or 'collapsed'
             initializeUnchecked: 'expanded', // or 'collapsed'
             leafImage: '',
-// node: '', // or 'expand', 'collapse'
-//            onCheckAscendantsWill: 'check', // or '' or 'uncheck'
-//            onUncheckAscendantsWill: 'check', // or '' or 'uncheck'
-//            onCheckDescendantsWill: 'check', // or '' or 'uncheck'
-//            onUncheckDescendantsWill: 'check', // or '' or 'uncheck'
-/*onCheckNodeWill?*/onCheck: '', // or 'expand', 'collapse'
-/*onUncheckNodeWill?*/onUncheck: '', // or 'expand', 'collapse'
-
-//preserveCheck: false,
-//preserveCollapse: false,
-
-//            uncheckAllButton: '',
+            onCheck: {
+                ancestors: 'check', //or '', 'uncheck'
+                descendants: 'check', //or '', 'uncheck'
+                node: '' // or 'collapse', 'expand'
+            },
+            onUncheck: {
+                ancestors: '', //or 'check', 'uncheck'
+                descendants: 'uncheck', //or '', 'uncheck'
+                node: '' // or 'collapse', 'expand'
+/*                checkAncestors: false,
+                checkDescendants: false,
+                collapse: false,
+                expand: false,
+                function: function() {},
+                uncheckAncestors: false,
+                uncheckDescendants: false*/
+            }
+//            uncheckAllButton: ''
         };
 
         // build main options before element iteration
@@ -128,27 +130,33 @@ var defaults = {
                 return false;
             });
 
-            // bind collapse/expand uncheck event
-            // if (options.node.onUncheck != undefined) {
-            $(':checkbox:not(:checked)', this).live("click", function() {
-                if (options.onUncheck == 'collapse') {
+            // bind collapse on uncheck event
+            if (options.onUncheck.node == 'collapse') {
+                $(':checkbox:not(:checked)', this).live("click", function() {
                     collapse($(this).parents("li:first"), options);
-                }
-                if (options.onUncheck == 'expand') {
-                    expand($(this).parents("li:first"), options);
-                }
-            });
-            //}
+                });
+            } else
 
-            // bind collapse/expand check event
-            $(':checkbox:checked', this).live("click", function() {
-                if (options.onCheck == 'collapse') {
-                    collapse($(this).parents("li:first"), options);
-                }
-                if (options.onCheck == 'expand') {
+            // bind expand on uncheck event
+            if (options.onUncheck.node == 'expand') {
+                $(':checkbox:not(:checked)', this).live("click", function() {
                     expand($(this).parents("li:first"), options);
-                }
-            });
+                });
+            }
+
+            // bind collapse on check event
+            if (options.onCheck.node == 'collapse') {
+                $(':checkbox:checked', this).live("click", function() {
+                    collapse($(this).parents("li:first"), options);
+                });
+            } else
+
+            // bind expand on check event
+            if (options.onCheck.node == 'expand') {
+                $(':checkbox:checked', this).live("click", function() {
+                    expand($(this).parents("li:first"), options);
+                });
+            }
 
             /**
              * Collapse node
@@ -226,21 +234,58 @@ var defaults = {
     }
 
     /**
-     * Recursively check parents of passed checkbox
+     * Check node
      *
-     * @todo move form checkbox to li element
+     * @private
+     *
+     * @param li      node to check
+     * @param options options object
      */
-    this.checkParents = function(checkbox, options)
+    function check(li, options)
     {
-        var parentCheckbox = checkbox.parents("li:first").parents("li:first").find(" :checkbox:first");
+        $(li).find('input:first').attr('checked', 'checked');
 
-        if (!parentCheckbox.is(":checked")) {
-            parentCheckbox.attr("checked","checked");
+        if (options.onCheck.ancestors == 'check') {
+            checkAncestors(li, options);
+        } else
+
+        if (options.onCheck.ancestors == 'uncheck') {
+            uncheckAncestors(li, options);
         }
 
-        if (parentCheckbox.parents('[class*=' + options.container + ']').attr('class') != undefined) {
-            checkParents(parentCheckbox, options);
+        if (options.onCheck.descendants == 'check') {
+            checkDescendants(li, options);
+        } else
+
+        if (options.onCheck.descendants == 'uncheck') {
+            uncheckDescendants(li, options);
         }
+    }
+
+    /**
+     * Check ancestors on passed node
+     *
+     * @private
+     *
+     * @param li      node
+     * @param options options object
+     */
+    function checkAncestors(li, options)
+    {
+        li.parents("li").find('input:first').attr("checked","checked");;
+    }
+
+    /**
+     * Check descendants on passed node
+     *
+     * @private
+     *
+     * @param li      node
+     * @param options options object
+     */
+    function checkDescendants(li, options)
+    {
+        li.find('input').attr('checked', 'checked');
     }
 
     /**
@@ -253,7 +298,7 @@ var defaults = {
      */
     function collapse(li, options)
     {
-        if ($(li).hasClass('collapsed')) return;
+        if ($(li).hasClass('collapsed') || $(li).hasClass('leaf')) return;
 
         if ($.ui !== undefined) {
             li.children("ul").hide(options.collapseEffect, {}, options.collapseDuration);
@@ -273,7 +318,7 @@ var defaults = {
      */
     function expand(li, options)
     {
-        if ($(li).hasClass('expanded')) return;
+        if ($(li).hasClass('expanded') || $(li).hasClass('leaf')) return;
 
         if ($.ui !== undefined) {
             li.children("ul").show(options.expandEffect, {}, options.expandDuration);
@@ -326,26 +371,6 @@ var defaults = {
     }
 
     /**
-     * Check node
-     *
-     * @private
-     *
-     * @param li      node to check
-     * @param options options object
-     */
-    this.check = function(li, options)
-    {
-        if (options.checkChildren) {
-            $(li).find('input').attr('checked', 'checked');
-        } else {
-            $(li).find('input:first').attr('checked', 'checked');
-        }
-        if (options.checkParents) {
-            checkParents($(li).find('input:first'), options);
-        }
-    }
-
-    /**
      * Uncheck node
      *
      * @private
@@ -353,13 +378,51 @@ var defaults = {
      * @param li      node to uncheck
      * @param options options object
      */
-    this.uncheck = function(li, options)
+    function uncheck(li, options)
     {
-        if (options.checkChildren) {
-            $(li).find('input').attr('checked', '');
-        } else {
-            $(li).find('input:first').attr('checked', '');
+        $(li).find('input:first').attr('checked', '');
+
+        if (options.onUncheck.ascendants == 'check') {
+            checkAncestors(li, options);
+        } else
+
+        if (options.onUncheck.ascendants == 'uncheck') {
+            uncheckAncestors(li, options);
         }
+
+        if (options.onUncheck.descendants == 'check') {
+            checkDescendants(li, options);
+        } else
+
+        if (options.onUncheck.descendants == 'uncheck') {
+            uncheckDescendants(li, options);
+        }
+    }
+
+    /**
+     * Uncheck ancestors on passed node
+     *
+     * @private
+     *
+     * @param li      node
+     * @param options options object
+     */
+    function uncheckAncestors(li, options)
+    {
+        li.parents("li").find('input:first').attr("checked","");;
+    }
+
+    /**
+     * Uncheck descendants on passed node
+     *
+     * @private
+     *
+     * @param li      node
+     * @param options options object
+     */
+    function uncheckDescendants(li, options)
+    {
+        li.find('input').attr('checked', '');
     }
 
 })(jQuery);
