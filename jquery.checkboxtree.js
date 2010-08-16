@@ -3,7 +3,7 @@
  *
  * @author Valerio Galano <v.galano@daredevel.it>
  *
- * @see http://checkboxtree.googlecode.com
+ * @see http://checkboxtree.daredevel.it
  *
  * @version 0.4
  */
