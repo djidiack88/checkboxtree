@@ -3,6 +3,10 @@ body {
     font-family: verdana, arial; font-size: 0.8em;
 }
 
+code {
+    white-space: pre;
+}
+
 table {
     border-collapse:collapse;
     border: 0px;
