@@ -18,14 +18,20 @@
             checkParents: true,
 //            parentShouldAlwaysBeCheckedIfAndOnlyIfAllChildrenAreChecked: true,
             collapsable: true,
-            collapseAllButton: '',
+            collapseAllButton: {
+                container: '',
+                html: ''
+            },
             collapsed: false,
             collapseDuration: 500,
             collapseEffect: 'blind',
             collapseImage: '',
             container: 'checkboxTree'+'['+ checkboxTree++ +']',
             cssClass: 'checkboxTree',
-            expandAllButton: '',
+            expandAllButton: {
+                container: '',
+                html: ''
+            },
             expandDuration: 500,
             expandEffect: 'blind',
             expandImage: '',
@@ -60,7 +66,17 @@
         // setup collapse engine tree
         if (options.collapsable) {
 
-            // @todo remove this as soon as possible
+            // mantain compatibility with old "checkChildren" option
+            if (options.checkChildren) {
+                options.onCheck.descendants = 'check';
+                options.onUncheck.descendants = 'uncheck';
+            }
+
+            // mantain compatibility with old "checkChildren" option
+            if (options.checkParents) {
+                options.onCheck.ascendants = 'check';
+            }
+
             // mantain compatibility with old "collapsed" option
             if (options.collapsed) {
                 options.initializeChecked = 'collapsed';
@@ -73,11 +89,11 @@
             options.leafAnchor     = (options.leafImage.length > 0)     ? '<img src="'+options.leafImage+'" />'     : '';
 
             // build collapse all button
-            if (options.collapseAllButton.length > 0) {
-                this.parent().prepend($('<a/>', {
+            if (options.collapseAllButton.html.length > 0) {
+                options.collapseAllButton.container.prepend($('<a/>', {
                     'class': options.cssClass+' all',
                     href:    'javascript:void(0);',
-                    html:    options.collapseAllButton,
+                    html:    options.collapseAllButton.html,
                     click:   function(){
                         $('[class*=' + options.container + '] li.expanded').each(function(){
                             collapse($(this), options);
@@ -87,11 +103,11 @@
             }
 
             // build expand all button
-            if (options.expandAllButton.length > 0) {
-                this.parent().prepend($('<a/>', {
+            if (options.expandAllButton.html.length > 0) {
+                options.expandAllButton.container.prepend($('<a/>', {
                     'class': options.cssClass+' all',
                     href:    'javascript:void(0);',
-                    html:    options.expandAllButton,
+                    html:    options.expandAllButton.html,
                     click:   function(){
                         $('[class*=' + options.container + '] li.collapsed').each(function(){
                             expand($(this), options);

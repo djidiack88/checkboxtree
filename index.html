@@ -49,7 +49,7 @@
             <div id="tabs-1">
                 <p>This example show default script behaviour.</p>
                 <code class="jquery">
-                $('#tree1').checkboxTree();
+$('#tree1').checkboxTree();
                 </code>
                 <ul id="tree1">
                     <li><input type="checkbox">Root
@@ -80,11 +80,10 @@
             <div id="tabs-2">
                 <p>This example show how to use images to handle collapse/expande feature.</p>
                 <code class="jquery">
-                    $('#tree2').checkboxTree({
-                        collapseImage: 'images/minus.png',
-                        expandImage: 'images/plus.png',
-//                        leafImage: 'images/blank.png'
-                    });
+$('#tree2').checkboxTree({
+    collapseImage: 'images/minus.png',
+    expandImage: 'images/plus.png',
+});
                 </code>
                 <ul id="tree2">
                     <li><input type="checkbox">Root
@@ -119,30 +118,17 @@
                     <li>how to use images to handle collapse/expande feature
                 </ul>
                 <code class="jquery">
-                $('#tree3').checkboxTree({
-                    onCheck: {
-                        node: 'expand'
-                    },
-                    onUncheck: {
-                        node: 'collapse'
-                    },
-                    collapseImage: 'images/downArrow.gif',
-                    expandImage: 'images/rightArrow.gif',
-//                    leafImage: 'images/blank.png'
-                });
+$('#tree3').checkboxTree({
+    onCheck: {
+        node: 'expand'
+    },
+    onUncheck: {
+        node: 'collapse'
+    },
+    collapseImage: 'images/downArrow.gif',
+    expandImage: 'images/rightArrow.gif',
+});
                 </code>
-                <dl>
-                    <dt>onCheck
-                    <dd>'expand'
-                    <dt>onUncheck
-                    <dd>'collapse'
-                    <dt>collapseImage
-                    <dd>'images/downArrow.gif'
-                    <dt>expandImage
-                    <dd>'images/rightArrow.gif'
-                    <dt>leafImage
-                    <dd>'images/blank.png'
-                </dl>
                 <ul id="tree3">
                     <li><input type="checkbox">Root
                         <ul>
@@ -172,17 +158,12 @@
             <div id="tabs-4">
                 <p>This example show how to add buttons to collapse/expand all tree.</p>
                 <code class="jquery">
-                $('#tree4').checkboxTree({
-                    collapseAllButton: 'Collapse all',
-                    expandAllButton: 'Expande all'
-                });
+$('#tree4').checkboxTree({
+    collapseAllButton: { html: 'Collapse all', container: $('#buttons') },
+    expandAllButton: { html:'Expande all', container: $('#buttons') }
+});
                 </code>
-                <dl>
-                    <dt>collapseAllButton
-                    <dd>'Collapse all'
-                    <dt>expandAllButton
-                    <dd>'Expande all'
-                </dl>
+                <div id="buttons"></div>
                 <ul id="tree4">
                     <li><input type="checkbox">Root
                         <ul>
@@ -212,20 +193,21 @@
             <div id="tabs-5">
                 <p>This example show how to use external API.</p>
                 <code class="jquery">
-                tree = $('#tree5').checkboxTree();
-                $('#collapse').click(function(){
-                    tree.collapse($('#node23'));
-                });
-                $('#expand').click(function(){
-                    tree.expand($('#node23'));
-                });
-                $('#check').click(function(){
-                    tree.check($('#node23'));
-                });
-                $('#uncheck').click(function(){
-                    tree.uncheck($('#node23'));
-                });
+tree = $('#tree5').checkboxTree();
+$('#collapse').click(function(){
+    tree.collapse($('#node23'));
+});
+$('#expand').click(function(){
+    tree.expand($('#node23'));
+});
+$('#check').click(function(){
+    tree.check($('#node23'));
+});
+$('#uncheck').click(function(){
+    tree.uncheck($('#node23'));
+});
                 </code>
+                <br />
                 <a href="javascript:void(0);" id="collapse">Collapse node 2.3</a> |
                 <a href="javascript:void(0);" id="expand">Expand node 2.3</a> <br />
                 <a href="javascript:void(0);" id="check">Check node 2.3</a> |
@@ -259,17 +241,11 @@
             <div id="tabs-6">
                 <p>This example show how to initialize a tree.</p>
                 <code class="jquery">
-                $('#tree6').checkboxTree({
-                    initializeChecked: 'expanded',
-                    initializeUnchecked: 'collapsed'
-                });
+$('#tree6').checkboxTree({
+    initializeChecked: 'expanded',
+    initializeUnchecked: 'collapsed'
+});
                 </code>
-                <dl>
-                    <dt>initializeChecked
-                    <dd>'expanded'
-                    <dt>initializeUnchecked
-                    <dd>'collapsed'
-                </dl>
                 <ul id="tree6">
                     <li><input type="checkbox" checked>Root
                         <ul>
