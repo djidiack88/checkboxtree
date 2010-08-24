@@ -10,29 +10,34 @@
         <script type="text/javascript">
         //<!--
             $(document).ready(function() {
-                    $('#tree').checkboxTree({
-                    collapseAllButton: 'Collapse all',
-                    collapseEffect: '',
-                    expandAllButton: 'Expande all',
-                    expandEffect: '',
-                    initializeChecked: 'collapsed',
-                    initializeUnchecked: 'collapsed'
-                }).show();
+                $('.jquery').each(function(){
+                    eval($(this).html());
+                });
+
             });
         //-->
         </script>
     </head>
     <body>
-        <a href="index.html">Back to demo index</a>
-        <hr>
-        <table>
-            <caption>jQuery checkboxTree plugin demo</caption>
-
-            <tr>
-                <th>Big tree example
-            <tr>
-                <td>
-                    <ul id="tree" style="display: none;">
+        <p>Big tree example</p>
+        <code class="jquery">
+$('#tree-7').checkboxTree({
+    collapseAllButton: {
+        html: 'Collapse all',
+        container: $('#buttons-7')
+    },
+    collapseEffect: '',
+    expandAllButton: {
+        html: 'Expande all',
+        container: $('#buttons-7')
+    },
+    expandEffect: '',
+    initializeChecked: 'collapsed',
+    initializeUnchecked: 'collapsed'
+}).show();
+        </code>
+        <div id="buttons-7"></div>
+                    <ul id="tree-7" style="display: none;">
                         <li><input type="checkbox">Root
                          <ul>
                             <li><input type="checkbox">Node 1
@@ -6105,6 +6110,5 @@
                         </ul>
                     </ul>
 
-        </table>
     </body>
 </html>
