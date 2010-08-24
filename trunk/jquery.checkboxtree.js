@@ -13,13 +13,11 @@
 
     $.fn.checkboxTree = function(options) {
         var defaults = {
-//            checkAllButton: '',
             checkChildren: true,
             checkParents: true,
-//            parentShouldAlwaysBeCheckedIfAndOnlyIfAllChildrenAreChecked: true,
             collapsable: true,
             collapseAllButton: {
-                container: '',
+                container: this.parent(),
                 html: ''
             },
             collapsed: false,
@@ -29,7 +27,7 @@
             container: 'checkboxTree'+'['+ checkboxTree++ +']',
             cssClass: 'checkboxTree',
             expandAllButton: {
-                container: '',
+                container: this.parent(),
                 html: ''
             },
             expandDuration: 500,
@@ -47,15 +45,7 @@
                 ancestors: '', //or 'check', 'uncheck'
                 descendants: 'uncheck', //or '', 'uncheck'
                 node: '' // or 'collapse', 'expand'
-/*                checkAncestors: false,
-                checkDescendants: false,
-                collapse: false,
-                expand: false,
-                function: function() {},
-                uncheckAncestors: false,
-                uncheckDescendants: false*/
             }
-//            uncheckAllButton: ''
         };
 
         // build main options before element iteration
