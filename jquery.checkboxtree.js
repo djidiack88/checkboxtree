@@ -1,241 +1,128 @@
 /**
  * jQuery Checkbox Tree
  *
- * @author Valerio Galano <v.galano@daredevel.it>
+ * @author Valerio Galano <valerio.galano@gmail.com>
  *
- * @see http://checkboxtree.daredevel.it
+ * @see http://checkboxtree.googlecode.com
  *
- * @version 0.4
+ * @version 0.3.1
  */
 (function($){
 
     var checkboxTree = 0;
 
     $.fn.checkboxTree = function(options) {
-        var defaults = {
+
+        // build main options before element iteration
+        var options = $.extend({
             checkChildren: true,
             checkParents: true,
             collapsable: true,
-            collapseAllButton: {
-                container: this.parent(),
-                html: ''
-            },
-            collapseAllElement: '',
+            collapseAllButton: '',
             collapsed: false,
             collapseDuration: 500,
             collapseEffect: 'blind',
             collapseImage: '',
             container: 'checkboxTree'+'['+ checkboxTree++ +']',
             cssClass: 'checkboxTree',
-            expandAllButton: {
-                container: this.parent(),
-                html: ''
-            },
-            expandAllElement: '',
+            expandAllButton: '',
             expandDuration: 500,
             expandEffect: 'blind',
             expandImage: '',
-            initializeChecked: 'expanded', // or 'collapsed'
-            initializeUnchecked: 'expanded', // or 'collapsed'
-            leafImage: '',
-            onCheck: {
-                ancestors: 'check', //or '', 'uncheck'
-                descendants: 'check', //or '', 'uncheck'
-                node: '' // or 'collapse', 'expand'
-            },
-            onUncheck: {
-                ancestors: '', //or 'check', 'uncheck'
-                descendants: 'uncheck', //or '', 'uncheck'
-                node: '' // or 'collapse', 'expand'
-            }
-        };
+            leafImage: ''
+        }, options);
 
-        // build main options before element iteration
-        var options = $.extend(true, defaults, options);
+        options.collapseAnchor = (options.collapseImage.length > 0) ? '<img src="'+options.collapseImage+'" />' : '-';
+        options.expandAnchor = (options.expandImage.length > 0) ? '<img src="'+options.expandImage+'" />' : '+';
+        options.leafAnchor = (options.leafImage.length > 0) ? '<img src="'+options.leafImage+'" />' : '';
 
-        // @todo check options
+        // build collapse all button
+        if (options.collapseAllButton.length > 0) {
 
-        // setup collapse engine tree
-        if (options.collapsable) {
-
-            // mantain compatibility with old "checkChildren" option
-            if (options.checkChildren) {
-                options.onCheck.descendants = 'check';
-                options.onUncheck.descendants = 'uncheck';
-            }
-
-            // mantain compatibility with old "checkChildren" option
-            if (options.checkParents) {
-                options.onCheck.ascendants = 'check';
-            }
-
-            // mantain compatibility with old "collapsed" option
-            if (options.collapsed) {
-                options.initializeChecked = 'collapsed';
-                options.initializeUnchecked = 'collapsed';
-            }
-
-            // @todo replace following anchor code with customizable option
-            options.collapseAnchor = (options.collapseImage.length > 0) ? '<img src="'+options.collapseImage+'" />' : '-';
-            options.expandAnchor   = (options.expandImage.length > 0)   ? '<img src="'+options.expandImage+'" />'   : '+';
-            options.leafAnchor     = (options.leafImage.length > 0)     ? '<img src="'+options.leafImage+'" />'     : '';
-
-            // build collapse all button
-            if (options.collapseAllButton.html.length > 0) {
-                options.collapseAllButton.container.prepend($('<a/>', {
-                    'class': options.cssClass+' all',
-                    href:    'javascript:void(0);',
-                    html:    options.collapseAllButton.html,
-                    click:   function(){
-                        $('[class*=' + options.container + '] li.expanded').each(function(){
+            $collapseAllButton = $('<a/>', {
+                'class': options.cssClass+' all',
+                id:      options.container+'collapseAll',
+                href:    'javascript:void(0);',
+                html:    options.collapseAllButton,
+                click:   function(){
+                    $('[class*=' + options.container + '] span').each(function(){
+                        if ($(this).hasClass("expanded")) {
                             collapse($(this), options);
-                        });
-                    }
-                }));
-            }
-
-            // build expand all button
-            if (options.expandAllButton.html.length > 0) {
-                options.expandAllButton.container.prepend($('<a/>', {
-                    'class': options.cssClass+' all',
-                    href:    'javascript:void(0);',
-                    html:    options.expandAllButton.html,
-                    click:   function(){
-                        $('[class*=' + options.container + '] li.collapsed').each(function(){
-                            expand($(this), options);
-                        });
-                    }
-                }));
-            }
-
-            // initialize leafs
-            $("li:not(:has(ul))", this).each(function() {
-                $(this).prepend($('<span></span>'));
-                markAsLeaf($(this), options);
-            });
-
-            // initialize checked nodes
-            $("li:has(ul):has(input:checked)", this).each(function() {
-                $(this).prepend($('<span></span>'));
-                options.initializeChecked == 'collapsed' ? collapse($(this), options) : expand($(this), options);
-            });
-
-            // initialize unchecked nodes
-            $("li:has(ul):not(:has(input:checked))", this).each(function() {
-                $(this).prepend($('<span></span>'));
-                options.initializeUnchecked == 'collapsed' ? collapse($(this), options) : expand($(this), options);
-            });
-
-            // bind expand event
-            $('li.collapsed span', this).live("click", function(){
-                expand($(this).parents("li:first"), options);
-                return false;
-            });
-
-            // bind collapse event
-            $('li.expanded span', this).live("click", function(){
-                collapse($(this).parents("li:first"), options);
-                return false;
-            });
-
-            // bind collapse all element event
-            $(options.collapseAllElement).bind("click", function() {
-                collapseAll(options);
-            });
-
-            // bind expand all element event
-            $(options.expandAllElement).bind("click", function() {
-                expandAll(options);
-            });
-
-            // bind collapse on uncheck event
-            if (options.onUncheck.node == 'collapse') {
-                $(':checkbox:not(:checked)', this).live("click", function() {
-                    collapse($(this).parents("li:first"), options);
-                });
-            } else
-
-            // bind expand on uncheck event
-            if (options.onUncheck.node == 'expand') {
-                $(':checkbox:not(:checked)', this).live("click", function() {
-                    expand($(this).parents("li:first"), options);
-                });
-            }
-
-            // bind collapse on check event
-            if (options.onCheck.node == 'collapse') {
-                $(':checkbox:checked', this).live("click", function() {
-                    collapse($(this).parents("li:first"), options);
-                });
-            } else
-
-            // bind expand on check event
-            if (options.onCheck.node == 'expand') {
-                $(':checkbox:checked', this).live("click", function() {
-                    expand($(this).parents("li:first"), options);
-                });
-            }
-
-            /**
-             * Collapse node
-             *
-             * @public
-             *
-             * @param li node to collapse
-             */
-            this.collapse = function(li)
-            {
-                if ($(li).hasClass('expanded')) {
-                    collapse(li, options);
+                        }
+                    });
                 }
-            }
+            });
 
-            /**
-             * Collapse all nodes
-             *
-             * @public
-             */
-            this.collapseAll = function()
-            {
-                collapseAll(options);
-            }
-
-            /**
-             * Expand node
-             *
-             * @public
-             *
-             * @param li node to expand
-             */
-            this.expand = function(li)
-            {
-                if ($(li).hasClass('collapsed')) {
-                    expand(li, options);
-                }
-            }
-
-            /**
-             * Expand all nodes
-             *
-             * @public
-             */
-            this.expandAll = function()
-            {
-                expandAll(options);
-            }
-
+            this.parent().prepend($collapseAllButton);
         }
 
-        // bind node uncheck event
-        $(':checkbox:not(:checked)', this).live('click', function() {
-            var li = $(this).parents('li:first');
-            uncheck(li, options);
+        // build expand all button
+        if (options.expandAllButton.length > 0) {
+
+            $expandAllButton = $('<a/>', {
+                'class': options.cssClass+' all',
+                id:      options.container+'expandAll',
+                href:    'javascript:void(0);',
+                html:    options.expandAllButton,
+                click:   function(){
+                    $('[class*=' + options.container + '] span').each(function(){
+                        if ($(this).hasClass("collapsed")) {
+                            expand($(this), options);
+                        }
+                    });
+                }
+            });
+
+            this.parent().prepend($expandAllButton);
+        }
+
+        // setup tree
+        $("li", this).each(function() {
+
+            if (options.collapsable) {
+
+                var $a;
+
+                if ($(this).is(":has(ul)")) {
+                    if (options.collapsed) {
+                        $(this).find("ul").hide();
+                        $a = $('<span></span>').html(options.expandAnchor).addClass("collapsed");
+                    } else {
+                        $a = $('<span></span>').html(options.collapseAnchor).addClass("expanded");
+                    }
+                } else {
+                     $a = $('<span></span>').html(options.leafAnchor).addClass("leaf");
+                }
+
+                $(this).prepend($a);
+            }
+
         });
 
-        // bind node check event
-        $(':checkbox:checked', this).live('click', function() {
-            var li = $(this).parents('li:first');
-            check(li, options);
+        // handle single expand/collapse
+        this.find('span').bind("click", function(e, a){
+
+            if ($(this).hasClass("leaf") == undefined) {
+                return;
+            }
+
+            if ($(this).hasClass("collapsed")) {
+                expand($(this), options);
+            } else {
+                collapse($(this), options);
+            }
+        });
+
+        // handle tree select/unselect
+        this.find(':checkbox').bind("click", function(e, a) {
+
+            if (options.checkChildren) {
+                toggleChildren($(this));
+            }
+
+            if (options.checkParents && $(this).is(":checked")) {
+                checkParents($(this), options);
+            }
         });
 
         // add container class
@@ -244,251 +131,64 @@
         // add css class
         this.addClass(options.cssClass);
 
-        /**
-         * Check node
-         *
-         * @public
-         *
-         * @param li node to check
-         */
-        this.check = function(li)
-        {
-            check(li, options);
-        }
-
-        /**
-         * Uncheck node
-         *
-         * @public
-         *
-         * @param li node to uncheck
-         */
-        this.uncheck = function(li)
-        {
-            uncheck(li, options);
-        }
-
         return this;
-    }
+    };
+
 
     /**
-     * Check node
-     *
-     * @private
-     *
-     * @param li      node to check
-     * @param options options object
+     * Recursively check parents of passed checkbox
      */
-    function check(li, options)
+    this.checkParents = function(checkbox, options)
     {
-        $(li).find('input:first').attr('checked', 'checked');
+        var parentCheckbox = checkbox.parents("li:first").parents("li:first").find(" :checkbox:first");
 
-        if (options.onCheck.ancestors == 'check') {
-            checkAncestors(li, options);
-        } else
-
-        if (options.onCheck.ancestors == 'uncheck') {
-            uncheckAncestors(li, options);
+        if (!parentCheckbox.is(":checked")) {
+            parentCheckbox.attr("checked","checked");
         }
 
-        if (options.onCheck.descendants == 'check') {
-            checkDescendants(li, options);
-        } else
-
-        if (options.onCheck.descendants == 'uncheck') {
-            uncheckDescendants(li, options);
+        if (parentCheckbox.parents('[class*=' + options.container + ']').attr('class') != undefined) {
+            checkParents(parentCheckbox, options);
         }
     }
 
     /**
-     * Check ancestors on passed node
-     *
-     * @private
-     *
-     * @param li      node
-     * @param options options object
+     * Collapse tree element
      */
-    function checkAncestors(li, options)
+    this.collapse = function(img, options)
     {
-        li.parents("li").find('input:first').attr("checked","checked");;
-    }
-
-    /**
-     * Check descendants on passed node
-     *
-     * @private
-     *
-     * @param li      node
-     * @param options options object
-     */
-    function checkDescendants(li, options)
-    {
-        li.find('input').attr('checked', 'checked');
-    }
-
-    /**
-     * Collapse node
-     *
-     * @private
-     *
-     * @param li      node to collapse
-     * @param options options object
-     */
-    function collapse(li, options)
-    {
-        if ($(li).hasClass('collapsed') || $(li).hasClass('leaf')) return;
+        var listItem = img.parents("li:first");
 
         if ($.ui !== undefined) {
-            li.children("ul").hide(options.collapseEffect, {}, options.collapseDuration);
+            listItem.children("ul").hide(options.collapseEffect, {}, options.collapseDuration);
         } else {
-            li.children("ul").hide(options.collapseDuration);
+            listItem.children("ul").hide(options.collapseDuration);
         }
-        markAsCollapsed(li, options);
+
+        listItem.children("span").html(options.expandAnchor).addClass("collapsed").removeClass("expanded");
     }
 
     /**
-     * Collapse all nodes of the tree
-     *
-     * @private
-     *
-     * @param options options object
+     * Expand tree element
      */
-    function collapseAll(options)
+    this.expand = function(img, options)
     {
-        $('[class*=' + options.container + '] li.expanded').each(function(){
-            collapse($(this), options);
-        });
-    }
-
-    /**
-     * Expand node
-     *
-     * @private
-     *
-     * @param li      node to expand
-     * @param options options object
-     */
-    function expand(li, options)
-    {
-        if ($(li).hasClass('expanded') || $(li).hasClass('leaf')) return;
+        var listItem = img.parents("li:first");
 
         if ($.ui !== undefined) {
-            li.children("ul").show(options.expandEffect, {}, options.expandDuration);
+            listItem.children("ul").show(options.expandEffect, {}, options.expandDuration);
         } else {
-            li.children("ul").show(options.expandDuration);
-        }
-        markAsExpanded(li, options);
-    }
-
-    /**
-     * Expand all nodes of the tree
-     *
-     * @private
-     *
-     * @param options options object
-     */
-    function expandAll(options)
-    {
-        $('[class*=' + options.container + '] li.collapsed').each(function(){
-            expand($(this), options);
-        });
-    }
-
-    /**
-     * Mark node as collapsed
-     *
-     * @private
-     *
-     * @param li      node to mark
-     * @param options options object
-     */
-    function markAsCollapsed(li, options)
-    {
-        li.children("span").html(options.expandAnchor);
-        li.addClass("collapsed").removeClass("expanded");
-    }
-
-    /**
-     * Mark node as expanded
-     *
-     * @private
-     *
-     * @param li      node to mark
-     * @param options options object
-     */
-    function markAsExpanded(li, options)
-    {
-        li.children("span").html(options.collapseAnchor);
-        li.addClass("expanded").removeClass("collapsed");
-    }
-
-    /**
-     * Mark node as leaf
-     *
-     * @private
-     *
-     * @param li      node to mark
-     * @param options options object
-     */
-    function markAsLeaf(li, options)
-    {
-        li.children("span").html(options.leafAnchor);
-        li.addClass("leaf");
-    }
-
-    /**
-     * Uncheck node
-     *
-     * @private
-     *
-     * @param li      node to uncheck
-     * @param options options object
-     */
-    function uncheck(li, options)
-    {
-        $(li).find('input:first').attr('checked', '');
-
-        if (options.onUncheck.ascendants == 'check') {
-            checkAncestors(li, options);
-        } else
-
-        if (options.onUncheck.ascendants == 'uncheck') {
-            uncheckAncestors(li, options);
+            listItem.children("ul").show(options.expandDuration);
         }
 
-        if (options.onUncheck.descendants == 'check') {
-            checkDescendants(li, options);
-        } else
-
-        if (options.onUncheck.descendants == 'uncheck') {
-            uncheckDescendants(li, options);
-        }
+        listItem.children("span").html(options.collapseAnchor).addClass("expanded").removeClass("collapsed");
     }
 
     /**
-     * Uncheck ancestors on passed node
-     *
-     * @private
-     *
-     * @param li      node
-     * @param options options object
+     * Check/uncheck children of passed checkbox
      */
-    function uncheckAncestors(li, options)
+    this.toggleChildren = function(checkbox)
     {
-        li.parents("li").find('input:first').attr("checked","");;
-    }
-
-    /**
-     * Uncheck descendants on passed node
-     *
-     * @private
-     *
-     * @param li      node
-     * @param options options object
-     */
-    function uncheckDescendants(li, options)
-    {
-        li.find('input').attr('checked', '');
+        checkbox.parents('li:first').find('li :checkbox').attr('checked',checkbox.attr('checked') ? 'checked' : '');
     }
 
 })(jQuery);
