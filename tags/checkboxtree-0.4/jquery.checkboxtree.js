@@ -53,8 +53,6 @@
         // build main options before element iteration
         var options = $.extend(true, defaults, options);
 
-        // @todo check options
-
         // setup collapse engine tree
         if (options.collapsable) {
 
@@ -75,7 +73,7 @@
                 options.initializeUnchecked = 'collapsed';
             }
 
-            // @todo replace following anchor code with customizable option
+            // build collapse engine's anchors
             options.collapseAnchor = (options.collapseImage.length > 0) ? '<img src="'+options.collapseImage+'" />' : '-';
             options.expandAnchor   = (options.expandImage.length > 0)   ? '<img src="'+options.expandImage+'" />'   : '+';
             options.leafAnchor     = (options.leafImage.length > 0)     ? '<img src="'+options.leafImage+'" />'     : '';

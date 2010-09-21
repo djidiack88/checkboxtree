@@ -1,11 +1,20 @@
 #summary checkboxTree user documentation for release 0.4
 #labels Phase-Deploy,Deprecated
 
+== Deploy ==
+{{{
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="jquery-ui-lightness.css">
+        <link rel="stylesheet" type="text/css" href="jquery.checkboxtree.min.css">
+        <script type="text/javascript" src="jquery.checkboxtree.min.js"></script>
+}}}
+
 == Options ==
 
 || *options*           || *type*         || *default value*     || *description* ||
-|| ~~checkChildren~~   || boolean        || true                || If node's children must be checked when node is checked. ||
-|| ~~checkParents~~    || boolean        || true                || If node's ancestors must be checked when node is checked. ||
+|| ~~checkChildren~~   || boolean        || true                || If node's children must be checked when node is checked. This option is __deprecaded__ and will be removed from release 0.5. ||
+|| ~~checkParents~~    || boolean        || true                || If node's ancestors must be checked when node is checked. This option is __deprecaded__ and will be removed from release 0.5. ||
 || collapsable         || boolean        || true                || If tree has collapsable nodes. ||
 || collapseAllButton   || object         || {}                  || [UserDocs04#collapseAllButton Read more...] ||
 || collapseAllElement  || object|string  || ''                  ||  ||

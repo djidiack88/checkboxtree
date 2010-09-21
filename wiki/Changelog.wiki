@@ -1,4 +1,6 @@
 === 0.4 (trunk): ===
+ * added collapseAllElement / expandAllElement configurable options
+ * added 
  * fixed issue 3
  * fixed issue 4
  * fixed issue 5
