@@ -20,6 +20,7 @@
                 container: this.parent(),
                 html: ''
             },
+            collapseAllElement: '',
             collapsed: false,
             collapseDuration: 500,
             collapseEffect: 'blind',
@@ -30,6 +31,7 @@
                 container: this.parent(),
                 html: ''
             },
+            expandAllElement: '',
             expandDuration: 500,
             expandEffect: 'blind',
             expandImage: '',
@@ -136,6 +138,16 @@
                 return false;
             });
 
+            // bind collapse all element event
+            $(options.collapseAllElement).bind("click", function() {
+                collapseAll(options);
+            });
+
+            // bind expand all element event
+            $(options.expandAllElement).bind("click", function() {
+                expandAll(options);
+            });
+
             // bind collapse on uncheck event
             if (options.onUncheck.node == 'collapse') {
                 $(':checkbox:not(:checked)', this).live("click", function() {
@@ -179,6 +191,16 @@
             }
 
             /**
+             * Collapse all nodes
+             *
+             * @public
+             */
+            this.collapseAll = function()
+            {
+                collapseAll(options);
+            }
+
+            /**
              * Expand node
              *
              * @public
@@ -190,6 +212,16 @@
                 if ($(li).hasClass('collapsed')) {
                     expand(li, options);
                 }
+            }
+
+            /**
+             * Expand all nodes
+             *
+             * @public
+             */
+            this.expandAll = function()
+            {
+                expandAll(options);
             }
 
         }
@@ -315,6 +347,20 @@
     }
 
     /**
+     * Collapse all nodes of the tree
+     *
+     * @private
+     *
+     * @param options options object
+     */
+    function collapseAll(options)
+    {
+        $('[class*=' + options.container + '] li.expanded').each(function(){
+            collapse($(this), options);
+        });
+    }
+
+    /**
      * Expand node
      *
      * @private
@@ -332,6 +378,20 @@
             li.children("ul").show(options.expandDuration);
         }
         markAsExpanded(li, options);
+    }
+
+    /**
+     * Expand all nodes of the tree
+     *
+     * @private
+     *
+     * @param options options object
+     */
+    function expandAll(options)
+    {
+        $('[class*=' + options.container + '] li.collapsed').each(function(){
+            expand($(this), options);
+        });
     }
 
     /**
