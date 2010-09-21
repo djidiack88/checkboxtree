@@ -8,15 +8,15 @@
 || ~~checkParents~~    || boolean        || true                || If node's ancestors must be checked when node is checked. ||
 || collapsable         || boolean        || true                || If tree has collapsable nodes. ||
 || collapseAllButton   || object         || {}                  || [UserDocs04#collapseAllButton Read more...] ||
-|| collapseAllElement  || object|string  || ''          ||  ||
+|| collapseAllElement  || object|string  || ''                  ||  ||
 || collapsed           || boolean        || false               || If all nodes must be all collapsed on script start. ||
 || collapseDuration    || integer        || 500                 || Collapse effect duration in ms. ||
 || collapseEffect      || string         || 'blind'             || Effect to use for node collapse. In case of very big tree, effects can slow down script execution: to fix this problem, set option value to '' to remove effect. Requires jQueryUI. See jQueryUI effect documentation for effect list. ||
 || collapseImage       || string         || ''                  || Image to use as anchor for expanded node. ||
-|| container           || string         || 'checkboxTree`[n]`' || Class to contain tree. ||
+|| container           || string         || 'checkboxTree`[n]`' || Class to contain tree. Is usefull if you want to handle more than one tree in the page. ||
 || cssClass            || string         || 'checkboxTree'      || Class for css linking. ||
 || expandAllButton     || object         || {}                  || [UserDocs04#expandAllButton Read more...]. ||
-|| expandAllElement    || object|string  || ''           ||  ||
+|| expandAllElement    || object|string  || ''                  ||  ||
 || expandDuration      || integer        || 500                 || Collapse effect duration in ms. ||
 || expandEffect        || string         || 'blind'             || Effect to use for node collapse. In case of very big tree, effects can slow down script execution: to fix this problem, set option value to '' to remove effect. Requires jQueryUI. See jQueryUI effect documentation for effect list. ||
 || expandImage         || string         || ''                  || Image to use as anchor for collapsed nodes. ||
@@ -36,13 +36,27 @@
             }
 
 === collapseAllButton ===
+{{{
+    collapseAllButton: {
+        html: 'Self-generated Collapse all',
+        container: $('#buttons-4')
+    },
+}}}
 
 === expandAllButton ===
 
 
 == Public Methods ==
 
-|| check(li)    ||
-|| collapse(li) ||
-|| expand(li)   ||
-|| uncheck(li)  ||
+Example of public method usage:
+{{{
+tree = $('#tree').checkboxTree();
+tree.collapse($('#nodeIWantToCheck'));
+}}}
+
+|| check(li)     || ||
+|| collapse(li)  || ||
+|| collapseAll() || ||
+|| expand(li)    || ||
+|| expandAll()   || ||
+|| uncheck(li)   || ||
