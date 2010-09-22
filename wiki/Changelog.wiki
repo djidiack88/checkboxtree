@@ -1,4 +1,4 @@
-=== 0.4 (trunk): ===
+=== 0.4 (trunk) ===
  * added collapseAllElement / expandAllElement configurable options
  * added 
  * fixed issue 3
@@ -6,11 +6,11 @@
  * fixed issue 5
  * fixed issue 9
  * fixed issue 6
-=== 0.3.1: ===
+=== 0.3.1 ===
  * fixed issue 7
  * fixed issue 2
-=== 0.3: ===
+=== 0.3 ===
  * *changed a lot of default values* (Please, read MigrationNotes before upgrade)
  * inserted default plain text +/- instead of images as expand/collapse anchors
-=== 0.2: ===
+=== 0.2 ===
  * Initial public release
