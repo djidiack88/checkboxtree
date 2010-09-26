@@ -1,4 +1,4 @@
-#summary checkboxTree user documentation for release 0.2
+#summary user documentation for release 0.2
 #labels Deprecated
 
 ===Options===
