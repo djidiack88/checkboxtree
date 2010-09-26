@@ -1,4 +1,4 @@
-#summary checkboxTree migrations notes
+#summary migrations notes
 #labels Featured
 
 ===Migration from release 0.3 to 0.4 ===
