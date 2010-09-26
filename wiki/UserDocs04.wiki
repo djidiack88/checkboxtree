@@ -38,7 +38,7 @@ Following options can be specified when checkboxTree is initialized.
 || ~~checkParents~~    || boolean        || true                || If node's ancestors must be checked when node is checked. This option is __deprecaded__ and will be removed from release 0.5. ||
 || collapsable         || boolean        || true                || If tree has collapsable nodes. ||
 || ~~collapseAllButton~~ || object         || {}                  || Build an clickable element to collapse all node. [#collapseAllButton Read more] ||
-|| collapseAllElement  || object|string  || ''                  ||  ||
+|| collapseAllElement  || object|string  || ''                  || Attach a collapse all event to your own element. Value passed can be the object representing element or the string used as element selector. ||
 || collapsed           || boolean        || false               || If all nodes must be all collapsed on script start. ||
 || collapseDuration    || integer        || 500                 || Collapse effect duration in ms. ||
 || collapseEffect      || string         || 'blind'             || Effect to use for node collapse. In case of very big tree, effects can slow down script execution: to fix this problem, set option value to '' to remove effect. Requires jQueryUI. See jQueryUI effect documentation for effect list. ||
@@ -46,7 +46,7 @@ Following options can be specified when checkboxTree is initialized.
 || container           || string         || 'checkboxTree`[n]`' || Class to contain tree. Is usefull if you want to handle more than one tree in the page. ||
 || cssClass            || string         || 'checkboxTree'      || Class for css linking. ||
 || ~~expandAllButton~~ || object         || {}                  || Build a clickable element to expand all nodes. [#expandAllButton Read more] ||
-|| expandAllElement    || object|string  || ''                  ||  ||
+|| expandAllElement    || object|string  || ''                  || Attach a expand all event to your own element. Value passed can be the object representing element or the string used as element selector. ||
 || expandDuration      || integer        || 500                 || Collapse effect duration in ms. ||
 || expandEffect        || string         || 'blind'             || Effect to use for node collapse. In case of very big tree, effects can slow down script execution: to fix this problem, set option value to '' to remove effect. Requires jQueryUI. See jQueryUI effect documentation for effect list. ||
 || expandImage         || string         || ''                  || Image to use as anchor for collapsed nodes. ||
@@ -57,6 +57,10 @@ Following options can be specified when checkboxTree is initialized.
 || onUncheck           || object         || [#onUncheck Read more] || Contains operations to perform when a node is unchecked. ||
 
 == collapseAllButton ==
+Using this option, checkboxTree will build an element that collapse all nodes when clicked. That element will have the _html_ parameter as label and will be placed into element passed as _container_.
+
+Please note: collapseAllButton is deprecated and will be remove in next release. If you prefer you can use collapseAllElement option.
+
 {{{
     collapseAllButton: {
         html: 'Self-generated Collapse all',
