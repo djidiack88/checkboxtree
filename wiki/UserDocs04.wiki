@@ -1,6 +1,8 @@
 #summary checkboxTree user documentation for release 0.4
 #labels Phase-Deploy,Deprecated
 
+<wiki:toc max_depth="2" />
+
 == Deploy ==
 {{{
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -8,6 +10,14 @@
         <link rel="stylesheet" type="text/css" href="jquery-ui-lightness.css">
         <link rel="stylesheet" type="text/css" href="jquery.checkboxtree.min.css">
         <script type="text/javascript" src="jquery.checkboxtree.min.js"></script>
+        <script type="text/javascript">
+        //<!--
+            $(document).ready(function() {
+                $('#tree').checkboxTree();
+            });
+        //-->
+        </script>
+
 }}}
 
 == Options ==
@@ -16,7 +26,7 @@
 || ~~checkChildren~~   || boolean        || true                || If node's children must be checked when node is checked. This option is __deprecaded__ and will be removed from release 0.5. ||
 || ~~checkParents~~    || boolean        || true                || If node's ancestors must be checked when node is checked. This option is __deprecaded__ and will be removed from release 0.5. ||
 || collapsable         || boolean        || true                || If tree has collapsable nodes. ||
-|| collapseAllButton   || object         || {}                  || [UserDocs04#collapseAllButton Read more...] ||
+|| ~~collapseAllButton~~ || object         || {}                  || [UserDocs04#collapseAllButton Read more...] ||
 || collapseAllElement  || object|string  || ''                  ||  ||
 || collapsed           || boolean        || false               || If all nodes must be all collapsed on script start. ||
 || collapseDuration    || integer        || 500                 || Collapse effect duration in ms. ||
@@ -24,7 +34,7 @@
 || collapseImage       || string         || ''                  || Image to use as anchor for expanded node. ||
 || container           || string         || 'checkboxTree`[n]`' || Class to contain tree. Is usefull if you want to handle more than one tree in the page. ||
 || cssClass            || string         || 'checkboxTree'      || Class for css linking. ||
-|| expandAllButton     || object         || {}                  || [UserDocs04#expandAllButton Read more...]. ||
+|| ~~expandAllButton~~ || object         || {}                  || [UserDocs04#expandAllButton Read more...]. ||
 || expandAllElement    || object|string  || ''                  ||  ||
 || expandDuration      || integer        || 500                 || Collapse effect duration in ms. ||
 || expandEffect        || string         || 'blind'             || Effect to use for node collapse. In case of very big tree, effects can slow down script execution: to fix this problem, set option value to '' to remove effect. Requires jQueryUI. See jQueryUI effect documentation for effect list. ||
@@ -32,17 +42,8 @@
 || initializeChecked   || string         || 'expanded'          || On tree setup, decide the initial state of checked nodes. Can be set to 'expanded' or 'collapsed'. ||
 || initializeUnchecked || string         || 'expanded'          || On tree setup, decide the initial state of unchecked nodes. Can be set to 'expanded' or 'collapsed'. ||
 || leafImage           || string         || ''                  || Image to use for not collapsable nodes. ||
-
-            onCheck: {
-                ancestors: 'check', //or '', 'uncheck'
-                descendants: 'check', //or '', 'uncheck'
-                node: '' // or 'collapse', 'expand'
-            },
-            onUncheck: {
-                ancestors: '', //or 'check', 'uncheck'
-                descendants: 'uncheck', //or '', 'uncheck'
-                node: '' // or 'collapse', 'expand'
-            }
+|| onCheck             || object         || [#onCheck Read more] || Contains operations to perform when a node is checked. ||
+|| onUncheck           || object         || [#onUncheck Read more] || Contains operations to perform when a node is unchecked. ||
 
 === collapseAllButton ===
 {{{
@@ -54,14 +55,25 @@
 
 === expandAllButton ===
 
+=== onCheck ===
+{{{
+onCheck: {
+    ancestors: 'check', //or '', 'uncheck'
+    descendants: 'check', //or '', 'uncheck'
+    node: '' // or 'collapse', 'expand'
+},
+}}}
+
+=== onUncheck ===
+{{{
+onUncheck: {
+    ancestors: '', //or 'check', 'uncheck'
+    descendants: 'uncheck', //or '', 'uncheck'
+    node: '' // or 'collapse', 'expand'
+}
+}}}
 
 == Public Methods ==
-
-Example of public method usage:
-{{{
-tree = $('#tree').checkboxTree();
-tree.collapse($('#nodeIWantToCheck'));
-}}}
 
 || check(li)     || ||
 || collapse(li)  || ||
@@ -69,3 +81,9 @@ tree.collapse($('#nodeIWantToCheck'));
 || expand(li)    || ||
 || expandAll()   || ||
 || uncheck(li)   || ||
+
+Example of public method usage:
+{{{
+tree = $('#tree').checkboxTree();
+tree.collapse($('#nodeIWantToCheck'));
+}}}
