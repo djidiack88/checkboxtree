@@ -53,11 +53,11 @@ Following options can be specified when checkboxTree is initialized.
 || initializeChecked   || string         || 'expanded'          || On tree setup, decide the initial state of checked nodes. Can be set to 'expanded' or 'collapsed'. ||
 || initializeUnchecked || string         || 'expanded'          || On tree setup, decide the initial state of unchecked nodes. Can be set to 'expanded' or 'collapsed'. ||
 || leafImage           || string         || ''                  || Image to use for not collapsable nodes. ||
-|| onCheck             || object         || [#onCheck Read more] || Contains operations to perform when a node is checked. ||
-|| onUncheck           || object         || [#onUncheck Read more] || Contains operations to perform when a node is unchecked. ||
+|| onCheck             || object         || [#onCheck Read more] || Contains operations to perform when a node is checked. [#onCheck Read more] ||
+|| onUncheck           || object         || [#onUncheck Read more] || Contains operations to perform when a node is unchecked. [#onUncheck Read more] ||
 
 == collapseAllButton ==
-Using this option, checkboxTree will build an element that collapse all nodes when clicked. That element will have the _html_ parameter as label and will be placed into element passed as _container_.
+Using this option, checkboxTree will build an element that collapse all nodes when it is clicked. That element will have the _html_ parameter as label and will be placed into element passed as _container_.
 
 Please note: collapseAllButton is deprecated and will be remove in next release. If you prefer you can use collapseAllElement option.
 
@@ -69,8 +69,11 @@ Please note: collapseAllButton is deprecated and will be remove in next release.
 }}}
 
 == expandAllButton ==
+Using this option, checkboxTree will build an element that expand all nodes when it is clicked. That element will have the _html_ parameter as label and will be placed into element passed as _container_.
+
+Please note: expandAllButton is deprecated and will be remove in next release. If you prefer you can use expandAllElement option.
 {{{
-    collapseAllButton: {
+    expandAllButton: {
         html: 'Self-generated Expand all',
         container: $('#buttons-4')
     },
