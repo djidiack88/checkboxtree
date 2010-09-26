@@ -1,3 +1,5 @@
+#summary releases changelog
+
 === 0.4 (trunk) ===
  * added collapseAllElement / expandAllElement configurable options
  * added 
