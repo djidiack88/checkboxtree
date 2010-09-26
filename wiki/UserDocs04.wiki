@@ -1,7 +1,7 @@
 #summary checkboxTree user documentation for release 0.4
 #labels Phase-Deploy,Deprecated
 
-<wiki:toc max_depth="2" />
+<wiki:toc />
 
 = Deployment =
 checkboxTree needs jQuery library to work. jQueryUI is required only if you want to improve collapse/expand effects handling.
@@ -106,10 +106,14 @@ onUncheck: {
 || expandAll()   || Expand all nodes. ||
 || uncheck(li)   || Uncheck passed node. ||
 
-Example of public method usage:
+== Example of public method usage ==
+
+Each tree node is something like that:
 {{{
 <li id="nodeIWantToCheck"><input type="checkbox">Node to check
 }}}
+
+To call a method that operates on a node, you need to pass the correspondent li element.
 {{{
 tree = $('#tree').checkboxTree();
 tree.collapse($('#nodeIWantToCheck'));
