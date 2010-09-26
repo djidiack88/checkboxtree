@@ -1,4 +1,4 @@
-#summary checkboxTree user documentation for release 0.3.x
+#summary user documentation for release 0.3.x
 #labels Featured,Phase-Deploy
 
 ==Options==
