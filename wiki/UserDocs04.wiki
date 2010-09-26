@@ -18,7 +18,11 @@ checkboxTree needs jQuery library to work. jQueryUI is required only if you want
         <script type="text/javascript">
         //<!--
             $(document).ready(function() {
-                $('#tree').checkboxTree();
+                $('#tree').checkboxTree({
+                /*
+                    specify here your options
+                */
+                });
             });
         //-->
         </script>
@@ -26,6 +30,8 @@ checkboxTree needs jQuery library to work. jQueryUI is required only if you want
 
 = Configurable options =
 Following options can be specified when checkboxTree is initialized.
+
+~~Striked~~ options are deprecated: they still working in this release, but will be removed from next release.
 
 || *options*           || *type*         || *default value*     || *description* ||
 || ~~checkChildren~~   || boolean        || true                || If node's children must be checked when node is checked. This option is __deprecaded__ and will be removed from release 0.5. ||
