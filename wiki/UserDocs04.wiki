@@ -3,13 +3,18 @@
 
 <wiki:toc max_depth="2" />
 
-= Deploy =
+= Deployment =
+checkboxTree needs jQuery library to work. jQueryUI is required only if you want to improve collapse/expand effects handling.
 {{{
+        <!-- include jQuery libraries -->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.3/jquery-ui.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="jquery-ui-lightness.css">
+
+        <!-- include checkboxTree plugin -->
         <link rel="stylesheet" type="text/css" href="jquery.checkboxtree.min.css">
         <script type="text/javascript" src="jquery.checkboxtree.min.js"></script>
+
+        <!-- initialize checkboxTree plugin -->
         <script type="text/javascript">
         //<!--
             $(document).ready(function() {
@@ -20,12 +25,13 @@
 }}}
 
 = Configurable options =
+Following options can be specified when checkboxTree is initialized.
 
 || *options*           || *type*         || *default value*     || *description* ||
 || ~~checkChildren~~   || boolean        || true                || If node's children must be checked when node is checked. This option is __deprecaded__ and will be removed from release 0.5. ||
 || ~~checkParents~~    || boolean        || true                || If node's ancestors must be checked when node is checked. This option is __deprecaded__ and will be removed from release 0.5. ||
 || collapsable         || boolean        || true                || If tree has collapsable nodes. ||
-|| ~~collapseAllButton~~ || object         || {}                  || Build an clickable element to collapse all node. [UserDocs04#collapseAllButton Read more...] ||
+|| ~~collapseAllButton~~ || object         || {}                  || Build an clickable element to collapse all node. [UserDocs04#collapseAllButton Read more] ||
 || collapseAllElement  || object|string  || ''                  ||  ||
 || collapsed           || boolean        || false               || If all nodes must be all collapsed on script start. ||
 || collapseDuration    || integer        || 500                 || Collapse effect duration in ms. ||
@@ -78,7 +84,7 @@ onUncheck: {
 }
 }}}
 
-= Public Methods =
+= Public methods =
 
 || check(li)     || Check passed node. ||
 || collapse(li)  || Collapse passed node. ||
@@ -88,6 +94,9 @@ onUncheck: {
 || uncheck(li)   || Uncheck passed node. ||
 
 Example of public method usage:
+{{{
+<li id="nodeIWantToCheck"><input type="checkbox">Node to check
+}}}
 {{{
 tree = $('#tree').checkboxTree();
 tree.collapse($('#nodeIWantToCheck'));
