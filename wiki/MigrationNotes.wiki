@@ -8,18 +8,15 @@ Working 0.3 releases, should work correctly out of the box with 0.4 version, but
 
  * if setted checkChildren: false, replace with: "onCheck: { descendants: '' }, onUncheck: { descendants: '' }"
  * if setted checkParents: false, replace with:  "onCheck: { ancestors: '' }, onUncheck: { ancestors: '' }"
- * if setted "collapseAllButton: 'Collapse All'", put the following code in your page:
+ * if setted "collapseAllButton: 'Collapse All'", set the option "collapseAllElement: '#collapseAll'" and put the following code in your page where you want the button:
 {{{
-         <button id="collapseAll">Collapse All</button>
+<button id="collapseAll">Collapse All</button>
 }}}
-   and set the option "collapseAllElement: '#collapseAll'"
 
- * if setted "expandAllButton: 'Expand All'", put the following code in your page:
+ * if setted "expandAllButton: 'Expand All'", set the option "expandAllElement: '#expandAll'" and put the following code in your page where you want the button:
 {{{
-         <button id="expandAll">Expand All</button>
+<button id="expandAll">Expand All</button>
 }}}
-   and set the option "expandAllElement: '#expandAll'"
-
 
 ===Migration from release 0.2 to 0.3 ===
 With release 0.3, a lot of default options are changed. You can compare options: UserDocs02 and UserDocs03
