@@ -6,7 +6,20 @@ With release 0.4, I added some new options and marked some other as deprecated (
 
 Working 0.3 releases, should work correctly out of the box with 0.4 version, but I recommend to follow next instructions to ensure future compatibility:
 
- * coming soon...
+ * if setted checkChildren: false, replace with: "onCheck: { descendants: '' }, onUncheck: { descendants: '' }"
+ * if setted checkParents: false, replace with:  "onCheck: { ancestors: '' }, onUncheck: { ancestors: '' }"
+ * if setted "collapseAllButton: 'Collapse All'", put the following code in your page:
+{{{
+         <button id="collapseAll">Collapse All</button>
+}}}
+   and set the option "collapseAllElement: '#collapseAll'"
+
+ * if setted "expandAllButton: 'Expand All'", put the following code in your page:
+{{{
+         <button id="expandAll">Expand All</button>
+}}}
+   and set the option "expandAllElement: '#expandAll'"
+
 
 ===Migration from release 0.2 to 0.3 ===
 With release 0.3, a lot of default options are changed. You can compare options: UserDocs02 and UserDocs03
