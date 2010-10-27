@@ -6,8 +6,8 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.3/jquery-ui.min.js"></script>
         <link rel="stylesheet" type="text/css" href="jquery-ui-lightness.css">
         <link rel="stylesheet" type="text/css" href="demo.css">
-        <link rel="stylesheet" type="text/css" href="jquery.checkboxtree.min.css">
-        <script type="text/javascript" src="jquery.checkboxtree.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="jquery.checkboxtree.css">
+        <script type="text/javascript" src="jquery.checkboxtree.js"></script>
         <script type="text/javascript">
         //<!--
             $(document).ready(function() {
@@ -159,19 +159,15 @@ $('#tree3').checkboxTree({
                 <p>This example show how to add buttons to collapse/expand all tree.</p>
                 <code class="jquery">
 $('#tree4').checkboxTree({
-    collapseAllButton: {
-        html: 'Self-generated Collapse all',
-        container: $('#buttons-4')
-    },
+    checkAllElement: '#checkAll',
     collapseAllElement: '#collapseAll',
-    expandAllButton: {
-        html:'Self-generated Expand all',
-        container: $('#buttons-4')
-    },
-    expandAllElement: $('#expandAll')
+    expandAllElement: $('#expandAll'),
+    uncheckAllElement: '#uncheckAll'
 });
                 </code>
                 <div id="buttons-4"></div>
+                <button id="checkAll">Check All</button>
+                <button id="uncheckAll">Uncheck All</button>
                 <button id="collapseAll">Collapse All</button>
                 <button id="expandAll">Expand All</button>
                 <ul id="tree4">
