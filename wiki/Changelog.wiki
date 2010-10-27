@@ -1,8 +1,10 @@
 #summary releases changelog
 
-=== 0.4 (trunk) ===
+=== 0.4 ===
  * added collapseAllElement / expandAllElement configurable options
- * added 
+ * added more flexible checking logic
+ * increased operation speed
+ * cleaned up code
  * fixed issue 3
  * fixed issue 4
  * fixed issue 5
