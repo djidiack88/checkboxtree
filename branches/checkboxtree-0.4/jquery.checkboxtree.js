@@ -5,7 +5,7 @@
  *
  * @see http://checkboxtree.daredevel.it
  *
- * @version 0.4
+ * @version 0.4.1
  */
 (function($){
 
@@ -64,7 +64,7 @@
 
             // mantain compatibility with old "checkChildren" option
             if (options.checkParents) {
-                options.onCheck.ascendants = 'check';
+                options.onCheck.ancestors = 'check';
             }
 
             // mantain compatibility with old "collapsed" option
@@ -446,11 +446,11 @@
     {
         $(li).find('input:first').attr('checked', '');
 
-        if (options.onUncheck.ascendants == 'check') {
+        if (options.onUncheck.ancestors == 'check') {
             checkAncestors(li, options);
         } else
 
-        if (options.onUncheck.ascendants == 'uncheck') {
+        if (options.onUncheck.ancestors == 'uncheck') {
             uncheckAncestors(li, options);
         }
 
