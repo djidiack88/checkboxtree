@@ -1,4 +1,6 @@
 #summary releases changelog
+=== 0.4.2 ===
+ * fixed issue 18
 === 0.4.1 ===
  * fixed issue 17
 === 0.4 ===
