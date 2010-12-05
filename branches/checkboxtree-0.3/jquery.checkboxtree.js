@@ -5,7 +5,7 @@
  *
  * @see http://checkboxtree.googlecode.com
  *
- * @version 0.3.1
+ * @version 0.3.2
  */
 (function($){
 
@@ -143,7 +143,7 @@
         var parentCheckbox = checkbox.parents("li:first").parents("li:first").find(" :checkbox:first");
 
         if (!parentCheckbox.is(":checked")) {
-            parentCheckbox.attr("checked","checked");
+            parentCheckbox.attr("checked","checked").change();
         }
 
         if (parentCheckbox.parents('[class*=' + options.container + ']').attr('class') != undefined) {
@@ -188,7 +188,7 @@
      */
     this.toggleChildren = function(checkbox)
     {
-        checkbox.parents('li:first').find('li :checkbox').attr('checked',checkbox.attr('checked') ? 'checked' : '');
+        checkbox.parents('li:first').find('li :checkbox').attr('checked',checkbox.attr('checked') ? 'checked' : '').change();
     }
 
 })(jQuery);
