@@ -266,7 +266,7 @@
      */
     function checkAncestors(li, options)
     {
-        li.parents('li').find('input:first').attr('checked','checked');
+        li.parents('li').find('input:first:not(:checked)').attr('checked','checked').change();
     }
 
     /**
@@ -297,7 +297,7 @@
      */
     function checkDescendants(li, options)
     {
-        li.find('li input').attr('checked', 'checked');
+        li.find('li input:not(:checked)').attr('checked', 'checked').change();
     }
 
     /**
@@ -420,7 +420,7 @@
      */
     function uncheck(li, options)
     {
-        $(li).find('input:first').attr('checked', '');
+        $(li).find('input:first:checked').attr('checked', '').change();
 
         if (options.onUncheck.ascendants == 'check') {
             checkAncestors(li, options);
@@ -449,7 +449,7 @@
      */
     function uncheckAncestors(li, options)
     {
-        li.parents('li').find('input:first').attr('checked','');
+        li.parents('li').find('input:first:checked').attr('checked','').change();
     }
 
     /**
@@ -462,7 +462,7 @@
      */
     function uncheckDescendants(li, options)
     {
-        li.find('li input').attr('checked', '');
+        li.find('li input:checked').attr('checked', '').change();
     }
 
 })(jQuery);
