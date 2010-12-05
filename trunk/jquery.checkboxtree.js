@@ -43,24 +43,24 @@
         //uncheckedImage: ''
         };
 
-        // build main options before element iteration
+        /* build main options before element iteration */
         var options = $.extend(true, defaults, options);
 
-        // setup collapse engine tree
+        /* setup collapse engine tree */
         if (options.collapsable) {
 
-            // build collapse engine's anchors
+            /* build collapse engine's anchors */
             options.collapseAnchor = (options.collapseImage.length > 0) ? '<img src="'+options.collapseImage+'" />' : '-';
             options.expandAnchor   = (options.expandImage.length > 0)   ? '<img src="'+options.expandImage+'" />'   : '+';
             options.leafAnchor     = (options.leafImage.length > 0)     ? '<img src="'+options.leafImage+'" />'     : '';
 
-            // initialize leafs
+            /* initialize leafs */
             $("li:not(:has(ul))", this).each(function() {
                 $(this).prepend($('<span></span>'));
                 markAsLeaf($(this), options);
             });
 
-            // initialize checked nodes
+            /* initialize checked nodes */
             $("li:has(ul):has(input:checked)", this).each(function() {
                 $(this).prepend($('<span></span>'));
                 options.initializeChecked == 'collapsed' ? collapse($(this), options) : expand($(this), options);
@@ -237,7 +237,7 @@
      */
     function check(li, options)
     {
-        $(li).find('input:first').attr('checked', 'checked');
+        $(li).find('input:first:not(:checked)').attr('checked', 'checked').change();
 
         if (options.onCheck.ancestors == 'check') {
             checkAncestors(li, options);
@@ -266,9 +266,11 @@
      */
     function checkAncestors(li, options)
     {
-        li.parents("li").find('input:first').attr("checked","checked");;
+        li.parents('li').find('input:first').attr('checked','checked');
     }
 
+    /**
+     */
     function checkAll(options)
     {
         $('[class*=' + options.container + '] :checkbox:not(:checked)').each(function(){
@@ -276,6 +278,8 @@
         });
     }
 
+    /**
+     */
     function uncheckAll(options)
     {
         $('[class*=' + options.container + '] :checkbox:checked').each(function(){
@@ -445,7 +449,7 @@
      */
     function uncheckAncestors(li, options)
     {
-        li.parents("li").find('input:first').attr("checked","");;
+        li.parents('li').find('input:first').attr('checked','');
     }
 
     /**
