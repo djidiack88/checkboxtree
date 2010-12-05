@@ -5,7 +5,7 @@
  *
  * @see http://checkboxtree.daredevel.it
  *
- * @version 0.4.1
+ * @version 0.4.2
  */
 (function($){
 
@@ -321,7 +321,7 @@
      */
     function checkDescendants(li, options)
     {
-        li.find('input').attr('checked', 'checked');
+        li.find('li input').attr('checked', 'checked');
     }
 
     /**
@@ -486,7 +486,7 @@
      */
     function uncheckDescendants(li, options)
     {
-        li.find('input').attr('checked', '');
+        li.find('li input').attr('checked', '');
     }
 
 })(jQuery);
