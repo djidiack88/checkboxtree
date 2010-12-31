@@ -92,7 +92,7 @@ onCheck: {
 {{{
 onUncheck: {
     ancestors: '', //or 'check', 'uncheck'
-    descendants: 'uncheck', //or '', 'uncheck'
+    descendants: 'uncheck', //or '', 'check'
     node: '' // or 'collapse', 'expand'
 }
 }}}
