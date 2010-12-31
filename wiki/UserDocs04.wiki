@@ -31,9 +31,10 @@ checkboxTree needs jQuery library to work. jQueryUI is required only if you want
 An online version of checkboxtree plugin is hosted on googlecode and can be directly used including the following code:
 {{{
         <!-- include checkboxTree plugin -->
-        <link rel="stylesheet" type="text/css" href="http://checkboxtree.googlecode.com/files/jquery.checkboxtree-0.4.2.min.css">
-        <script type="text/javascript" src="http://checkboxtree.googlecode.com/files/jquery.checkboxtree-0.4.2.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://checkboxtree.googlecode.com/files/jquery.checkboxtree-X.min.css">
+        <script type="text/javascript" src="http://checkboxtree.googlecode.com/files/jquery.checkboxtree-X.min.js"></script>
 }}}
+where X is desidered release version.
 
 = Configurable options =
 Following options can be specified when checkboxTree is initialized.
