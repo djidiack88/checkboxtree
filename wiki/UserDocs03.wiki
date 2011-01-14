@@ -1,5 +1,5 @@
 #summary user documentation for release 0.3.x
-#labels Featured,Phase-Deploy
+#labels Phase-Deploy
 
 ==Options==
 
