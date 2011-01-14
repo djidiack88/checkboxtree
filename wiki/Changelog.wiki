@@ -1,4 +1,5 @@
 #summary releases changelog
+#labels Featured
 === 0.4.2 ===
  * fixed issue 18
  * fixed issue 14
