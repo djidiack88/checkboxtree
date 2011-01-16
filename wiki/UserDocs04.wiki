@@ -6,6 +6,8 @@
 = Deployment =
 checkboxTree needs jQuery library to work. jQueryUI is required only if you want to improve collapse/expand effects handling.
 
+For best result, always use last library versions.
+
 Please, note that the script doesn't work with jQuery 1.4.3 and 1.4.4. If you need, you can patch the script as described in issue 20.
 {{{
         <!-- include jQuery libraries -->
@@ -30,13 +32,13 @@ Please, note that the script doesn't work with jQuery 1.4.3 and 1.4.4. If you ne
         </script>
 }}}
 == Online libraries ==
-Starting with 0.4.2 release, an online version of checkboxtree plugin is hosted on googlecode and can be directly used including the following code:
+An online version of checkboxtree plugin is hosted on googlecode and can be directly used including the following code:
 {{{
         <!-- include checkboxTree plugin -->
-        <link rel="stylesheet" type="text/css" href="http://checkboxtree.googlecode.com/files/jquery.checkboxtree-X.min.css">
-        <script type="text/javascript" src="http://checkboxtree.googlecode.com/files/jquery.checkboxtree-X.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://checkboxtree.googlecode.com/svn/tags/checkboxtree-X.X.X/jquery.checkboxtree.min.css">
+        <script type="text/javascript" src="http://checkboxtree.googlecode.com/svn/tags/checkboxtree-X.X.X/jquery.checkboxtree.min.js"></script>
 }}}
-where X is desidered release version.
+where X.X.X is desidered release version.
 
 = Configurable options =
 Following options can be specified when checkboxTree is initialized.
