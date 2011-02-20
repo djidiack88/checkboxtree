@@ -1,5 +1,12 @@
 #summary releases changelog
 #labels Featured
+=== 0.5 (not released yet) ===
+ * fixed issue 10 (shown in example 8)
+ * fixed issue 1 (shown in example 7)
+ * removed verdana/arial from tree
+=== 0.4.3 ===
+ * fixed compatibility issues for jquery 1.5
+ * fixed issue 27
 === 0.4.2 ===
  * fixed issue 18
  * fixed issue 14
