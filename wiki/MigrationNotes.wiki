@@ -1,7 +1,11 @@
 #summary migrations notes
 #labels Featured
 
-===Migration from release 0.3 to 0.4 ===
+=== Migration from release 0.4 to 0.5 ===
+Working 0.4 releases that don't include deprecated options, should work correctly out of the box with 0.5 version.
+If your configuration include deprecated options, please refer to [#Migration from release 0.3 to 0.4]
+
+=== Migration from release 0.3 to 0.4 ===
 With release 0.4, I added some new options and marked some other as deprecated (still working, but removed in next release). You can compare documentations: UserDocs03 and UserDocs04
 
 Working 0.3 releases, should work correctly out of the box with 0.4 version, but I recommend to follow next instructions to ensure future compatibility:
@@ -18,7 +22,7 @@ Working 0.3 releases, should work correctly out of the box with 0.4 version, but
 <button id="expandAll">Expand All</button>
 }}}
 
-===Migration from release 0.2 to 0.3 ===
+=== Migration from release 0.2 to 0.3 ===
 With release 0.3, a lot of default options are changed. You can compare options: UserDocs02 and UserDocs03
 
 If you have a working release 0.2, please be sure to follow next steps in order to preserve your script behaviour:

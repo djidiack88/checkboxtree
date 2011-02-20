@@ -3,12 +3,18 @@
 <html>
 <head>
 	<title>jQuery checkboxTree plugin demo</title>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/jquery-ui.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="jquery-ui-lightness.css">
+
+	<script type="text/javascript" src="library/jquery-1.5.js"></script>
+	<!-- <script type="text/javascript" src="library/jquery-1.4.2.js"></script>-->
+	<script type="text/javascript" src="library/jquery-ui-1.8.9.custom/js/jquery-ui-1.8.9.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css"
+		  href="library/jquery-ui-1.8.9.custom/css/smoothness/jquery-ui-1.8.9.custom.css">
+
 	<link rel="stylesheet" type="text/css" href="demo.css">
+
 	<link rel="stylesheet" type="text/css" href="jquery.checkboxtree.css">
 	<script type="text/javascript" src="jquery.checkboxtree.js"></script>
+
 	<script type="text/javascript">
 		//<!--
 		$(document).ready(function() {
@@ -19,7 +25,7 @@
 		});
 		//-->
 	</script>
-	<script type="text/javascript">
+	<!--	<script type="text/javascript">
 
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-10814140-5']);
@@ -34,70 +40,72 @@
 			s.parentNode.insertBefore(ga, s);
 		})();
 
-	</script>
+	</script>-->
 </head>
 <body>
 <a href="http://checkboxtree.daredevel.it/">Project Home</a>
 
 <div id="tabs">
 <ul>
-	<li><a href="#tabs-1">default</a></li>
-	<li><a href="#tabs-2">example 2</a></li>
-	<li><a href="#tabs-3">example 3</a></li>
-	<li><a href="#tabs-4">example 4</a></li>
-	<li><a href="#tabs-5">example 5</a></li>
-	<li><a href="#tabs-6">example 6</a></li>
+	<li><a href="#tabs-1">(01) default behaviour</a></li>
+	<li><a href="#tabs-2">(02) collapse images</a></li>
+	<li><a href="#tabs-3">(03) auto expand</a></li>
+	<li><a href="#tabs-4">(04) element attach</a></li>
+	<li><a href="#tabs-5">(05) methods usage</a></li>
+	<li><a href="#tabs-6">(06) initialization</a></li>
+	<li><a href="#tabs-7">(07) check if full</a></li>
+	<li><a href="#tabs-8">(08) single branch</a></li>
 	<li><a href="big.html">big tree (ajax tab)</a></li>
 </ul>
 
 <div id="tabs-1">
 	<p>This example show default script behaviour.</p>
-	<code class="jquery">
+	<code class="jquery" lang="text/javascript">
 		$('#tree1').checkboxTree();
 	</code>
 	<ul id="tree1">
-		<li><input type="checkbox">Root
+		<li><input type="checkbox">Node 1
 			<ul>
-				<li><input type="checkbox">Node 1
+				<li><input type="checkbox">Node 1.1
 					<ul>
-						<li><input type="checkbox">Node 1.1
+						<li><input type="checkbox">Node 1.1.1
 					</ul>
 			</ul>
 			<ul>
-				<li><input type="checkbox">Node 2
+				<li><input type="checkbox">Node 1.2
 					<ul>
-						<li><input type="checkbox">Node 2.1
-						<li><input type="checkbox">Node 2.2
-						<li><input type="checkbox">Node 2.3
+						<li><input type="checkbox">dNode 1.2.1
+						<li><input type="checkbox">Node 1.2.2
+						<li><input type="checkbox">Node 1.2.3
 							<ul>
-								<li><input type="checkbox">Node 2.3.1
-								<li><input type="checkbox">Node 2.3.2
+								<li><input type="checkbox">Node 1.2.3.1
+								<li><input type="checkbox">Node 1.2.3.2
 							</ul>
-						<li><input type="checkbox">Node 2.4
-						<li><input type="checkbox">Node 2.5
-						<li><input type="checkbox">Node 2.6
+						<li><input type="checkbox">Node 1.2.4
+						<li><input type="checkbox">Node 1.2.5
+						<li><input type="checkbox">Node 1.2.6
 					</ul>
 			</ul>
-		<li><input type="checkbox">Root 2
+		<li><input type="checkbox">Node 2
 			<ul>
-				<li><input type="checkbox">Node 1
+				<li><input type="checkbox">Node 2.1
 					<ul>
-						<li><input type="checkbox">Node 1.1
+						<li><input type="checkbox">Node 2.1.1
 					</ul>
 			</ul>
 			<ul>
-				<li><input type="checkbox">Node 2
+				<li><input type="checkbox">Node 2.2
 					<ul>
-						<li><input type="checkbox">Node 2.1
-						<li><input type="checkbox">Node 2.2
-						<li><input type="checkbox">Node 2.3
+						<li><input type="checkbox">Node 2.2.1
+						<li><input type="checkbox">Node 2.2.2
+						<li><input type="checkbox">Node 2.2.3
 							<ul>
-								<li><input type="checkbox">Node 2.3.1
-								<li><input type="checkbox">Node 2.3.2
+								<li><input type="checkbox">Node 2.2.3.1
+								<li><input type="checkbox">Node 2.2.3.2
 							</ul>
-						<li><input type="checkbox">Node 2.4
-						<li><input type="checkbox">Node 2.5
-						<li><input type="checkbox">Node 2.6
+						<li><input type="checkbox">Node 2.2.4
+						<li><input type="checkbox">Node 2.2.5
+						<li><input type="checkbox">Node 2.2.6
 					</ul>
 			</ul>
 	</ul>
@@ -105,10 +113,10 @@
 
 <div id="tabs-2">
 	<p>This example show how to use images to handle collapse/expand feature.</p>
-	<code class="jquery">
+	<code class="jquery" lang="text/javascript">
 		$('#tree2').checkboxTree({
-		collapseImage: 'images/minus.png',
-		expandImage: 'images/plus.png',
+			collapseImage: 'images/minus.png',
+			expandImage: 'images/plus.png'
 		});
 	</code>
 	<ul id="tree2">
@@ -143,16 +151,16 @@
 		<li>how to automatically collapse/expand on check/unchek events
 		<li>how to use images to handle collapse/expand feature
 	</ul>
-	<code class="jquery">
+	<code class="jquery" lang="text/javascript">
 		$('#tree3').checkboxTree({
-		onCheck: {
-		node: 'expand'
-		},
-		onUncheck: {
-		node: 'collapse'
-		},
-		collapseImage: 'images/downArrow.gif',
-		expandImage: 'images/rightArrow.gif',
+			onCheck: {
+				node: 'expand'
+			},
+			onUncheck: {
+				node: 'collapse'
+			},
+			collapseImage: 'images/downArrow.gif',
+			expandImage: 'images/rightArrow.gif'
 		});
 	</code>
 	<ul id="tree3">
@@ -182,19 +190,20 @@
 </div>
 
 <div id="tabs-4">
-	<p>This example show how to add buttons to collapse/expand all tree.</p>
-	<code class="jquery">
+	<p>This example show how to add buttons to collapse/expand and check/uncheck all tree's nodes.</p>
+	<code class="jquery" lang="text/javascript">
 		$('#tree4').checkboxTree({
-		checkAllElement: '#checkAll',
-		collapseAllElement: '#collapseAll',
-		expandAllElement: $('#expandAll'),
-		uncheckAllElement: '#uncheckAll'
+			checkAllElement: '#checkAll',
+			collapseAllElement: '#collapseAll',
+			expandAllElement: $('#expandAll'),
+			uncheckAllElement: $('#uncheckAll')
 		});
 	</code>
 
 	<div id="buttons-4"></div>
 	<button id="checkAll">Check All</button>
 	<button id="uncheckAll">Uncheck All</button>
+	<br/>
 	<button id="collapseAll">Collapse All</button>
 	<button id="expandAll">Expand All</button>
 	<ul id="tree4">
@@ -224,27 +233,41 @@
 </div>
 
 <div id="tabs-5">
-	<p>This example show how to use external API.</p>
-	<code class="jquery">
+	<p>This example show how to use public methods.</p>
+	<code class="jquery" lang="text/javascript">
 		tree = $('#tree5').checkboxTree();
-		$('#collapse').click(function(){
-		tree.collapse($('#node23'));
+
+		$('#tabs-5-checkAll').click(function(){
+			tree.checkAll();
 		});
-		$('#expand').click(function(){
-		tree.expand($('#node23'));
+
+		$('#tabs-5-uncheckAll').click(function(){
+			tree.uncheckAll();
 		});
-		$('#check').click(function(){
-		tree.check($('#node23'));
+
+		$('#tabs-5-collapse').click(function(){
+			tree.collapse($('#tabs-5-node23'));
 		});
-		$('#uncheck').click(function(){
-		tree.uncheck($('#node23'));
+
+		$('#tabs-5-expand').click(function(){
+			tree.expand($('#tabs-5-node23'));
+		});
+
+		$('#tabs-5-check').click(function(){
+			tree.check($('#tabs-5-node23'));
+		});
+
+		$('#tabs-5-uncheck').click(function(){
+			tree.uncheck($('#tabs-5-node23'));
 		});
 	</code>
 	<br/>
-	<a href="javascript:void(0);" id="collapse">Collapse node 2.3</a> |
-	<a href="javascript:void(0);" id="expand">Expand node 2.3</a> <br/>
-	<a href="javascript:void(0);" id="check">Check node 2.3</a> |
-	<a href="javascript:void(0);" id="uncheck">Uncheck node 2.3</a> <br/>
+	<a href="javascript:void(0);" id="tabs-5-checkAll">Check all nodes</a> |
+	<a href="javascript:void(0);" id="tabs-5-uncheckAll">Uncheck all nodes</a> <br/>
+	<a href="javascript:void(0);" id="tabs-5-collapse">Collapse node 2.3</a> |
+	<a href="javascript:void(0);" id="tabs-5-expand">Expand node 2.3</a> <br/>
+	<a href="javascript:void(0);" id="tabs-5-check">Check node 2.3</a> |
+	<a href="javascript:void(0);" id="tabs-5-uncheck">Uncheck node 2.3</a> <br/>
 	<ul id="tree5">
 		<li><input type="checkbox">Root
 			<ul>
@@ -258,7 +281,7 @@
 					<ul>
 						<li><input type="checkbox">Node 2.1
 						<li><input type="checkbox">Node 2.2
-						<li id="node23"><input type="checkbox">Node 2.3
+						<li id="tabs-5-node23"><input type="checkbox">Node 2.3
 							<ul>
 								<li><input type="checkbox">Node 2.3.1
 								<li><input type="checkbox">Node 2.3.2
@@ -273,10 +296,10 @@
 
 <div id="tabs-6">
 	<p>This example show how to initialize a tree.</p>
-	<code class="jquery">
+	<code class="jquery" lang="text/javascript">
 		$('#tree6').checkboxTree({
-		initializeChecked: 'expanded',
-		initializeUnchecked: 'collapsed'
+			initializeChecked: 'expanded',
+			initializeUnchecked: 'collapsed'
 		});
 	</code>
 	<ul id="tree6">
@@ -304,6 +327,107 @@
 			</ul>
 	</ul>
 </div>
+
+<div id="tabs-7">
+	<p>This example show how to configure tree to auto-check node when all descendants are checked.</p>
+	<code class="jquery" lang="text/javascript">
+		$('#tree7').checkboxTree({
+			onCheck: {
+				ancestors: 'checkIfFull',
+				descendants: 'check'
+			},
+			onUncheck: {
+				ancestors: 'uncheck'
+			}
+		});
+	</code>
+	<ul id="tree7">
+		<li><input type="checkbox">Root
+			<ul>
+				<li><input type="checkbox">Node 1
+					<ul>
+						<li><input type="checkbox">Node 1.1
+					</ul>
+			</ul>
+			<ul>
+				<li><input type="checkbox">Node 2
+					<ul>
+						<li><input type="checkbox">Node 2.1
+						<li><input type="checkbox">Node 2.2
+						<li><input type="checkbox">Node 2.3
+							<ul>
+								<li><input type="checkbox">Node 2.3.1
+								<li><input type="checkbox">Node 2.3.2
+							</ul>
+						<li><input type="checkbox">Node 2.4
+						<li><input type="checkbox">Node 2.5
+						<li><input type="checkbox">Node 2.6
+					</ul>
+			</ul>
+	</ul>
+</div>
+
+<div id="tabs-8">
+	<p>This example show how to configure tree to admit only one branch selected at time.</p>
+	<code class="jquery" lang="text/javascript">
+		$('#tree8').checkboxTree({
+			onCheck: {
+				ancestors: 'check',
+				others: 'uncheck'
+			},
+			onUncheck: {
+				descendants: 'uncheck'
+			}
+		});
+	</code>
+	<ul id="tree8">
+		<li><input type="checkbox">Node 1
+			<ul>
+				<li><input type="checkbox">Node 1.1
+					<ul>
+						<li><input type="checkbox">Node 1.1.1
+					</ul>
+			</ul>
+			<ul>
+				<li><input type="checkbox">Node 1.2
+					<ul>
+						<li><input type="checkbox">Node 1.2.1
+						<li><input type="checkbox">Node 1.2.2
+						<li><input type="checkbox">Node 1.2.3
+							<ul>
+								<li><input type="checkbox">Node 1.2.3.1
+								<li><input type="checkbox">Node 1.2.3.2
+							</ul>
+						<li><input type="checkbox">Node 1.2.4
+						<li><input type="checkbox">Node 1.2.5
+						<li><input type="checkbox">Node 1.2.6
+					</ul>
+			</ul>
+		<li><input type="checkbox">Node 2
+			<ul>
+				<li><input type="checkbox">Node 2.1
+					<ul>
+						<li><input type="checkbox">Node 2.1.1
+					</ul>
+			</ul>
+			<ul>
+				<li><input type="checkbox">Node 2.2
+					<ul>
+						<li><input type="checkbox">Node 2.2.1
+						<li><input type="checkbox">Node 2.2.2
+						<li><input type="checkbox">Node 2.2.3
+							<ul>
+								<li><input type="checkbox">Node 2.2.3.1
+								<li><input type="checkbox">Node 2.2.3.2
+							</ul>
+						<li><input type="checkbox">Node 2.2.4
+						<li><input type="checkbox">Node 2.2.5
+						<li><input type="checkbox">Node 2.2.6
+					</ul>
+			</ul>
+	</ul>
+</div>
+
 </div>
 </body>
 </html>
