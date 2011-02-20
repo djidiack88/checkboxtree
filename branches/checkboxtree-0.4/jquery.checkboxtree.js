@@ -85,7 +85,7 @@
                     href:    'javascript:void(0);',
                     html:    options.collapseAllButton.html,
                     click:   function(){
-                        $('[class*=' + options.container + '] li.expanded').each(function(){
+                        $('[class*="' + options.container + '"] li.expanded').each(function(){
                             collapse($(this), options);
                         });
                     }
@@ -99,7 +99,7 @@
                     href:    'javascript:void(0);',
                     html:    options.expandAllButton.html,
                     click:   function(){
-                        $('[class*=' + options.container + '] li.collapsed').each(function(){
+                        $('[class*="' + options.container + '"] li.collapsed').each(function(){
                             expand($(this), options);
                         });
                     }
@@ -124,16 +124,17 @@
                 options.initializeUnchecked == 'collapsed' ? collapse($(this), options) : expand($(this), options);
             });
 
-            // bind expand event
-            $('li.collapsed span', this).live("click", function(){
-                expand($(this).parents("li:first"), options);
-                return false;
-            });
+            /* bind collapse/expand event */
+            $('li span', this).live("click", function(){
+				li = $(this).parents("li:first");
 
-            // bind collapse event
-            $('li.expanded span', this).live("click", function(){
-                collapse($(this).parents("li:first"), options);
-                return false;
+				if (li.hasClass('collapsed')) {
+                	expand(li, options);
+				} else
+				
+				if (li.hasClass('expanded')) {
+                	collapse(li, options);
+				}
             });
 
             // bind collapse all element event
@@ -353,7 +354,7 @@
      */
     function collapseAll(options)
     {
-        $('[class*=' + options.container + '] li.expanded').each(function(){
+        $('[class*="' + options.container + '"] li.expanded').each(function(){
             collapse($(this), options);
         });
     }
@@ -387,7 +388,7 @@
      */
     function expandAll(options)
     {
-        $('[class*=' + options.container + '] li.collapsed').each(function(){
+        $('[class*="' + options.container + '"] li.collapsed').each(function(){
             expand($(this), options);
         });
     }
