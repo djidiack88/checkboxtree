@@ -45,6 +45,8 @@ Following options can be specified when checkboxTree is initialized.
 
 ~~Striked~~ options are deprecated: they still working in this release, but will be removed from next release.
 
+*To avoid problems with those old options, set "checkChildren: false" and "checkParents: false".* Read issue 23 for more informations.
+
 || *options*           || *type*         || *default value*     || *description* ||
 || ~~checkChildren~~   || boolean        || true                || If node's children must be checked when node is checked. This option is __deprecaded__ and will be removed from release 0.5. ||
 || ~~checkParents~~    || boolean        || true                || If node's ancestors must be checked when node is checked. This option is __deprecaded__ and will be removed from release 0.5. ||
