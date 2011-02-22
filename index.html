@@ -3,7 +3,34 @@
 <html>
 <head>
 	<title>jQuery checkboxTree plugin demo</title>
+    <!--	<script type="text/javascript">
 
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-10814140-5']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>-->
+    <!-- styles for demo purpose -->
+<style type="text/css">
+    body {
+        font-family: verdana, arial; font-size: 0.8em;
+    }
+
+code {
+    white-space: pre;
+}
+</style>
+
+    <!-- start checkboxTree configuration -->
 	<script type="text/javascript" src="library/jquery-1.5.js"></script>
 	<script type="text/javascript" src="library/jquery-ui-1.8.9.custom/js/jquery-ui-1.8.9.custom.min.js"></script>
 	<link rel="stylesheet" type="text/css"
@@ -11,36 +38,26 @@
 
 	<link rel="stylesheet" type="text/css" href="jquery.checkboxtree.css">
 	<script type="text/javascript" src="jquery.checkboxtree.js"></script>
+    <!-- end checkboxTree configuration -->
 
+    <script type="text/javascript" src="library/jquery.cookie.js"></script>
 	<script type="text/javascript">
 		//<!--
 		$(document).ready(function() {
-			$('#tabs').tabs();
+			$('#tabs').tabs({
+                cookie: { expires: 30 }
+            });
 			$('.jquery').each(function() {
 				eval($(this).html());
 			});
+            $('.button').button();
 		});
 		//-->
 	</script>
-	<!--	<script type="text/javascript">
-
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-10814140-5']);
-		_gaq.push(['_trackPageview']);
-
-		(function() {
-			var ga = document.createElement('script');
-			ga.type = 'text/javascript';
-			ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(ga, s);
-		})();
-
-	</script>-->
 </head>
 <body>
-<a href="http://checkboxtree.daredevel.it/">Project Home</a>
+<h1>jQuery checkboxTree plugin demo</h1>
+<a href="http://checkboxtree.daredevel.it/" class="button">Project Home</a>
 
 <div id="tabs">
 <ul>
