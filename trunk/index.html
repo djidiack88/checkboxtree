@@ -69,6 +69,7 @@ code {
 	<li><a href="#tabs-6">(06) initialization</a></li>
 	<li><a href="#tabs-7">(07) check if full</a></li>
 	<li><a href="#tabs-8">(08) single branch</a></li>
+	<li><a href="#tabs-9">(09) events handling</a></li>
 	<li><a href="big.html">big tree (ajax tab)</a></li>
 </ul>
 
@@ -78,48 +79,48 @@ code {
 		$('#tree1').checkboxTree();
 	</code>
 	<ul id="tree1">
-		<li><input type="checkbox">Node 1
+		<li><input type="checkbox"><label>Node 1</label>
 			<ul>
-				<li><input type="checkbox">Node 1.1
+				<li><input type="checkbox"><label>Node 1.1</label>
 					<ul>
-						<li><input type="checkbox">Node 1.1.1
+						<li><input type="checkbox"><label>Node 1.1.1</label>
 					</ul>
 			</ul>
 			<ul>
-				<li><input type="checkbox">Node 1.2
+				<li><input type="checkbox"><label>Node 1.2</label>
 					<ul>
-						<li><input type="checkbox">Node 1.2.1
-						<li><input type="checkbox">Node 1.2.2
-						<li><input type="checkbox">Node 1.2.3
+						<li><input type="checkbox"><label>Node 1.2.1</label>
+						<li><input type="checkbox"><label>Node 1.2.2</label>
+						<li><input type="checkbox"><label>Node 1.2.3</label>
 							<ul>
-								<li><input type="checkbox">Node 1.2.3.1
-								<li><input type="checkbox">Node 1.2.3.2
+								<li><input type="checkbox"><label>Node 1.2.3.1</label>
+								<li><input type="checkbox"><label>Node 1.2.3.2</label>
 							</ul>
-						<li><input type="checkbox">Node 1.2.4
-						<li><input type="checkbox">Node 1.2.5
-						<li><input type="checkbox">Node 1.2.6
+						<li><input type="checkbox"><label>Node 1.2.4</label>
+						<li><input type="checkbox"><label>Node 1.2.5</label>
+						<li><input type="checkbox"><label>Node 1.2.6</label>
 					</ul>
 			</ul>
-		<li><input type="checkbox">Node 2
+		<li><input type="checkbox"><label>Node 2</label>
 			<ul>
-				<li><input type="checkbox">Node 2.1
+				<li><input type="checkbox"><label>Node 2.1</label>
 					<ul>
-						<li><input type="checkbox">Node 2.1.1
+						<li><input type="checkbox"><label>Node 2.1.1</label>
 					</ul>
 			</ul>
 			<ul>
-				<li><input type="checkbox">Node 2.2
+				<li><input type="checkbox"><label>Node 2.2</label>
 					<ul>
-						<li><input type="checkbox">Node 2.2.1
-						<li><input type="checkbox">Node 2.2.2
-						<li><input type="checkbox">Node 2.2.3
+						<li><input type="checkbox"><label>Node 2.2.1</label>
+						<li><input type="checkbox"><label>Node 2.2.2</label>
+						<li><input type="checkbox"><label>Node 2.2.3</label>
 							<ul>
-								<li><input type="checkbox">Node 2.2.3.1
-								<li><input type="checkbox">Node 2.2.3.2
+								<li><input type="checkbox"><label>Node 2.2.3.1</label>
+								<li><input type="checkbox"><label>Node 2.2.3.2</label>
 							</ul>
-						<li><input type="checkbox">Node 2.2.4
-						<li><input type="checkbox">Node 2.2.5
-						<li><input type="checkbox">Node 2.2.6
+						<li><input type="checkbox"><label>Node 2.2.4</label>
+						<li><input type="checkbox"><label>Node 2.2.5</label>
+						<li><input type="checkbox"><label>Node 2.2.6</label>
 					</ul>
 			</ul>
 	</ul>
@@ -136,24 +137,24 @@ code {
 	<ul id="tree2">
 		<li><input type="checkbox">Root
 			<ul>
-				<li><input type="checkbox">Node 1
+				<li><input type="checkbox"><label>Node 1
 					<ul>
-						<li><input type="checkbox">Node 1.1
+						<li><input type="checkbox"><label>Node 1.1
 					</ul>
 			</ul>
 			<ul>
-				<li><input type="checkbox">Node 2
+				<li><input type="checkbox"><label>Node 2</label>
 					<ul>
-						<li><input type="checkbox">Node 2.1
-						<li><input type="checkbox">Node 2.2
-						<li><input type="checkbox">Node 2.3
+						<li><input type="checkbox"><label>Node 2.1</label>
+						<li><input type="checkbox"><label>Node 2.2</label>
+						<li><input type="checkbox"><label>Node 2.3</label>
 							<ul>
-								<li><input type="checkbox">Node 2.3.1
-								<li><input type="checkbox">Node 2.3.2
+								<li><input type="checkbox"><label>Node 2.3.1</label>
+								<li><input type="checkbox"><label>Node 2.3.2</label>
 							</ul>
-						<li><input type="checkbox">Node 2.4
-						<li><input type="checkbox">Node 2.5
-						<li><input type="checkbox">Node 2.6
+						<li><input type="checkbox"><label>Node 2.4</label>
+						<li><input type="checkbox"><label>Node 2.5</label>
+						<li><input type="checkbox"><label>Node 2.6</label>
 					</ul>
 			</ul>
 	</ul>
@@ -167,37 +168,37 @@ code {
 	</ul>
 	<code class="jquery" lang="text/javascript">
 		$('#tree3').checkboxTree({
-			onCheck: {
-				node: 'expand'
-			},
-			onUncheck: {
-				node: 'collapse'
-			},
-			collapseImage: 'images/downArrow.gif',
-			expandImage: 'images/rightArrow.gif'
+		onCheck: {
+		node: 'expand'
+		},
+		onUncheck: {
+		node: 'collapse'
+		},
+		collapseImage: 'images/downArrow.gif',
+		expandImage: 'images/rightArrow.gif'
 		});
 	</code>
 	<ul id="tree3">
 		<li><input type="checkbox">Root
 			<ul>
-				<li><input type="checkbox">Node 1
+				<li><input type="checkbox"><label>Node 1</label>
 					<ul>
-						<li><input type="checkbox">Node 1.1
+						<li><input type="checkbox"><label>Node 1.1</label>
 					</ul>
 			</ul>
 			<ul>
-				<li><input type="checkbox">Node 2
+				<li><input type="checkbox"><label>Node 2</label>
 					<ul>
-						<li><input type="checkbox">Node 2.1
-						<li><input type="checkbox">Node 2.2
-						<li><input type="checkbox">Node 2.3
+						<li><input type="checkbox"><label>Node 2.1</label>
+						<li><input type="checkbox"><label>Node 2.2</label>
+						<li><input type="checkbox"><label>Node 2.3</label>
 							<ul>
-								<li><input type="checkbox">Node 2.3.1
-								<li><input type="checkbox">Node 2.3.2
+								<li><input type="checkbox"><label>Node 2.3.1</label>
+								<li><input type="checkbox"><label>Node 2.3.2</label>
 							</ul>
-						<li><input type="checkbox">Node 2.4
-						<li><input type="checkbox">Node 2.5
-						<li><input type="checkbox">Node 2.6
+						<li><input type="checkbox"><label>Node 2.4</label>
+						<li><input type="checkbox"><label>Node 2.5</label>
+						<li><input type="checkbox"><label>Node 2.6</label>
 					</ul>
 			</ul>
 	</ul>
@@ -223,24 +224,24 @@ code {
 	<ul id="tree4">
 		<li><input type="checkbox">Root
 			<ul>
-				<li><input type="checkbox">Node 1
+				<li><input type="checkbox"><label>Node 1</label>
 					<ul>
-						<li><input type="checkbox">Node 1.1
+						<li><input type="checkbox"><label>Node 1.1</label>
 					</ul>
 			</ul>
 			<ul>
-				<li><input type="checkbox">Node 2
+				<li><input type="checkbox"><label>Node 2</label>
 					<ul>
-						<li><input type="checkbox">Node 2.1
-						<li><input type="checkbox">Node 2.2
-						<li><input type="checkbox">Node 2.3
+						<li><input type="checkbox"><label>Node 2.1</label>
+						<li><input type="checkbox"><label>Node 2.2</label>
+						<li><input type="checkbox"><label>Node 2.3</label>
 							<ul>
-								<li><input type="checkbox">Node 2.3.1
-								<li><input type="checkbox">Node 2.3.2
+								<li><input type="checkbox"><label>Node 2.3.1</label>
+								<li><input type="checkbox"><label>Node 2.3.2</label>
 							</ul>
-						<li><input type="checkbox">Node 2.4
-						<li><input type="checkbox">Node 2.5
-						<li><input type="checkbox">Node 2.6
+						<li><input type="checkbox"><label>Node 2.4</label>
+						<li><input type="checkbox"><label>Node 2.5</label>
+						<li><input type="checkbox"><label>Node 2.6</label>
 					</ul>
 			</ul>
 	</ul>
@@ -285,24 +286,24 @@ code {
 	<ul id="tree5">
 		<li><input type="checkbox">Root
 			<ul>
-				<li><input type="checkbox">Node 1
+				<li><input type="checkbox"><label>Node 1</label>
 					<ul>
-						<li><input type="checkbox">Node 1.1
+						<li><input type="checkbox"><label>Node 1.1</label>
 					</ul>
 			</ul>
 			<ul>
-				<li><input type="checkbox">Node 2
+				<li><input type="checkbox"><label>Node 2</label>
 					<ul>
-						<li><input type="checkbox">Node 2.1
-						<li><input type="checkbox">Node 2.2
-						<li id="tabs-5-node23"><input type="checkbox">Node 2.3
+						<li><input type="checkbox"><label>Node 2.1</label>
+						<li><input type="checkbox"><label>Node 2.2</label>
+						<li id="tabs-5-node23"><input type="checkbox"><label>Node 2.3</label>
 							<ul>
-								<li><input type="checkbox">Node 2.3.1
-								<li><input type="checkbox">Node 2.3.2
+								<li><input type="checkbox"><label>Node 2.3.1</label>
+								<li><input type="checkbox"><label>Node 2.3.2</label>
 							</ul>
-						<li><input type="checkbox">Node 2.4
-						<li><input type="checkbox">Node 2.5
-						<li><input type="checkbox">Node 2.6
+						<li><input type="checkbox"><label>Node 2.4</label>
+						<li><input type="checkbox"><label>Node 2.5</label>
+						<li><input type="checkbox"><label>Node 2.6</label>
 					</ul>
 			</ul>
 	</ul>
@@ -319,24 +320,24 @@ code {
 	<ul id="tree6">
 		<li><input type="checkbox" checked>Root
 			<ul>
-				<li><input type="checkbox">Node 1
+				<li><input type="checkbox"><label>Node 1</label>
 					<ul>
-						<li><input type="checkbox">Node 1.1
+						<li><input type="checkbox"><label>Node 1.1</label>
 					</ul>
 			</ul>
 			<ul>
-				<li><input type="checkbox" checked>Node 2
+				<li><input type="checkbox" checked>Node 2</label>
 					<ul>
-						<li><input type="checkbox">Node 2.1
-						<li><input type="checkbox">Node 2.2
-						<li><input type="checkbox">Node 2.3
+						<li><input type="checkbox"><label>Node 2.1</label>
+						<li><input type="checkbox"><label>Node 2.2</label>
+						<li><input type="checkbox"><label>Node 2.3</label>
 							<ul>
-								<li><input type="checkbox">Node 2.3.1
-								<li><input type="checkbox">Node 2.3.2
+								<li><input type="checkbox"><label>Node 2.3.1</label>
+								<li><input type="checkbox"><label>Node 2.3.2</label>
 							</ul>
-						<li><input type="checkbox">Node 2.4
-						<li><input type="checkbox">Node 2.5
-						<li><input type="checkbox">Node 2.6
+						<li><input type="checkbox"><label>Node 2.4</label>
+						<li><input type="checkbox"><label>Node 2.5</label>
+						<li><input type="checkbox"><label>Node 2.6</label>
 					</ul>
 			</ul>
 	</ul>
@@ -351,31 +352,31 @@ code {
 				descendants: 'check'
 			},
 			onUncheck: {
-				ancestors: 'uncheck'
+			ancestors: 'uncheck'
 			}
 		});
 	</code>
 	<ul id="tree7">
 		<li><input type="checkbox">Root
 			<ul>
-				<li><input type="checkbox">Node 1
+				<li><input type="checkbox"><label>Node 1</label>
 					<ul>
-						<li><input type="checkbox">Node 1.1
+						<li><input type="checkbox"><label>Node 1.1</label>
 					</ul>
 			</ul>
 			<ul>
-				<li><input type="checkbox">Node 2
+				<li><input type="checkbox"><label>Node 2</label>
 					<ul>
-						<li><input type="checkbox">Node 2.1
-						<li><input type="checkbox">Node 2.2
-						<li><input type="checkbox">Node 2.3
+						<li><input type="checkbox"><label>Node 2.1</label>
+						<li><input type="checkbox"><label>Node 2.2</label>
+						<li><input type="checkbox"><label>Node 2.3</label>
 							<ul>
-								<li><input type="checkbox">Node 2.3.1
-								<li><input type="checkbox">Node 2.3.2
+								<li><input type="checkbox"><label>Node 2.3.1</label>
+								<li><input type="checkbox"><label>Node 2.3.2</label>
 							</ul>
-						<li><input type="checkbox">Node 2.4
-						<li><input type="checkbox">Node 2.5
-						<li><input type="checkbox">Node 2.6
+						<li><input type="checkbox"><label>Node 2.4</label>
+						<li><input type="checkbox"><label>Node 2.5</label>
+						<li><input type="checkbox"><label>Node 2.6</label>
 					</ul>
 			</ul>
 	</ul>
@@ -395,48 +396,105 @@ code {
 		});
 	</code>
 	<ul id="tree8">
-		<li><input type="checkbox">Node 1
+		<li><input type="checkbox"><label>Node 1</label>
 			<ul>
-				<li><input type="checkbox">Node 1.1
+				<li><input type="checkbox"><label>Node 1.1</label>
 					<ul>
-						<li><input type="checkbox">Node 1.1.1
+						<li><input type="checkbox"><label>Node 1.1.1</label>
 					</ul>
 			</ul>
 			<ul>
-				<li><input type="checkbox">Node 1.2
+				<li><input type="checkbox"><label>Node 1.2</label>
 					<ul>
-						<li><input type="checkbox">Node 1.2.1
-						<li><input type="checkbox">Node 1.2.2
-						<li><input type="checkbox">Node 1.2.3
+						<li><input type="checkbox"><label>Node 1.2.1</label>
+						<li><input type="checkbox"><label>Node 1.2.2</label>
+						<li><input type="checkbox"><label>Node 1.2.3</label>
 							<ul>
-								<li><input type="checkbox">Node 1.2.3.1
-								<li><input type="checkbox">Node 1.2.3.2
+								<li><input type="checkbox"><label>Node 1.2.3.1</label>
+								<li><input type="checkbox"><label>Node 1.2.3.2</label>
 							</ul>
-						<li><input type="checkbox">Node 1.2.4
-						<li><input type="checkbox">Node 1.2.5
-						<li><input type="checkbox">Node 1.2.6
+						<li><input type="checkbox"><label>Node 1.2.4</label>
+						<li><input type="checkbox"><label>Node 1.2.5</label>
+						<li><input type="checkbox"><label>Node 1.2.6</label>
 					</ul>
 			</ul>
-		<li><input type="checkbox">Node 2
+		<li><input type="checkbox"><label>Node 2</label>
 			<ul>
-				<li><input type="checkbox">Node 2.1
+				<li><input type="checkbox"><label>Node 2.1</label>
 					<ul>
-						<li><input type="checkbox">Node 2.1.1
+						<li><input type="checkbox"><label>Node 2.1.1</label>
 					</ul>
 			</ul>
 			<ul>
-				<li><input type="checkbox">Node 2.2
+				<li><input type="checkbox"><label>Node 2.2</label>
 					<ul>
-						<li><input type="checkbox">Node 2.2.1
-						<li><input type="checkbox">Node 2.2.2
-						<li><input type="checkbox">Node 2.2.3
+						<li><input type="checkbox"><label>Node 2.2.1</label>
+						<li><input type="checkbox"><label>Node 2.2.2</label>
+						<li><input type="checkbox"><label>Node 2.2.3</label>
 							<ul>
-								<li><input type="checkbox">Node 2.2.3.1
-								<li><input type="checkbox">Node 2.2.3.2
+								<li><input type="checkbox"><label>Node 2.2.3.1</label>
+								<li><input type="checkbox"><label>Node 2.2.3.2</label>
 							</ul>
-						<li><input type="checkbox">Node 2.2.4
-						<li><input type="checkbox">Node 2.2.5
-						<li><input type="checkbox">Node 2.2.6
+						<li><input type="checkbox"><label>Node 2.2.4</label>
+						<li><input type="checkbox"><label>Node 2.2.5</label>
+						<li><input type="checkbox"><label>Node 2.2.6</label>
+					</ul>
+			</ul>
+	</ul>
+</div>
+
+<div id="tabs-9">
+	<p>This example show default script behaviour.</p>
+	<code class="jquery" lang="text/javascript">
+		$('#tree9').checkboxTree({
+			onCollapse: {
+				before: function(li) { alert('collapsed node: ' + li.find('label:first')text()); }
+			}
+		});
+	</code>
+	<ul id="tree9">
+		<li><input type="checkbox"><label>Node 1</label>
+			<ul>
+				<li><input type="checkbox"><label>Node 1.1</label>
+					<ul>
+						<li><input type="checkbox"><label>Node 1.1.1</label>
+					</ul>
+			</ul>
+			<ul>
+				<li><input type="checkbox"><label>Node 1.2</label>
+					<ul>
+						<li><input type="checkbox"><label>Node 1.2.1</label>
+						<li><input type="checkbox"><label>Node 1.2.2</label>
+						<li><input type="checkbox"><label>Node 1.2.3</label>
+							<ul>
+								<li><input type="checkbox"><label>Node 1.2.3.1</label>
+								<li><input type="checkbox"><label>Node 1.2.3.2</label>
+							</ul>
+						<li><input type="checkbox"><label>Node 1.2.4</label>
+						<li><input type="checkbox"><label>Node 1.2.5</label>
+						<li><input type="checkbox"><label>Node 1.2.6</label>
+					</ul>
+			</ul>
+		<li><input type="checkbox"><label>Node 2</label>
+			<ul>
+				<li><input type="checkbox"><label>Node 2.1</label>
+					<ul>
+						<li><input type="checkbox"><label>Node 2.1.1</label>
+					</ul>
+			</ul>
+			<ul>
+				<li><input type="checkbox"><label>Node 2.2</label>
+					<ul>
+						<li><input type="checkbox"><label>Node 2.2.1</label>
+						<li><input type="checkbox"><label>Node 2.2.2</label>
+						<li><input type="checkbox"><label>Node 2.2.3</label>
+							<ul>
+								<li><input type="checkbox"><label>Node 2.2.3.1</label>
+								<li><input type="checkbox"><label>Node 2.2.3.2</label>
+							</ul>
+						<li><input type="checkbox"><label>Node 2.2.4</label>
+						<li><input type="checkbox"><label>Node 2.2.5</label>
+						<li><input type="checkbox"><label>Node 2.2.6</label>
 					</ul>
 			</ul>
 	</ul>
