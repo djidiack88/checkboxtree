@@ -111,13 +111,13 @@
             });
 
             /* initialize checked nodes */
-            $(this).find("li:has(ul):has(:checkbox:checked)").each(function() {
+            $(this).find("li:has(ul):has(input:checkbox:checked)").each(function() {
                 $(this).prepend($('<span />'));
                 options.initializeChecked == 'collapsed' ? collapse($(this), options, false) : expand($(this), options, false);
             });
 
             /* initialize unchecked nodes */
-            $(this).find("li:has(ul):not(:has(:checkbox:checked))").each(function() {
+            $(this).find("li:has(ul):not(:has(input:checkbox:checked))").each(function() {
                 $(this).prepend($('<span />'));
                 options.initializeUnchecked == 'collapsed' ? collapse($(this), options, false) : expand($(this), options, false);
             });
@@ -147,28 +147,28 @@
 
             /* bind collapse on uncheck event */
             if (options.onUncheck.node == 'collapse') {
-                $(':checkbox:not(:checked)', this).live("click", function() {
+                $(this).find('input:checkbox:not(:checked)').live("click", function() {
                     collapse($(this).parents("li:first"), options);
                 });
             } else
 
             /* bind expand on uncheck event */
             if (options.onUncheck.node == 'expand') {
-                $(':checkbox:not(:checked)', this).live("click", function() {
+                $(this).find('input:checkbox:not(:checked)').live("click", function() {
                     expand($(this).parents("li:first"), options);
                 });
             }
 
             /* bind collapse on check event */
             if (options.onCheck.node == 'collapse') {
-                $(':checkbox:checked', this).live("click", function() {
+                $(this).find('input:checkbox:checked').live("click", function() {
                     collapse($(this).parents("li:first"), options);
                 });
             } else
 
             /* bind expand on check event */
             if (options.onCheck.node == 'expand') {
-                $(':checkbox:checked', this).live("click", function() {
+                $(this).find('input:checkbox:checked').live("click", function() {
                     expand($(this).parents("li:first"), options);
                 });
             }
@@ -220,13 +220,13 @@
         }
 
         /* bind node uncheck event */
-        $(this).find(':checkbox:not(:checked)').live('click', function() {
+        $(this).find('input:checkbox:not(:checked)').live('click', function() {
             var li = $(this).parents('li:first');
             uncheck(li, options);
         });
 
         /* bind node check event */
-        $(this).find(':checkbox:checked').live('click', function() {
+        $(this).find('input:checkbox:checked').live('click', function() {
             var li = $(this).parents('li:first');
             check(li, options);
         });
@@ -300,7 +300,7 @@
      * @return true if all descendant checked
      */
     function allDescendantChecked(li) {
-        return (li.parents('li:first').find('li :checkbox:not(:checked)').length == 0);
+        return (li.parents('li:first').find('li input:checkbox:not(:checked)').length == 0);
     }
 
     /**
@@ -313,7 +313,7 @@
      */
     function check(li, options) {
 
-        li.find(':checkbox:first:not(:checked)').attr('checked', 'checked').change();
+        li.find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
 
         /* handle others */
         if (options.onCheck.others == 'check') {
@@ -360,7 +360,7 @@
      * @param options options object
      */
     function checkAll(options) {
-        $('[class*="' + options.container + '"] :checkbox:not(:checked)').attr('checked', 'checked').change();
+        $('[class*="' + options.container + '"] input:checkbox:not(:checked)').attr('checked', 'checked').change();
     }
 
     /**
@@ -373,7 +373,7 @@
      * @param li node
      */
     function checkAncestors(li) {
-        li.parents('li').find(':checkbox:first:not(:checked)').attr('checked', 'checked').change();
+        li.parents('li').find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
     }
 
     /**
@@ -386,7 +386,7 @@
      * @param li node
      */
     function checkDescendants(li) {
-        li.find('li :checkbox:not(:checked)').attr('checked', 'checked').change();
+        li.find('li input:checkbox:not(:checked)').attr('checked', 'checked').change();
     }
 
     /**
@@ -406,7 +406,7 @@
 //		$('[class*="' + options.container + '"] :not(:has([class*="exclude"])) :checkbox:not(:checked)').attr('checked', 'checked').change();
         $('[class*="' + options.container + '"] li').each(function() {
             if (!$(this).hasClass('exclude')) {
-                $(this).find(':checkbox:first:not(:checked)').attr('checked', 'checked').change();
+                $(this).find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
             }
         });
         $('[class*="' + options.container + '"] li').removeClass('exclude');
@@ -567,7 +567,7 @@
      */
     function uncheck(li, options) {
 
-        li.find(':checkbox:first:checked').attr('checked', '').change();
+        li.find('input:checkbox:first:checked').attr('checked', '').change();
 
         /* handle others */
         if (options.onUncheck.others == 'check') {
@@ -608,7 +608,7 @@
      * @param options options object
      */
     function uncheckAll(options) {
-        $('[class*="' + options.container + '"] :checkbox:checked').attr('checked', '').change();
+        $('[class*="' + options.container + '"] input:checkbox:checked').attr('checked', '').change();
     }
 
     /**
@@ -621,7 +621,7 @@
      * @param li node
      */
     function uncheckAncestors(li) {
-        li.parents('li').find(':checkbox:first:checked').attr('checked', '').change();
+        li.parents('li').find('input:checkbox:first:checked').attr('checked', '').change();
     }
 
     /**
@@ -634,7 +634,7 @@
      * @param li node
      */
     function uncheckDescendants(li) {
-        li.find('li :checkbox:checked').attr('checked', '').change();
+        li.find('li input:checkbox:checked').attr('checked', '').change();
     }
 
     /**
@@ -654,7 +654,7 @@
 //		$('[class*="' + options.container + '"] :not(:has([class*="exclude"])) :checkbox:checked').attr('checked', '').change();
         $('[class*="' + options.container + '"] li').each(function() {
             if (!$(this).hasClass('exclude')) {
-                $(this).find(':checkbox:first:checked').attr('checked', '').change();
+                $(this).find('input:checkbox:first:checked').attr('checked', '').change();
             }
         });
         $('[class*="' + options.container + '"] li').removeClass('exclude');
