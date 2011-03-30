@@ -1,5 +1,5 @@
 #summary user documentation for release 0.3.x
-#labels Phase-Deploy
+#labels Phase-Deploy,Phase-Implementation,Deprecated
 
 ==Options==
 
