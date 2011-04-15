@@ -1,5 +1,4 @@
 #summary migrations notes
-#labels Featured
 
 === Migration from release 0.4 to 0.5 ===
 Working 0.4 releases that don't include deprecated options, should work correctly out of the box with 0.5 version.
