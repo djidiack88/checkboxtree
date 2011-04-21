@@ -1,5 +1,10 @@
+ul.checkboxTree {
+    font-family:verdana,arial;
+	padding-left: 20px;
+}
+
 ul.checkboxTree li {
-    list-style-type: none;
+	list-style-type: none;
     position: relative;
 }
 
@@ -8,4 +13,17 @@ ul.checkboxTree li span {
     position: absolute;
     top: 2px;
     left: -16px;
+}
+
+a.checkboxTree.all {
+    width: 160px;
+    padding: 4px;
+    text-decoration: none;
+    display: block;
+    color: #224059;
+    background-color: #b5c9e2;
+    border-top: 2px #cce3ff solid;
+    border-left: 2px #cce3ff solid;
+    border-bottom: 2px #31557f solid;
+    border-right: 2px #31557f solid;
 }
