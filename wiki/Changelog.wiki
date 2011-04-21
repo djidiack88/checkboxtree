@@ -2,7 +2,7 @@
 #labels Featured
 === 0.5 (not released yet) ===
  * issue 20: replace usage of jQuery() context with find()
- * issue 22: added onCollapse and onExpand configurable events handlers
+ * issue 22: added two customized events: "collapse" and "expand"
  * issue 28: improved speed
  * issue 10: now script can force checked only one branch (shown in example 8)
  * issue 1: now script can check node if all descendants are checked (shown in example 7)
