@@ -149,28 +149,28 @@
 
             // bind collapse on uncheck event
             if (options.onUncheck.node == 'collapse') {
-                $(':checkbox:not(:checked)', this).live("click", function() {
+                $('input:checkbox:not(:checked)', this).live("click", function() {
                     collapse($(this).parents("li:first"), options);
                 });
             } else
 
             // bind expand on uncheck event
             if (options.onUncheck.node == 'expand') {
-                $(':checkbox:not(:checked)', this).live("click", function() {
+                $('input:checkbox:not(:checked)', this).live("click", function() {
                     expand($(this).parents("li:first"), options);
                 });
             }
 
             // bind collapse on check event
             if (options.onCheck.node == 'collapse') {
-                $(':checkbox:checked', this).live("click", function() {
+                $('input:checkbox:checked', this).live("click", function() {
                     collapse($(this).parents("li:first"), options);
                 });
             } else
 
             // bind expand on check event
             if (options.onCheck.node == 'expand') {
-                $(':checkbox:checked', this).live("click", function() {
+                $('input:checkbox:checked', this).live("click", function() {
                     expand($(this).parents("li:first"), options);
                 });
             }
@@ -226,13 +226,13 @@
         }
 
         // bind node uncheck event
-        $(':checkbox:not(:checked)', this).live('click', function() {
+        $('input:checkbox:not(:checked)', this).live('click', function() {
             var li = $(this).parents('li:first');
             uncheck(li, options);
         });
 
         // bind node check event
-        $(':checkbox:checked', this).live('click', function() {
+        $('input:checkbox:checked', this).live('click', function() {
             var li = $(this).parents('li:first');
             check(li, options);
         });
@@ -309,7 +309,7 @@
      */
     function checkAncestors(li, options)
     {
-        li.parents('li').find('input:first:not(:checked)').attr('checked','checked').change();
+        li.parentsUntil('[class*="' + options.container + '"]').filter('li').find('input:first:not(:checked)').attr('checked','checked').change();
     }
 
     /**
@@ -474,7 +474,7 @@
      */
     function uncheckAncestors(li, options)
     {
-        li.parents('li').find('input:first:checked').attr('checked','').change();
+        li.parentsUntil('[class*="' + options.container + '"]').filter('li').find('input:first:checked').attr('checked','').change();
     }
 
     /**
