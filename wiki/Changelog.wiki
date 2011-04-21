@@ -9,6 +9,7 @@
  * removed verdana/arial from tree
  * removed tree padding
 === 0.4.4 ===
+ * issue 20: backported from 0.5
  * issue 32: synchronized effect with anchor replacing
  * issue 39: improved speed
  * issue 30: fixed by stijncleynhens
