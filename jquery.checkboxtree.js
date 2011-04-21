@@ -60,22 +60,6 @@
                  */
                 others: ''
             },
-            onCollapse: {
-                after: function(li) {
-                    alert('after collapse');
-                },
-                before: function(li) {
-                    alert('before collapse');
-                }
-            },
-            onExpand: {
-                after: function(li) {
-                    alert('after expand');
-                },
-                before: function(li) {
-                    alert('before expand');
-                }
-            },
             /**
              * Defines which actions trigger when a node is unchecked.
              * Actions are triggered in the following order:
@@ -287,8 +271,43 @@
             uncheckAll(options);
         };
 
+        this.addNode = function(a) {
+            addNode(a);
+        }
+
         return this;
     };
+
+    function addNode(parentLi, options) {
+        input = $('<input/>', {
+            type: 'checkbox'
+        });
+
+        label = $('<label/>',{
+            html: 'new'
+        });
+
+        span = $('<span/>',{
+            html: ''
+        });
+
+        li = $('<li/>',{
+            class: 'leaf'
+        });
+
+        li.append(span).append(input).append(label);
+
+        if (parentLi.hasClass('leaf')) {
+            ul = $('<ul/>');
+            span = $('<span/>',{
+                html: '-'
+            });
+            parentLi.append(ul.append(li)).removeClass('leaf').addClass('expanded');
+            span.prependTo(parentLi);
+        } else {
+            parentLi.find('ul:first').append(li);
+        }
+    }
 
     /**
      * Check if all descendant of passed node are checked
@@ -420,12 +439,8 @@
      * @param li      node to collapse
      * @param options options object
      */
-    function collapse(li, options, triggerEvents) {
+    function collapse(li, options) {
         if (li.hasClass('collapsed') || li.hasClass('leaf')) return;
-
-        if (triggerEvents) {
-            options.onCollapse.before(li);
-        }
 
         if ($.ui !== undefined) {
             li.children("ul").hide(options.collapseEffect, {}, options.collapseDuration);
@@ -434,9 +449,7 @@
         }
         markAsCollapsed(li, options);
 
-        if (triggerEvents) {
-            options.onCollapse.after(li);
-        }
+        li.trigger('collapse');
     }
 
     /**
@@ -460,12 +473,8 @@
      * @param li      node to expand
      * @param options options object
      */
-    function expand(li, options, triggerEvents) {
+    function expand(li, options) {
         if (li.hasClass('expanded') || li.hasClass('leaf')) return;
-
-        if (triggerEvents) {
-            options.onExpand.before(li);
-        }
 
         if ($.ui !== undefined) {
             li.children("ul").show(options.expandEffect, {}, options.expandDuration);
@@ -474,9 +483,7 @@
         }
         markAsExpanded(li, options);
 
-        if (triggerEvents) {
-            options.onExpand.after(li);
-        }
+        li.trigger('expand');
     }
 
     /**
