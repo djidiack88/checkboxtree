@@ -15,32 +15,63 @@
         var defaults = {
             /**
              * Defines an element of DOM that, if clicked, trigger checkAll() method.
-             * Value can be either an object or a selector string.
+             * Value can be either a jQuery object or a selector string.
              */
             checkAllElement: '',
+            /**
+             * Defines if tree has collapse capability
+             */
             collapsable: true,
+            /**
+             * Defines an element of DOM that, if clicked, trigger collapseAll() method.
+             * Value can be either a jQuery object or a selector string.
+             */
             collapseAllElement: '',
+            /**
+             * Defines duration of collapse effect in ms.
+             * Works only if collapseEffect is not null.
+             */
             collapseDuration: 500,
+            /**
+             * Defines the effect used for collapse node.
+             */
             collapseEffect: 'blind',
             collapseImage: '',
             container: 'checkboxTree' + '[' + checkboxTree++ + ']',
             cssClass: 'checkboxTree',
+//            dataSourceType: '',
+//            dataSourceUrl: '',
+            /**
+             * Defines an element of DOM that, if clicked, trigger expandAll() method.
+             * Value can be either a jQuery object or a selector string.
+             */
             expandAllElement: '',
+            /**
+             * Defines duration of expand effect in ms.
+             * Works only if expandEffect is not null.
+             */
             expandDuration: 500,
+            /**
+             * Defines the effect used for expand node.
+             */
             expandEffect: 'blind',
             expandImage: '',
+            /**
+             * Defines if checked node are collapsed or not at tree initializing.
+             */
             initializeChecked: 'expanded', // or 'collapsed'
+            /**
+             * Defines if unchecked node are collapsed or not at tree initializing.
+             */
             initializeUnchecked: 'expanded', // or 'collapsed'
             leafImage: '',
             /**
              * Defines which actions trigger when a node is checked.
              * Actions are triggered in the following order:
-             *              before???
              * 1) node
              * 2) others
              * 3) descendants
              * 4) ancestors
-             *              after???
              */
             onCheck: {
                 /**
@@ -69,11 +100,27 @@
              * 4) ancestors
              */
             onUncheck: {
-                ancestors: '', //or 'check', 'uncheck'
-                descendants: 'uncheck', //or '', 'check'
-                node: '', // or 'collapse', 'expand'
-                others: '' //or 'check', 'uncheck'
+                /**
+                 * Available values: null, 'check', 'uncheck'
+                 */
+                ancestors: '',
+                /**
+                 * Available values: null, 'check', 'uncheck'
+                 */
+                descendants: 'uncheck',
+                /**
+                 * Available values: null, 'collapse', 'expand'
+                 */
+                node: '',
+                /**
+                 * Available values: null, 'check', 'uncheck'
+                 */
+                others: ''
             },
+            /**
+             * Defines an element of DOM that, if clicked, trigger uncheckAll() method.
+             * Value can be either a jQuery object or a selector string.
+             */
             uncheckAllElement: ''
         };
 
@@ -278,6 +325,14 @@
         return this;
     };
 
+    /**
+     * Add a new node as children of passed one
+     * 
+     * @private
+     *
+     * @param parentLi node under which new node will be attached
+     * @param options  options object
+     */
     function addNode(parentLi, options) {
         input = $('<input/>', {
             type: 'checkbox'
