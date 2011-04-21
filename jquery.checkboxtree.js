@@ -107,25 +107,25 @@
             }
 
             // initialize leafs
-            $("li:not(:has(ul))", this).each(function() {
+            $(this).find("li:not(:has(ul))").each(function() {
                 $(this).prepend($('<span></span>'));
                 markAsLeaf($(this), options);
             });
 
             // initialize checked nodes
-            $("li:has(ul):has(input:checked)", this).each(function() {
+            $(this).find("li:has(ul):has(input:checked)").each(function() {
                 $(this).prepend($('<span></span>'));
                 options.initializeChecked == 'collapsed' ? collapse($(this), options) : expand($(this), options);
             });
 
             // initialize unchecked nodes
-            $("li:has(ul):not(:has(input:checked))", this).each(function() {
+            $(this).find("li:has(ul):not(:has(input:checked))").each(function() {
                 $(this).prepend($('<span></span>'));
                 options.initializeUnchecked == 'collapsed' ? collapse($(this), options) : expand($(this), options);
             });
 
             /* bind collapse/expand event */
-            $('li span', this).live("click", function() {
+            $(this).find('li span').live("click", function() {
                 li = $(this).parents("li:first");
 
                 if (li.hasClass('collapsed')) {
@@ -149,28 +149,28 @@
 
             // bind collapse on uncheck event
             if (options.onUncheck.node == 'collapse') {
-                $('input:checkbox:not(:checked)', this).live("click", function() {
+                $(this).find('input:checkbox:not(:checked)').live("click", function() {
                     collapse($(this).parents("li:first"), options);
                 });
             } else
 
             // bind expand on uncheck event
             if (options.onUncheck.node == 'expand') {
-                $('input:checkbox:not(:checked)', this).live("click", function() {
+                $(this).find('input:checkbox:not(:checked)').live("click", function() {
                     expand($(this).parents("li:first"), options);
                 });
             }
 
             // bind collapse on check event
             if (options.onCheck.node == 'collapse') {
-                $('input:checkbox:checked', this).live("click", function() {
+                $(this).find('input:checkbox:checked').live("click", function() {
                     collapse($(this).parents("li:first"), options);
                 });
             } else
 
             // bind expand on check event
             if (options.onCheck.node == 'expand') {
-                $('input:checkbox:checked', this).live("click", function() {
+                $(this).find('input:checkbox:checked').live("click", function() {
                     expand($(this).parents("li:first"), options);
                 });
             }
@@ -222,13 +222,13 @@
         }
 
         // bind node uncheck event
-        $('input:checkbox:not(:checked)', this).live('click', function() {
+        $(this).find('input:checkbox:not(:checked)').live('click', function() {
             var li = $(this).parents('li:first');
             uncheck(li, options);
         });
 
         // bind node check event
-        $('input:checkbox:checked', this).live('click', function() {
+        $(this).find('input:checkbox:checked').live('click', function() {
             var li = $(this).parents('li:first');
             check(li, options);
         });
