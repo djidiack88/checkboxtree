@@ -7,7 +7,7 @@
  *
  * @version 0.4.3
  */
-(function($){
+(function($) {
 
     var checkboxTree = 0;
 
@@ -25,7 +25,7 @@
             collapseDuration: 500,
             collapseEffect: 'blind',
             collapseImage: '',
-            container: 'checkboxTree'+'['+ checkboxTree++ +']',
+            container: 'checkboxTree' + '[' + checkboxTree++ + ']',
             cssClass: 'checkboxTree',
             expandAllButton: {
                 container: this.parent(),
@@ -74,18 +74,18 @@
             }
 
             // build collapse engine's anchors
-            options.collapseAnchor = (options.collapseImage.length > 0) ? '<img src="'+options.collapseImage+'" />' : '-';
-            options.expandAnchor   = (options.expandImage.length > 0)   ? '<img src="'+options.expandImage+'" />'   : '+';
-            options.leafAnchor     = (options.leafImage.length > 0)     ? '<img src="'+options.leafImage+'" />'     : '';
+            options.collapseAnchor = (options.collapseImage.length > 0) ? '<img src="' + options.collapseImage + '" />' : '-';
+            options.expandAnchor = (options.expandImage.length > 0) ? '<img src="' + options.expandImage + '" />' : '+';
+            options.leafAnchor = (options.leafImage.length > 0) ? '<img src="' + options.leafImage + '" />' : '';
 
             // build collapse all button
             if (options.collapseAllButton.html.length > 0) {
                 options.collapseAllButton.container.prepend($('<a/>', {
-                    'class': options.cssClass+' all',
+                    'class': options.cssClass + ' all',
                     href:    'javascript:void(0);',
                     html:    options.collapseAllButton.html,
-                    click:   function(){
-                        $('[class*="' + options.container + '"] li.expanded').each(function(){
+                    click:   function() {
+                        $('[class*="' + options.container + '"] li.expanded').each(function() {
                             collapse($(this), options);
                         });
                     }
@@ -95,11 +95,11 @@
             // build expand all button
             if (options.expandAllButton.html.length > 0) {
                 options.expandAllButton.container.prepend($('<a/>', {
-                    'class': options.cssClass+' all',
+                    'class': options.cssClass + ' all',
                     href:    'javascript:void(0);',
                     html:    options.expandAllButton.html,
-                    click:   function(){
-                        $('[class*="' + options.container + '"] li.collapsed').each(function(){
+                    click:   function() {
+                        $('[class*="' + options.container + '"] li.collapsed').each(function() {
                             expand($(this), options);
                         });
                     }
@@ -125,16 +125,16 @@
             });
 
             /* bind collapse/expand event */
-            $('li span', this).live("click", function(){
-				li = $(this).parents("li:first");
+            $('li span', this).live("click", function() {
+                li = $(this).parents("li:first");
 
-				if (li.hasClass('collapsed')) {
-                	expand(li, options);
-				} else
-				
-				if (li.hasClass('expanded')) {
-                	collapse(li, options);
-				}
+                if (li.hasClass('collapsed')) {
+                    expand(li, options);
+                } else
+
+                if (li.hasClass('expanded')) {
+                    collapse(li, options);
+                }
             });
 
             // bind collapse all element event
@@ -182,8 +182,7 @@
              *
              * @param li node to collapse
              */
-            this.collapse = function(li)
-            {
+            this.collapse = function(li) {
                 if ($(li).hasClass('expanded')) {
                     collapse(li, options);
                 }
@@ -194,8 +193,7 @@
              *
              * @public
              */
-            this.collapseAll = function()
-            {
+            this.collapseAll = function() {
                 collapseAll(options);
             }
 
@@ -206,8 +204,7 @@
              *
              * @param li node to expand
              */
-            this.expand = function(li)
-            {
+            this.expand = function(li) {
                 if ($(li).hasClass('collapsed')) {
                     expand(li, options);
                 }
@@ -218,8 +215,7 @@
              *
              * @public
              */
-            this.expandAll = function()
-            {
+            this.expandAll = function() {
                 expandAll(options);
             }
 
@@ -250,8 +246,7 @@
          *
          * @param li node to check
          */
-        this.check = function(li)
-        {
+        this.check = function(li) {
             check(li, options);
         }
 
@@ -262,8 +257,7 @@
          *
          * @param li node to uncheck
          */
-        this.uncheck = function(li)
-        {
+        this.uncheck = function(li) {
             uncheck(li, options);
         }
 
@@ -278,8 +272,7 @@
      * @param li      node to check
      * @param options options object
      */
-    function check(li, options)
-    {
+    function check(li, options) {
         $(li).find('input:first:not(:checked)').attr('checked', 'checked').change();
 
         if (options.onCheck.ancestors == 'check') {
@@ -307,9 +300,8 @@
      * @param li      node
      * @param options options object
      */
-    function checkAncestors(li, options)
-    {
-        li.parentsUntil('[class*="' + options.container + '"]').filter('li').find('input:first:not(:checked)').attr('checked','checked').change();
+    function checkAncestors(li, options) {
+        li.parentsUntil('[class*="' + options.container + '"]').filter('li').find('input:first:not(:checked)').attr('checked', 'checked').change();
     }
 
     /**
@@ -320,8 +312,7 @@
      * @param li      node
      * @param options options object
      */
-    function checkDescendants(li, options)
-    {
+    function checkDescendants(li, options) {
         li.find('li input:not(:checked)').attr('checked', 'checked').change();
     }
 
@@ -333,8 +324,7 @@
      * @param li      node to collapse
      * @param options options object
      */
-    function collapse(li, options)
-    {
+    function collapse(li, options) {
         if ($(li).hasClass('collapsed') || $(li).hasClass('leaf')) return;
 
         if ($.ui !== undefined) {
@@ -342,7 +332,10 @@
         } else {
             li.children("ul").hide(options.collapseDuration);
         }
-        markAsCollapsed(li, options);
+        setTimeout(function() {
+            markAsCollapsed(li, options);
+        }, options.collapseDuration);
+
     }
 
     /**
@@ -352,9 +345,8 @@
      *
      * @param options options object
      */
-    function collapseAll(options)
-    {
-        $('[class*="' + options.container + '"] li.expanded').each(function(){
+    function collapseAll(options) {
+        $('[class*="' + options.container + '"] li.expanded').each(function() {
             collapse($(this), options);
         });
     }
@@ -367,8 +359,7 @@
      * @param li      node to expand
      * @param options options object
      */
-    function expand(li, options)
-    {
+    function expand(li, options) {
         if ($(li).hasClass('expanded') || $(li).hasClass('leaf')) return;
 
         if ($.ui !== undefined) {
@@ -376,7 +367,10 @@
         } else {
             li.children("ul").show(options.expandDuration);
         }
-        markAsExpanded(li, options);
+        setTimeout(function() {
+            markAsExpanded(li, options);
+        }, options.expandDuration);
+
     }
 
     /**
@@ -386,9 +380,8 @@
      *
      * @param options options object
      */
-    function expandAll(options)
-    {
-        $('[class*="' + options.container + '"] li.collapsed').each(function(){
+    function expandAll(options) {
+        $('[class*="' + options.container + '"] li.collapsed').each(function() {
             expand($(this), options);
         });
     }
@@ -401,8 +394,7 @@
      * @param li      node to mark
      * @param options options object
      */
-    function markAsCollapsed(li, options)
-    {
+    function markAsCollapsed(li, options) {
         li.children("span").html(options.expandAnchor);
         li.addClass("collapsed").removeClass("expanded");
     }
@@ -415,8 +407,7 @@
      * @param li      node to mark
      * @param options options object
      */
-    function markAsExpanded(li, options)
-    {
+    function markAsExpanded(li, options) {
         li.children("span").html(options.collapseAnchor);
         li.addClass("expanded").removeClass("collapsed");
     }
@@ -429,8 +420,7 @@
      * @param li      node to mark
      * @param options options object
      */
-    function markAsLeaf(li, options)
-    {
+    function markAsLeaf(li, options) {
         li.children("span").html(options.leafAnchor);
         li.addClass("leaf");
     }
@@ -443,8 +433,7 @@
      * @param li      node to uncheck
      * @param options options object
      */
-    function uncheck(li, options)
-    {
+    function uncheck(li, options) {
         $(li).find('input:first:checked').attr('checked', '').change();
 
         if (options.onUncheck.ancestors == 'check') {
@@ -472,9 +461,8 @@
      * @param li      node
      * @param options options object
      */
-    function uncheckAncestors(li, options)
-    {
-        li.parentsUntil('[class*="' + options.container + '"]').filter('li').find('input:first:checked').attr('checked','').change();
+    function uncheckAncestors(li, options) {
+        li.parentsUntil('[class*="' + options.container + '"]').filter('li').find('input:first:checked').attr('checked', '').change();
     }
 
     /**
@@ -485,8 +473,7 @@
      * @param li      node
      * @param options options object
      */
-    function uncheckDescendants(li, options)
-    {
+    function uncheckDescendants(li, options) {
         li.find('li input:checked').attr('checked', '').change();
     }
 
