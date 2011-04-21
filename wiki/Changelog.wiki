@@ -8,6 +8,10 @@
  * issue 1: now script can check node if all descendants are checked (shown in example 7)
  * removed verdana/arial from tree
  * removed tree padding
+=== 0.4.4 ===
+ * issue 32: synchronized effect with anchor replacing
+ * issue 39: improved speed
+ * issue 30: fixed by stijncleynhens
 === 0.4.3 ===
  * fixed compatibility issues for jquery 1.5
  * fixed issue 27
