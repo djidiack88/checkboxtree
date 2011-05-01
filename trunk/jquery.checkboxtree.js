@@ -442,7 +442,7 @@ $.widget("daredevel.checkboxTree", {
      * @param li node
      */
     _checkAncestors: function(li) {
-        li.parents('li').find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
+        li.parentsUntil(this.element).filter('li').find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
     },
 
     /**
@@ -498,7 +498,10 @@ $.widget("daredevel.checkboxTree", {
         } else {
             li.children("ul").hide(options.collapseDuration);
         }
-        this._markAsCollapsed(li, options);
+        var t = this;
+        setTimeout(function() {
+            t._markAsCollapsed(li, options);
+        }, options.collapseDuration);
 
         li.trigger('collapse');
     },
@@ -533,7 +536,11 @@ $.widget("daredevel.checkboxTree", {
         } else {
             li.children("ul").show(options.expandDuration);
         }
-        this._markAsExpanded(li, options);
+        var t = this;
+
+        setTimeout(function() {
+            t._markAsExpanded(li, options);
+        }, options.expandDuration);
 
         li.trigger('expand');
     },
@@ -681,7 +688,7 @@ $.widget("daredevel.checkboxTree", {
      * @param li node
      */
     _uncheckAncestors: function(li) {
-        li.parents('li').find('input:checkbox:first:checked').attr('checked', '').change();
+        li.parentsUntil(this.element).filter('li').find('input:checkbox:first:checked').attr('checked', '').change();
     },
 
     /**
