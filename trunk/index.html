@@ -244,29 +244,29 @@
     <p>This example show how to use public methods.</p>
     <code class="jquery" lang="text/javascript">
         tree = $('#tree5').checkboxTree();
-tree.append($('#tabs-5-node23'));
+
         $('#tabs-5-checkAll').click(function(){
-            tree.checkAll();
+            $('#tree5').checkboxTree('checkAll');
         });
 
         $('#tabs-5-uncheckAll').click(function(){
-           tree.uncheckAll();
+           $('#tree5').checkboxTree('uncheckAll');
         });
 
         $('#tabs-5-collapse').click(function(){
-            tree.collapse($('#tabs-5-node23'));
+            $('#tree5').checkboxTree('collapse', $('#tabs-5-node23'));
         });
 
         $('#tabs-5-expand').click(function(){
-            tree.expand($('#tabs-5-node23'));
+            $('#tree5').checkboxTree('expand', $('#tabs-5-node23'));
         });
 
         $('#tabs-5-check').click(function(){
-            tree.check($('#tabs-5-node23'));
+            $('#tree5').checkboxTree('check', $('#tabs-5-node23'));
         });
 
         $('#tabs-5-uncheck').click(function(){
-            tree.uncheck($('#tabs-5-node23'));
+            $('#tree5').checkboxTree('uncheck', $('#tabs-5-node23'));
         });
     </code>
     <br/>
@@ -430,15 +430,15 @@ tree.append($('#tabs-5-node23'));
 <div id="tabs-9">
     <p>This example show default script behaviour.</p>
     <code class="jquery" lang="text/javascript">
-        tree = $('#tree9').checkboxTree({
+        $('#tree9').checkboxTree({
 
         });
 
-        tree.bind('collapse', function() {
+        $('#tree9').bind('collapse', function() {
             alert('collapse event triggered');
         })
 
-        tree.bind('expand', function() {
+        $('#tree9').bind('expand', function() {
             alert('expand event triggered');
         })
 
@@ -490,12 +490,9 @@ tree.append($('#tabs-5-node23'));
 <div id="tabs-10">
     <p>This example show default script behaviour.</p>
     <code class="jquery" lang="text/javascript">
-        tree = $('#tree10').checkboxTree({
+        $('#tree10').checkboxTree();
 
-        });
-
-        tree.addNode($('#y'));
-
+        $('#tree10').checkboxTree('addNode', $('#y'));
     </code>
     <ul id="tree10">
         <li><input type="checkbox"><label>Node 1</label>
