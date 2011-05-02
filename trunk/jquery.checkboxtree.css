@@ -6,6 +6,6 @@ ul.checkboxTree li {
 ul.checkboxTree li span {
     cursor: default;
     position: absolute;
-    top: 2px;
+    top: 1px;
     left: -16px;
 }
