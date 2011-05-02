@@ -1,6 +1,7 @@
 #summary releases changelog
 #labels Featured
 === 0.5 (not released yet) ===
+ * issue 38: fixed error on multiple selector usage
  * issue 42: complete code re-write in jquery.widget way
  * issue 20: replaced usage of jQuery() context with find()
  * issue 22: added two customized events: "collapse" and "expand"
