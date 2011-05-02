@@ -7,120 +7,205 @@
  *
  * @version 0.5
  */
-
-var checkboxTree = 0;
-
 $.widget("daredevel.checkboxTree", {
 
-    options: {
-        /**
-         * Defines an element of DOM that, if clicked, trigger checkAll() method.
-         * Value can be either a jQuery object or a selector string.
-         */
-        checkAllElement: '',
-        /**
-         * Defines if tree has collapse capability
-         */
-        collapsable: true,
-        /**
-         * Defines an element of DOM that, if clicked, trigger collapseAll() method.
-         * Value can be either a jQuery object or a selector string.
-         */
-        collapseAllElement: '',
-        /**
-         * Defines duration of collapse effect in ms.
-         * Works only if collapseEffect is not null.
-         */
-        collapseDuration: 500,
-        /**
-         * Defines the effect used for collapse node.
-         */
-        collapseEffect: 'blind',
-        collapseImage: '',
-        cssClass: 'checkboxTree',
-//            dataSourceType: '',
-//            dataSourceUrl: '',
-        /**
-         * Defines an element of DOM that, if clicked, trigger expandAll() method.
-         * Value can be either a jQuery object or a selector string.
-         */
-        expandAllElement: '',
-        /**
-         * Defines duration of expand effect in ms.
-         * Works only if expandEffect is not null.
-         */
-        expandDuration: 500,
-        /**
-         * Defines the effect used for expand node.
-         */
-        expandEffect: 'blind',
-        expandImage: '',
-        /**
-         * Defines if checked node are collapsed or not at tree initializing.
-         */
-        initializeChecked: 'expanded', // or 'collapsed'
-        /**
-         * Defines if unchecked node are collapsed or not at tree initializing.
-         */
-        initializeUnchecked: 'expanded', // or 'collapsed'
-        leafImage: '',
-        /**
-         * Defines which actions trigger when a node is checked.
-         * Actions are triggered in the following order:
-         * 1) node
-         * 2) others
-         * 3) descendants
-         * 4) ancestors
-         */
-        onCheck: {
-            /**
-             * Available values: null, 'check', 'uncheck', 'checkIfFull'
-             */
-            ancestors: 'check',
-            /**
-             * Available values: null, 'check', 'uncheck'
-             */
-            descendants: 'check',
-            /**
-             * Available values: null, 'collapse', 'expand'
-             */
-            node: '',
-            /**
-             * Available values: null, 'check', 'uncheck'
-             */
-            others: ''
-        },
-        /**
-         * Defines which actions trigger when a node is unchecked.
-         * Actions are triggered in the following order:
-         * 1) node
-         * 2) others
-         * 3) descendants
-         * 4) ancestors
-         */
-        onUncheck: {
-            /**
-             * Available values: null, 'check', 'uncheck'
-             */
-            ancestors: '',
-            /**
-             * Available values: null, 'check', 'uncheck'
-             */
-            descendants: 'uncheck',
-            /**
-             * Available values: null, 'collapse', 'expand'
-             */
-            node: '',
-            /**
-             * Available values: null, 'check', 'uncheck'
-             */
-            others: ''
-        },
-        /**
-         * Defines an element of DOM that, if clicked, trigger uncheckAll() method.
-         * Value can be either a jQuery object or a selector string.
-         */
-        uncheckAllElement: ''
+    /**
+     * Add a new node as children of passed one
+     *
+     * @private
+     *
+     * @param parentLi node under which new node will be attached
+     * @param options  options object
+     */
+    _addNode: function(parentLi, options) {
+        input = $('<input/>', {
+            type: 'checkbox'
+        });
+
+        label = $('<label/>', {
+            html: 'new'
+        });
+
+        span = $('<span/>', {
+            html: ''
+        });
+
+        li = $('<li/>', {
+            class: 'leaf'
+        });
+
+        li.append(span).append(input).append(label);
+
+        if (parentLi.hasClass('leaf')) {
+            ul = $('<ul/>');
+            span = $('<span/>', {
+                html: '-'
+            });
+            parentLi.append(ul.append(li)).removeClass('leaf').addClass('expanded');
+            span.prependTo(parentLi);
+        } else {
+            parentLi.find('ul:first').append(li);
+        }
+    },
+
+    /**
+     * Check if all descendant of passed node are checked
+     *
+     * @private
+     *
+     * @param li node
+     *
+     * @return true if all descendant checked
+     */
+    _allDescendantChecked: function(li) {
+        return (li.parents('li:first').find('li input:checkbox:not(:checked)').length == 0);
+    },
+
+    /**
+     * Check node
+     *
+     * @private
+     *
+     * @param li      node to check
+     * @param options options object
+     */
+    _check: function(li, options) {
+
+        li.find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
+
+        /* handle others */
+        if (options.onCheck.others == 'check') {
+            this._checkOthers(li, options);
+        } else
+
+        if (options.onCheck.others == 'uncheck') {
+            this._uncheckOthers(li, options);
+        }
+
+        /* handle descendants */
+        if (options.onCheck.descendants == 'check') {
+            this._checkDescendants(li, options);
+        } else
+
+        if (options.onCheck.descendants == 'uncheck') {
+            this._uncheckDescendants(li, options);
+        }
+
+        /* handle ancestors */
+        if (options.onCheck.ancestors == 'check') {
+            this._checkAncestors(li, options);
+        } else
+
+        if (options.onCheck.ancestors == 'uncheck') {
+            this._uncheckAncestors(li, options);
+        } else
+
+        if (options.onCheck.ancestors == 'checkIfFull') {
+            if (this._allDescendantChecked(li) && !this._isRoot(li, options)) {
+                this._check(parentNode(li, options), options);
+            }
+        }
+    },
+
+    /**
+     * Check all tree elements
+     *
+     * Don't use check() method because we won't trigger onCheck events
+     *
+     * @private
+     *
+     * @param options options object
+     */
+    _checkAll: function(options) {
+        $(this.element).find('input:checkbox:not(:checked)').attr('checked', 'checked').change();
+    },
+
+    /**
+     * Check ancestors on passed node
+     *
+     * Don't use check() method because we won't trigger onCheck events
+     *
+     * @private
+     *
+     * @param li node
+     */
+    _checkAncestors: function(li) {
+        li.parentsUntil(this.element).filter('li').find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
+    },
+
+    /**
+     * Check descendants on passed node
+     *
+     * Don't use check() method because we won't trigger onCheck events
+     *
+     * @private
+     *
+     * @param li node
+     */
+    _checkDescendants: function(li) {
+        li.find('li input:checkbox:not(:checked)').attr('checked', 'checked').change();
+    },
+
+    /**
+     * Check nodes that are neither ancestors or descendants of passed node
+     *
+     * Don't use check() method because we won't trigger onCheck events
+     *
+     * @private
+     *
+     * @param li
+     * @param options
+     */
+    _checkOthers: function(li, options) {
+        var t = this;
+        li.addClass('exclude');
+        li.parents('li').addClass('exclude');
+        li.find('li').addClass('exclude');
+//		$('[class*="' + options.container + '"] :not(:has([class*="exclude"])) :checkbox:not(:checked)').attr('checked', 'checked').change();
+        $(this.element).find('li').each(function() {
+            if (!$(this).hasClass('exclude')) {
+                $(this).find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
+            }
+        });
+        $(this.element).find('li').removeClass('exclude');
+    },
+
+    /**
+     * Collapse node
+     *
+     * @private
+     *
+     * @param li      node to collapse
+     * @param options options object
+     */
+    _collapse: function(li, options) {
+        if (li.hasClass('collapsed') || li.hasClass('leaf')) return;
+
+        if ($.ui !== undefined) {
+            li.children("ul").hide(options.collapseEffect, {}, options.collapseDuration);
+        } else {
+            li.children("ul").hide(options.collapseDuration);
+        }
+        var t = this;
+        setTimeout(function() {
+            t._markAsCollapsed(li, options);
+        }, options.collapseDuration);
+
+        li.trigger('collapse');
+    },
+
+    /**
+     * Collapse all nodes of the tree
+     *
+     * @private
+     *
+     * @param options options object
+     */
+    _collapseAll: function(options) {
+        var t = this;
+        $(this.element).find('li.expanded').each(function() {
+            t._collapse($(this), options);
+        });
     },
 
     _create: function() {
@@ -229,295 +314,6 @@ $.widget("daredevel.checkboxTree", {
 
         /* add css class */
         this.element.addClass(this.options.cssClass);
-    },
-
-    /**
-     * Collapse node
-     *
-     * @public
-     *
-     * @param li node to collapse
-     */
-    collapse: function(li) {
-        if (li.hasClass('expanded')) {
-            this._collapse(li, this.options, true);
-        }
-    },
-
-    /**
-     * Collapse all nodes
-     *
-     * @public
-     */
-    collapseAll: function() {
-        this._collapseAll(this.options);
-    },
-
-    /**
-     * Expand node
-     *
-     * @public
-     *
-     * @param li node to expand
-     */
-    expand: function(li) {
-        if (li.hasClass('collapsed')) {
-            this._expand(li, this.options, true);
-        }
-    },
-
-    /**
-     * Expand all nodes
-     *
-     * @public
-     */
-    expandAll: function() {
-        this._expandAll(this.options);
-    },
-
-    /**
-     * Check node
-     *
-     * @public
-     *
-     * @param li node to check
-     */
-    check: function(li) {
-        this._check(li, this.options);
-    },
-
-    /**
-     * Check all nodes
-     *
-     * @public
-     */
-    checkAll: function() {
-        this._checkAll(this.options);
-    },
-
-    /**
-     * Uncheck node
-     *
-     * @public
-     *
-     * @param li node to uncheck
-     */
-    uncheck: function(li) {
-        this._uncheck(li, this.options);
-    },
-
-    /**
-     * Uncheck all nodes
-     *
-     * @public
-     */
-    uncheckAll: function() {
-        this._uncheckAll(this.options);
-    },
-
-    addNode: function(a) {
-        this._addNode(a);
-    },
-
-
-    /**
-     * Add a new node as children of passed one
-     *
-     * @private
-     *
-     * @param parentLi node under which new node will be attached
-     * @param options  options object
-     */
-    _addNode: function(parentLi, options) {
-        input = $('<input/>', {
-            type: 'checkbox'
-        });
-
-        label = $('<label/>', {
-            html: 'new'
-        });
-
-        span = $('<span/>', {
-            html: ''
-        });
-
-        li = $('<li/>', {
-            class: 'leaf'
-        });
-
-        li.append(span).append(input).append(label);
-
-        if (parentLi.hasClass('leaf')) {
-            ul = $('<ul/>');
-            span = $('<span/>', {
-                html: '-'
-            });
-            parentLi.append(ul.append(li)).removeClass('leaf').addClass('expanded');
-            span.prependTo(parentLi);
-        } else {
-            parentLi.find('ul:first').append(li);
-        }
-    },
-
-    /**
-     * Check if all descendant of passed node are checked
-     *
-     * @private
-     *
-     * @param li node
-     *
-     * @return true if all descendant checked
-     */
-    _allDescendantChecked: function(li) {
-        return (li.parents('li:first').find('li input:checkbox:not(:checked)').length == 0);
-    },
-
-    /**
-     * Check node
-     *
-     * @private
-     *
-     * @param li      node to check
-     * @param options options object
-     */
-    _check: function(li, options) {
-
-        li.find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
-
-        /* handle others */
-        if (options.onCheck.others == 'check') {
-            this._checkOthers(li, options);
-        } else
-
-        if (options.onCheck.others == 'uncheck') {
-            this._uncheckOthers(li, options);
-        }
-
-        /* handle descendants */
-        if (options.onCheck.descendants == 'check') {
-            this._checkDescendants(li, options);
-        } else
-
-        if (options.onCheck.descendants == 'uncheck') {
-            this._uncheckDescendants(li, options);
-        }
-
-        /* handle ancestors */
-        if (options.onCheck.ancestors == 'check') {
-            this._checkAncestors(li, options);
-        } else
-
-        if (options.onCheck.ancestors == 'uncheck') {
-            this._uncheckAncestors(li, options);
-        } else
-
-        if (options.onCheck.ancestors == 'checkIfFull') {
-            if (this._allDescendantChecked(li) && !this._isRoot(li, options)) {
-                this._check(parentNode(li, options), options);
-            }
-        }
-
-    },
-
-    /**
-     * Check all tree elements
-     *
-     * Don't use check() method because we won't trigger onCheck events
-     *
-     * @private
-     *
-     * @param options options object
-     */
-    _checkAll: function(options) {
-        $(this.element).find('input:checkbox:not(:checked)').attr('checked', 'checked').change();
-    },
-
-    /**
-     * Check ancestors on passed node
-     *
-     * Don't use check() method because we won't trigger onCheck events
-     *
-     * @private
-     *
-     * @param li node
-     */
-    _checkAncestors: function(li) {
-        li.parentsUntil(this.element).filter('li').find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
-    },
-
-    /**
-     * Check descendants on passed node
-     *
-     * Don't use check() method because we won't trigger onCheck events
-     *
-     * @private
-     *
-     * @param li node
-     */
-    _checkDescendants: function(li) {
-        li.find('li input:checkbox:not(:checked)').attr('checked', 'checked').change();
-    },
-
-    /**
-     * Check nodes that are neither ancestors or descendants of passed node
-     *
-     * Don't use check() method because we won't trigger onCheck events
-     *
-     * @private
-     *
-     * @param li
-     * @param options
-     */
-    _checkOthers: function(li, options) {
-        var t = this;
-        li.addClass('exclude');
-        li.parents('li').addClass('exclude');
-        li.find('li').addClass('exclude');
-//		$('[class*="' + options.container + '"] :not(:has([class*="exclude"])) :checkbox:not(:checked)').attr('checked', 'checked').change();
-        $(this.element).find('li').each(function() {
-            if (!$(this).hasClass('exclude')) {
-                $(this).find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
-            }
-        });
-        $(this.element).find('li').removeClass('exclude');
-    },
-
-    /**
-     * Collapse node
-     *
-     * @private
-     *
-     * @param li      node to collapse
-     * @param options options object
-     */
-    _collapse: function(li, options) {
-        if (li.hasClass('collapsed') || li.hasClass('leaf')) return;
-
-        if ($.ui !== undefined) {
-            li.children("ul").hide(options.collapseEffect, {}, options.collapseDuration);
-        } else {
-            li.children("ul").hide(options.collapseDuration);
-        }
-        var t = this;
-        setTimeout(function() {
-            t._markAsCollapsed(li, options);
-        }, options.collapseDuration);
-
-        li.trigger('collapse');
-    },
-
-    /**
-     * Collapse all nodes of the tree
-     *
-     * @private
-     *
-     * @param options options object
-     */
-    _collapseAll: function(options) {
-        var t = this;
-        $(this.element).find('li.expanded').each(function() {
-            t._collapse($(this), options);
-        });
     },
 
     /**
@@ -726,6 +522,205 @@ $.widget("daredevel.checkboxTree", {
             }
         });
         $(this.element).find('li').removeClass('exclude');
+    },
+
+    /**
+     * Collapse node
+     *
+     * @public
+     *
+     * @param li node to collapse
+     */
+    collapse: function(li) {
+        if (li.hasClass('expanded')) {
+            this._collapse(li, this.options, true);
+        }
+    },
+
+    /**
+     * Collapse all nodes
+     *
+     * @public
+     */
+    collapseAll: function() {
+        this._collapseAll(this.options);
+    },
+
+    /**
+     * Expand node
+     *
+     * @public
+     *
+     * @param li node to expand
+     */
+    expand: function(li) {
+        if (li.hasClass('collapsed')) {
+            this._expand(li, this.options, true);
+        }
+    },
+
+    /**
+     * Expand all nodes
+     *
+     * @public
+     */
+    expandAll: function() {
+        this._expandAll(this.options);
+    },
+
+    /**
+     * Check node
+     *
+     * @public
+     *
+     * @param li node to check
+     */
+    check: function(li) {
+        this._check(li, this.options);
+    },
+
+    /**
+     * Check all nodes
+     *
+     * @public
+     */
+    checkAll: function() {
+        this._checkAll(this.options);
+    },
+
+    /**
+     * Uncheck node
+     *
+     * @public
+     *
+     * @param li node to uncheck
+     */
+    uncheck: function(li) {
+        this._uncheck(li, this.options);
+    },
+
+    /**
+     * Uncheck all nodes
+     *
+     * @public
+     */
+    uncheckAll: function() {
+        this._uncheckAll(this.options);
+    },
+
+    addNode: function(a) {
+        this._addNode(a);
+    },
+
+    options: {
+        /**
+         * Defines an element of DOM that, if clicked, trigger checkAll() method.
+         * Value can be either a jQuery object or a selector string.
+         */
+        checkAllElement: '',
+        /**
+         * Defines if tree has collapse capability
+         */
+        collapsable: true,
+        /**
+         * Defines an element of DOM that, if clicked, trigger collapseAll() method.
+         * Value can be either a jQuery object or a selector string.
+         */
+        collapseAllElement: '',
+        /**
+         * Defines duration of collapse effect in ms.
+         * Works only if collapseEffect is not null.
+         */
+        collapseDuration: 500,
+        /**
+         * Defines the effect used for collapse node.
+         */
+        collapseEffect: 'blind',
+        collapseImage: '',
+        cssClass: 'checkboxTree',
+//            dataSourceType: '',
+//            dataSourceUrl: '',
+        /**
+         * Defines an element of DOM that, if clicked, trigger expandAll() method.
+         * Value can be either a jQuery object or a selector string.
+         */
+        expandAllElement: '',
+        /**
+         * Defines duration of expand effect in ms.
+         * Works only if expandEffect is not null.
+         */
+        expandDuration: 500,
+        /**
+         * Defines the effect used for expand node.
+         */
+        expandEffect: 'blind',
+        expandImage: '',
+        /**
+         * Defines if checked node are collapsed or not at tree initializing.
+         */
+        initializeChecked: 'expanded', // or 'collapsed'
+        /**
+         * Defines if unchecked node are collapsed or not at tree initializing.
+         */
+        initializeUnchecked: 'expanded', // or 'collapsed'
+        leafImage: '',
+        /**
+         * Defines which actions trigger when a node is checked.
+         * Actions are triggered in the following order:
+         * 1) node
+         * 2) others
+         * 3) descendants
+         * 4) ancestors
+         */
+        onCheck: {
+            /**
+             * Available values: null, 'check', 'uncheck', 'checkIfFull'
+             */
+            ancestors: 'check',
+            /**
+             * Available values: null, 'check', 'uncheck'
+             */
+            descendants: 'check',
+            /**
+             * Available values: null, 'collapse', 'expand'
+             */
+            node: '',
+            /**
+             * Available values: null, 'check', 'uncheck'
+             */
+            others: ''
+        },
+        /**
+         * Defines which actions trigger when a node is unchecked.
+         * Actions are triggered in the following order:
+         * 1) node
+         * 2) others
+         * 3) descendants
+         * 4) ancestors
+         */
+        onUncheck: {
+            /**
+             * Available values: null, 'check', 'uncheck'
+             */
+            ancestors: '',
+            /**
+             * Available values: null, 'check', 'uncheck'
+             */
+            descendants: 'uncheck',
+            /**
+             * Available values: null, 'collapse', 'expand'
+             */
+            node: '',
+            /**
+             * Available values: null, 'check', 'uncheck'
+             */
+            others: ''
+        },
+        /**
+         * Defines an element of DOM that, if clicked, trigger uncheckAll() method.
+         * Value can be either a jQuery object or a selector string.
+         */
+        uncheckAllElement: ''
     }
 
     /*
