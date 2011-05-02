@@ -16,7 +16,7 @@ $.widget("daredevel.checkboxTree", {
      *
      * @param parentLi node under which new node will be attached
      */
-    addNode: function(parentLi) {
+    _addNode: function(parentLi) {
         input = $('<input/>', {
             type: 'checkbox'
         });
@@ -60,6 +60,11 @@ $.widget("daredevel.checkboxTree", {
         return (li.parents('li:first').find('li input:checkbox:not(:checked)').length == 0);
     },
 
+    /**
+     * Initialize plugin
+     *
+     * @private
+     */
     _create: function() {
 
         var t = this
@@ -167,8 +172,10 @@ $.widget("daredevel.checkboxTree", {
         /* add css class */
         this.element.addClass(this.options.cssClass);
 
+        /* add jQueryUI css widget class */
         this.element.addClass('ui-widget');
 
+        /* force essential css attributes */
         this.element.find('li')
                 .css('list-style-type', 'none')
                 .css('position', 'relative');
@@ -220,7 +227,6 @@ $.widget("daredevel.checkboxTree", {
         li.addClass('exclude');
         li.parents('li').addClass('exclude');
         li.find('li').addClass('exclude');
-//		$('[class*="' + options.container + '"] :not(:has([class*="exclude"])) :checkbox:not(:checked)').attr('checked', 'checked').change();
         $(this.element).find('li').each(function() {
             if (!$(this).hasClass('exclude')) {
                 $(this).find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
@@ -229,6 +235,11 @@ $.widget("daredevel.checkboxTree", {
         $(this.element).find('li').removeClass('exclude');
     },
 
+    /**
+     * Destroy plugin
+     *
+     * @private
+     */
     _destroy: function() {
         this.element.removeClass(this.options.cssClass);
 
@@ -350,7 +361,6 @@ $.widget("daredevel.checkboxTree", {
         li.addClass('exclude');
         li.parents('li').addClass('exclude');
         li.find('li').addClass('exclude');
-//		$('[class*="' + options.container + '"] :not(:has([class*="exclude"])) :checkbox:checked').attr('checked', '').change();
         $(this.element).find('li').each(function() {
             if (!$(this).hasClass('exclude')) {
                 $(this).find('input:checkbox:first:checked').attr('checked', '').change();
