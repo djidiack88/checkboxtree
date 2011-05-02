@@ -1,5 +1,5 @@
 /*!
- * jQuery Checkbox Tree
+ * jQuery CheckboxTree
  *
  * @author Valerio Galano <v.galano@daredevel.it>
  *
@@ -173,7 +173,7 @@ $.widget("daredevel.checkboxTree", {
         this.element.addClass(this.options.cssClass);
 
         /* add jQueryUI css widget class */
-        this.element.addClass('ui-widget');
+        this.element.addClass('ui-widget ui-widget-content');
 
         /* force essential css attributes */
         this.element.find('li')
@@ -197,7 +197,7 @@ $.widget("daredevel.checkboxTree", {
      * @param li node
      */
     _checkAncestors: function(li) {
-        li.parentsUntil(this.element).filter('li').find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
+        li.parentsUntil(".ui-widget").filter('li').find('input:checkbox:first:not(:checked)').attr('checked', 'checked').change();
     },
 
     /**
@@ -220,7 +220,7 @@ $.widget("daredevel.checkboxTree", {
      *
      * @private
      *
-     * @param li
+     * @param li node
      */
     _checkOthers: function(li) {
         var t = this;
@@ -251,7 +251,7 @@ $.widget("daredevel.checkboxTree", {
      *
      * @private
      *
-     * @param li      node to check
+     * @param li node to check
      */
     _isRoot: function(li) {
         return li.parents('ul:first') == this.element;
@@ -262,7 +262,7 @@ $.widget("daredevel.checkboxTree", {
      *
      * @private
      *
-     * @param li      node to mark
+     * @param li node to mark
      */
     _markAsCollapsed: function(li) {
         if (this.options.expandAnchor.length > 0) {
@@ -279,7 +279,7 @@ $.widget("daredevel.checkboxTree", {
      *
      * @private
      *
-     * @param li      node to mark
+     * @param li node to mark
      */
     _markAsExpanded: function(li) {
         if (this.options.collapseAnchor.length > 0) {
@@ -296,7 +296,7 @@ $.widget("daredevel.checkboxTree", {
      *
      * @private
      *
-     * @param li      node to mark
+     * @param li  node to mark
      */
     _markAsLeaf: function(li) {
         if (this.options.leafAnchor.length > 0) {
@@ -313,7 +313,7 @@ $.widget("daredevel.checkboxTree", {
      *
      * @private
      *
-     * @param li      node
+     * @param li node
      *
      * @return parent li
      */
@@ -331,7 +331,7 @@ $.widget("daredevel.checkboxTree", {
      * @param li node
      */
     _uncheckAncestors: function(li) {
-        li.parentsUntil(this.element).filter('li').find('input:checkbox:first:checked').attr('checked', '').change();
+        li.parentsUntil(".ui-widget").filter('li').find('input:checkbox:first:checked').attr('checked', '').change();
     },
 
     /**
@@ -354,7 +354,7 @@ $.widget("daredevel.checkboxTree", {
      *
      * @private
      *
-     * @param li
+     * @param li node
      */
     _uncheckOthers: function(li) {
         var t = this;
@@ -409,7 +409,7 @@ $.widget("daredevel.checkboxTree", {
 
         if (this.options.onCheck.ancestors == 'checkIfFull') {
             if (this._allDescendantChecked(li) && !this._isRoot(li)) {
-                this.check(parentNode(li));
+                this.check(this._parentNode(li));
             }
         }
     },
@@ -431,10 +431,12 @@ $.widget("daredevel.checkboxTree", {
      *
      * @public
      *
-     * @param li      node to collapse
+     * @param li node to collapse
      */
     collapse: function(li) {
-        //if (li.hasClass('expanded')) return;
+        if (li.hasClass('collapsed') || (li.hasClass('leaf'))) {
+            return;
+        }
 
         if ($.ui !== undefined) {
             li.children("ul").hide(this.options.collapseEffect, {}, this.options.collapseDuration);
@@ -466,10 +468,12 @@ $.widget("daredevel.checkboxTree", {
      *
      * @public
      *
-     * @param li      node to expand
+     * @param li node to expand
      */
     expand: function(li) {
-        //if (!li.hasClass('collapsed')) return;
+        if (li.hasClass('expanded') || (li.hasClass('leaf'))) {
+            return;
+        }
 
         var t = this;
 
@@ -549,6 +553,9 @@ $.widget("daredevel.checkboxTree", {
         $(this.element).find('input:checkbox:checked').attr('checked', '').change();
     },
 
+    /**
+     * Default options values
+     */
     options: {
         /**
          * Defines an element of DOM that, if clicked, trigger checkAll() method.
