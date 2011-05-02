@@ -1,4 +1,4 @@
-/**
+/*!
  * jQuery Checkbox Tree
  *
  * @author Valerio Galano <v.galano@daredevel.it>
