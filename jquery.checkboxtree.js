@@ -560,6 +560,7 @@ $.widget("daredevel.checkboxTree", {
         /**
          * Defines an element of DOM that, if clicked, trigger checkAll() method.
          * Value can be either a jQuery object or a selector string.
+         * @deprecated will be removed in jquery 0.6
          */
         checkAllElement: '',
         /**
@@ -569,6 +570,7 @@ $.widget("daredevel.checkboxTree", {
         /**
          * Defines an element of DOM that, if clicked, trigger collapseAll() method.
          * Value can be either a jQuery object or a selector string.
+         * @deprecated will be removed in jquery 0.6
          */
         collapseAllElement: '',
         /**
@@ -599,6 +601,7 @@ $.widget("daredevel.checkboxTree", {
         /**
          * Defines an element of DOM that, if clicked, trigger expandAll() method.
          * Value can be either a jQuery object or a selector string.
+         * @deprecated will be removed in jquery 0.6
          */
         expandAllElement: '',
         /**
@@ -691,6 +694,7 @@ $.widget("daredevel.checkboxTree", {
         /**
          * Defines an element of DOM that, if clicked, trigger uncheckAll() method.
          * Value can be either a jQuery object or a selector string.
+         * @deprecated will be removed in jquery 0.6
          */
         uncheckAllElement: ''
     }
