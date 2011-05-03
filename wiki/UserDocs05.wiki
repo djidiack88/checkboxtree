@@ -43,9 +43,8 @@ Following options can be specified when checkboxTree is initialized.
 ~~Striked~~ options are deprecated: they still working in this release, but will be removed from next release.
 
 || *options*           || *type*         || *default value*        || *description* ||
-|| collapsable         || boolean        || true                   || If tree has collapsable nodes. ||
-|| collapseAllElement  || object|string  || ''                     || Attach a collapse all event to one or more DOM element. Value passed can be either the object representing element or the string used as element selector. When user click on the identified element collapse all element will be trough. ||
-|| collapsed           || boolean        || false                  || If all nodes must be all collapsed on script start. ||
+|| collapsable         || boolean        || true                   || Defines if tree has collapse capability. ||
+|| ~~collapseAllElement~~  || object|string  || ''                     || Attach a collapse all event to one or more DOM element. Value passed can be either the object representing element or the string used as element selector. When user click on the identified element collapse all element will be trough. This feature can be simply replaced by collapseAll method. ||
 || collapseDuration    || integer        || 500                    || Collapse effect duration in ms. ||
 || collapseEffect      || string         || 'blind'                || Effect to use for node collapse. In case of very big tree, effects can slow down script execution: to fix this problem, set option value to '' to remove effect. Requires jQueryUI. See jQueryUI effect documentation for effect list. ||
 || collapseImage       || string         || ''                     || Image to use as anchor for expanded node. ||
