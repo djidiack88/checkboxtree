@@ -4,15 +4,12 @@
 <wiki:toc />
 
 = Deployment =
-checkboxTree needs jQuery library to work. jQueryUI is required only if you want to improve collapse/expand effects handling.
+checkboxTree needs jQuery 1.4+ and jQueryUI 1.8+ (Core, Effect, Widget) library to work.
 
-For best result, always use last library versions.
-
-Please, note that the script doesn't work with jQuery 1.4.3 and 1.4.4. If you need, you can patch the script as described in issue 20.
 {{{
         <!-- include jQuery libraries -->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.3/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 
         <!-- include checkboxTree plugin -->
         <link rel="stylesheet" type="text/css" href="jquery.checkboxtree.min.css">
