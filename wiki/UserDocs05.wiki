@@ -34,6 +34,7 @@ An online version of checkboxtree plugin is hosted on googlecode and can be dire
 {{{
 <!-- include checkboxTree plugin -->
 <script type="text/javascript" src="http://checkboxtree.googlecode.com/svn/tags/checkboxtree-X.X.X/jquery.checkboxtree.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://checkboxtree.googlecode.com/svn/tags/checkboxtree-X.X.X/jquery.checkboxtree.min.css" />
 }}}
 where X.X.X is desidered release version.
 
