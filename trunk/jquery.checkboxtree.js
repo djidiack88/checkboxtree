@@ -418,12 +418,10 @@ $.widget("daredevel.checkboxTree", {
             return;
         }
 
-        if ($.ui !== undefined) {
-            li.children("ul").hide(this.options.collapseEffect, {}, this.options.collapseDuration);
-        } else {
-            li.children("ul").hide(this.options.collapseDuration);
-        }
         var t = this;
+
+        li.children("ul").hide(this.options.collapseEffect, {}, this.options.collapseDuration);
+        
         setTimeout(function() {
             t._markAsCollapsed(li, t.options);
         }, t.options.collapseDuration);
@@ -457,11 +455,7 @@ $.widget("daredevel.checkboxTree", {
 
         var t = this;
 
-        if ($.ui !== undefined) {
-            li.children("ul").show(t.options.expandEffect, {}, t.options.expandDuration);
-        } else {
-            li.children("ul").show(t.options.expandDuration);
-        }
+        li.children("ul").show(t.options.expandEffect, {}, t.options.expandDuration);
 
         setTimeout(function() {
             t._markAsExpanded(li, t.options);
@@ -538,13 +532,13 @@ $.widget("daredevel.checkboxTree", {
      */
     options: {
         /**
-         * Defines if tree has collapse capability
+         * Defines if tree has collapse capability.
          */
         collapsable: true,
         /**
          * Defines an element of DOM that, if clicked, trigger collapseAll() method.
          * Value can be either a jQuery object or a selector string.
-         * @deprecated will be removed in jquery 0.6
+         * @deprecated will be removed in jquery 0.6.
          */
         collapseAllElement: '',
         /**
@@ -557,12 +551,12 @@ $.widget("daredevel.checkboxTree", {
          */
         collapseEffect: 'blind',
         /**
-         * Defines URL of image used for collapse anchor
-         * @deprecated will be removed in jquery 0.6
+         * Defines URL of image used for collapse anchor.
+         * @deprecated will be removed in jquery 0.6.
          */
         collapseImage: '',
         /**
-         * Defines jQueryUI icon class used for collapse anchor
+         * Defines jQueryUI icon class used for collapse anchor.
          */
         collapseUiIcon: 'ui-icon-triangle-1-e',
 //            dataSourceType: '',
@@ -570,7 +564,7 @@ $.widget("daredevel.checkboxTree", {
         /**
          * Defines an element of DOM that, if clicked, trigger expandAll() method.
          * Value can be either a jQuery object or a selector string.
-         * @deprecated will be removed in jquery 0.6
+         * @deprecated will be removed in jquery 0.6.
          */
         expandAllElement: '',
         /**
@@ -583,12 +577,12 @@ $.widget("daredevel.checkboxTree", {
          */
         expandEffect: 'blind',
         /**
-         * Defines URL of image used for expand anchor
-         * @deprecated will be removed in jquery 0.6
+         * Defines URL of image used for expand anchor.
+         * @deprecated will be removed in jquery 0.6.
          */
         expandImage: '',
         /**
-         * Defines jQueryUI icon class used for expand anchor
+         * Defines jQueryUI icon class used for expand anchor.
          */
         expandUiIcon: 'ui-icon-triangle-1-se',
         /**
@@ -600,12 +594,12 @@ $.widget("daredevel.checkboxTree", {
          */
         initializeUnchecked: 'expanded', // or 'collapsed'
         /**
-         * Defines URL of image used for leaf anchor
-         * @deprecated will be removed in jquery 0.6
+         * Defines URL of image used for leaf anchor.
+         * @deprecated will be removed in jquery 0.6.
          */
         leafImage: '',
         /**
-         * Defines jQueryUI icon class used for leaf anchor
+         * Defines jQueryUI icon class used for leaf anchor.
          */
         leafUiIcon: '',
         /**
@@ -618,19 +612,19 @@ $.widget("daredevel.checkboxTree", {
          */
         onCheck: {
             /**
-             * Available values: null, 'check', 'uncheck', 'checkIfFull'
+             * Available values: null, 'check', 'uncheck', 'checkIfFull'.
              */
             ancestors: 'check',
             /**
-             * Available values: null, 'check', 'uncheck'
+             * Available values: null, 'check', 'uncheck'.
              */
             descendants: 'check',
             /**
-             * Available values: null, 'collapse', 'expand'
+             * Available values: null, 'collapse', 'expand'.
              */
             node: '',
             /**
-             * Available values: null, 'check', 'uncheck'
+             * Available values: null, 'check', 'uncheck'.
              */
             others: ''
         },
@@ -644,19 +638,19 @@ $.widget("daredevel.checkboxTree", {
          */
         onUncheck: {
             /**
-             * Available values: null, 'check', 'uncheck'
+             * Available values: null, 'check', 'uncheck'.
              */
             ancestors: '',
             /**
-             * Available values: null, 'check', 'uncheck'
+             * Available values: null, 'check', 'uncheck'.
              */
             descendants: 'uncheck',
             /**
-             * Available values: null, 'collapse', 'expand'
+             * Available values: null, 'collapse', 'expand'.
              */
             node: '',
             /**
-             * Available values: null, 'check', 'uncheck'
+             * Available values: null, 'check', 'uncheck'.
              */
             others: ''
         }
