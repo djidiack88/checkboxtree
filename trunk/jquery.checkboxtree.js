@@ -159,22 +159,12 @@ $.widget("daredevel.checkboxTree", {
             t.check(li);
         });
 
-        /* add css class */
-        this.element.addClass(this.options.cssClass);
+        /* add essential css class */
+        this.element.addClass('ui-widget-daredevel-checkboxTree');
 
         /* add jQueryUI css widget class */
         this.element.addClass('ui-widget ui-widget-content');
 
-        /* force essential css attributes */
-        this.element.find('li')
-                .css('list-style-type', 'none')
-                .css('position', 'relative');
-        
-        this.element.find('span')
-                .css('cursor', 'default')
-                .css('left', '-16px')
-                .css('position', 'absolute')
-                .css('top', '1px');
     },
 
     /**
@@ -575,11 +565,6 @@ $.widget("daredevel.checkboxTree", {
          * Defines jQueryUI icon class used for collapse anchor
          */
         collapseUiIcon: 'ui-icon-triangle-1-e',
-        /**
-         * Defines a css class for root element of the tree
-         * @deprecated will be removed in jquery 0.6
-         */
-        cssClass: 'checkboxTree',
 //            dataSourceType: '',
 //            dataSourceUrl: '',
         /**
