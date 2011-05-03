@@ -1,8 +1,14 @@
 #summary migrations notes
 
 === Migration from release 0.4 to 0.5 ===
-Working 0.4 releases that don't include deprecated options, should work correctly out of the box with 0.5 version.
-If your configuration include deprecated options, please refer to [#Migration from release 0.3 to 0.4] to remove them.
+First of all, a 0.5 release shouldn't contains deprecated options of 0.4 release: please refer to [#Migration from release 0.3 to 0.4] to remove them.
+
+ * "cssClass" and "container" options have been removed, but can be replaced with code like this:
+{{{
+$('#tree').addClass('cssClassString');
+$('#tree').addClass('containerString');
+}}}
+ where "cssClassString" and "containerString" are your values for removed options.
 
 === Migration from release 0.3 to 0.4 ===
 With release 0.4, I added some new options and marked some other as deprecated (still working, but removed in next release). You can compare documentations: UserDocs03 and UserDocs04
