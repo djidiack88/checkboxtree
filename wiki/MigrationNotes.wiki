@@ -10,6 +10,11 @@ $('#tree').addClass('containerString');
 }}}
  where "cssClassString" and "containerString" are your values for removed options.
 
+ * "collapsed" option has been removed. To replace use the following options:
+   * initializeChecked: 'expanded', initializeUnchecked: 'expanded', // if was collapsed: false;
+   * initializeChecked: 'collapsed', initializeUnchecked: 'collapsed', // if was collapsed: true;
+
+
 === Migration from release 0.3 to 0.4 ===
 With release 0.4, I added some new options and marked some other as deprecated (still working, but removed in next release). You can compare documentations: UserDocs03 and UserDocs04
 
