@@ -65,7 +65,7 @@
     <li><a href="#tabs-1">(01) default behaviour</a></li>
     <li><a href="#tabs-2">(02) collapse images</a></li>
     <li><a href="#tabs-3">(03) auto expand</a></li>
-    <li><a href="#tabs-4">(04) element attach</a></li>
+    <li><a href="#tabs-4">(04) jQueryUI theme customize</a></li>
     <li><a href="#tabs-5">(05) methods usage</a></li>
     <li><a href="#tabs-6">(06) initialization</a></li>
     <li><a href="#tabs-7">(07) check if full</a></li>
@@ -200,22 +200,15 @@
 </div>
 
 <div id="tabs-4">
-    <p>This example show how to add buttons to collapse/expand and check/uncheck all tree's nodes.</p>
+    <p>This example show how to customize jQueryUI theme icons.</p>
     <code class="jquery" lang="text/javascript">
         $('#tree4').checkboxTree({
-            checkAllElement: '#checkAll',
-            collapseAllElement: '#collapseAll',
-            expandAllElement: $('#expandAll'),
-            uncheckAllElement: $('#uncheckAll')
+            collapseUiIcon: 'ui-icon-plus',
+            expandUiIcon: 'ui-icon-minus',
+            leafUiIcon: 'ui-icon-bullet'
         });
     </code>
 
-    <div id="buttons-4"></div>
-    <button id="checkAll">Check All</button>
-    <button id="uncheckAll">Uncheck All</button>
-    <br/>
-    <button id="collapseAll">Collapse All</button>
-    <button id="expandAll">Expand All</button>
     <ul id="tree4">
         <li><input type="checkbox"><label>Root</label>
             <ul>
