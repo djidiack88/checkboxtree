@@ -159,16 +159,6 @@ $.widget("daredevel.checkboxTree", {
             t.check(li);
         });
 
-        /* bind check all element event */
-        $(this.options.checkAllElement).bind("click", function() {
-            t.checkAll();
-        });
-
-        /* bind uncheck all element event */
-        $(this.options.uncheckAllElement).bind("click", function() {
-            t.uncheckAll();
-        });
-
         /* add css class */
         this.element.addClass(this.options.cssClass);
 
@@ -558,12 +548,6 @@ $.widget("daredevel.checkboxTree", {
      */
     options: {
         /**
-         * Defines an element of DOM that, if clicked, trigger checkAll() method.
-         * Value can be either a jQuery object or a selector string.
-         * @deprecated will be removed in jquery 0.6
-         */
-        checkAllElement: '',
-        /**
          * Defines if tree has collapse capability
          */
         collapsable: true,
@@ -690,13 +674,7 @@ $.widget("daredevel.checkboxTree", {
              * Available values: null, 'check', 'uncheck'
              */
             others: ''
-        },
-        /**
-         * Defines an element of DOM that, if clicked, trigger uncheckAll() method.
-         * Value can be either a jQuery object or a selector string.
-         * @deprecated will be removed in jquery 0.6
-         */
-        uncheckAllElement: ''
+        }
     }
 
     /*
