@@ -11,6 +11,10 @@ checkboxTree needs jQuery 1.4+ and jQueryUI 1.8+ (Core, Effect, Widget) library 
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 
+        <!-- include your preferred jQueryUI theme -->
+    <link rel="stylesheet" type="text/css"
+          href="library/jquery-ui-1.8.12.custom/css/smoothness/jquery-ui-1.8.12.custom.css">
+
         <!-- include checkboxTree plugin -->
         <link rel="stylesheet" type="text/css" href="jquery.checkboxtree.min.css">
         <script type="text/javascript" src="jquery.checkboxtree.min.js"></script>
