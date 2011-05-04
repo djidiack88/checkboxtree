@@ -16,7 +16,7 @@ $.widget("daredevel.checkboxTree", {
      *
      * @param parentLi node under which new node will be attached
      */
-    _addNode: function(parentLi) {
+/*    _addNode: function(parentLi) {
         input = $('<input/>', {
             type: 'checkbox'
         });
@@ -45,7 +45,7 @@ $.widget("daredevel.checkboxTree", {
         } else {
             parentLi.find('ul:first').append(li);
         }
-    },
+    },*/
 
     /**
      * Check if all descendant of passed node are checked
