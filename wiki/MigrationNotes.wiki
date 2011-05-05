@@ -1,19 +1,26 @@
 #summary migrations notes
 
 === Migration from release 0.4 to 0.5 ===
-First of all, a 0.5 release shouldn't contains deprecated options of 0.4 release: please refer to [#Migration from release 0.3 to 0.4] to remove them.
+First of all, a 0.5 release shouldn't contains deprecated options of 0.4 release: please refer to [#Migration from release 0.3 to 0.4] to replace them.
 
  * "cssClass" and "container" options have been removed, but can be replaced with code like this:
 {{{
 $('#tree').addClass('cssClassString');
 $('#tree').addClass('containerString');
 }}}
- where "cssClassString" and "containerString" are your values for removed options.
+ where "cssClassString" and "containerString" are your previous values for removed options.
 
  * "collapsed" option has been removed. To replace use the following options:
    * initializeChecked: 'expanded', initializeUnchecked: 'expanded', // if was collapsed: false;
    * initializeChecked: 'collapsed', initializeUnchecked: 'collapsed', // if was collapsed: true;
 
+ * Way of calling method has been changed, so your code should change as follow:
+{{{ 
+// this code:
+$('#tree').collapse(li);
+// should became:
+$('#tree').checkboxTree('collapse', li);
+}}}
 
 === Migration from release 0.3 to 0.4 ===
 With release 0.4, I added some new options and marked some other as deprecated (still working, but removed in next release). You can compare documentations: UserDocs03 and UserDocs04
