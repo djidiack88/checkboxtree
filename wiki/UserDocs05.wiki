@@ -111,8 +111,9 @@ onUncheck: {
     node: '' // or 'collapse', 'expand'
 }
 }}}
+= Events =
 
-= Public methods =
+= Methods =
 
 || check(li)     || Check passed node. ||
 || checkAll()    || Check all nodes. ||
@@ -135,3 +136,5 @@ To call a method that operates on a node, you need to pass the correspondent li 
 tree = $('#tree').checkboxTree();
 tree.collapse($('#nodeIWantToCheck'));
 }}}
+
+= Theming =
