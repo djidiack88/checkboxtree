@@ -111,7 +111,7 @@ onUncheck: {
     node: '' // or 'collapse', 'expand'
 }
 }}}
-= Handling events =
+= Handle events =
 Events can be handled suppling a callback function as an init option:
 {{{
 $( ".selector" ).checkboxTree({
@@ -127,7 +127,7 @@ $( ".selector" ).bind( "checkboxTreecollapse", function(event, ui) {
 
 == Available events ==
 
-= Calling methods =
+= Call methods =
 Methods can be called as follow:
 {{{
 $( ".selector" ).checkboxTree( method, arg1, arg2, ... );
@@ -160,3 +160,9 @@ tree.collapse($('#nodeIWantToCheck'));
 = Theming =
 
 = Support =
+
+== Report bugs ==
+If you find a bug, please report it at [http://code.google.com/p/checkboxtree/issues/list].
+
+== Donate ==
+If you think that my work made you save your time and you want to show you appreciation, or want to support development, please click [https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KWY8ZUCUBGVXG here] to make a donation.
