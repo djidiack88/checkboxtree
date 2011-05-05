@@ -68,6 +68,7 @@ var collapseDuration = $( '.selector' ).dialog( 'option', 'collapseDuration' );
 $( '.selector' ).dialog( 'option', 'collapseDuration', 300);
 }}}
 
+== Available options ==
 The following table contains a list of all available options with a short description. Complex options will be explained below.
 
 ~~Striked~~ options are deprecated: they still working in this release, but will be removed from next release.
