@@ -4,7 +4,7 @@
 <wiki:toc />
 
 = Deployment =
-checkboxTree needs jQuery 1.4+ and jQueryUI 1.8+ (Core, Effect, Widget) library to work.
+checkboxTree needs jQuery 1.4+ and jQueryUI 1.8+ (Core, Effect, Widget) library to work. To deploy it, the following code can be included in html page:
 
 {{{
 <!-- include jQuery and jQueryUI libraries -->
@@ -29,8 +29,7 @@ checkboxTree needs jQuery 1.4+ and jQueryUI 1.8+ (Core, Effect, Widget) library 
 //-->
 </script>
 }}}
-== Online libraries ==
-An online version of checkboxtree plugin is hosted on googlecode and can be directly used including the following code:
+An online version of checkboxtree plugin is hosted on googlecode and can be directly include by using the following code:
 {{{
 <!-- include checkboxTree plugin -->
 <script type="text/javascript" src="http://checkboxtree.googlecode.com/svn/tags/checkboxtree-X.X.X/jquery.checkboxtree.min.js"></script>
@@ -38,8 +37,7 @@ An online version of checkboxtree plugin is hosted on googlecode and can be dire
 }}}
 where X.X.X is desidered release version.
 
-= Configurable options =
-Following options can be specified when checkboxTree is initialized.
+= Options =
 
 ~~Striked~~ options are deprecated: they still working in this release, but will be removed from next release.
 
