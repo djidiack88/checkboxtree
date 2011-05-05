@@ -2,6 +2,16 @@
 #labels Phase-Deploy,Phase-Implementation,Deprecated
 
 <wiki:toc />
+= What's jQuery checkboxTree? =
+
+= Download =
+http://code.google.com/p/checkboxtree/downloads/list
+
+= After download =
+/images/
+/library/
+/index.html
+/minify.sh
 
 = Deployment =
 checkboxTree needs jQuery 1.4+ and jQueryUI 1.8+ (Core, Effect, Widget) library to work. To deploy it, the following code can be included in html page:
@@ -10,9 +20,7 @@ checkboxTree needs jQuery 1.4+ and jQueryUI 1.8+ (Core, Effect, Widget) library 
 <!-- include jQuery and jQueryUI libraries -->
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
-
-<!-- include your preferred jQueryUI theme -->
-<link rel="stylesheet" type="text/css" href="library/jquery-ui-1.8.12.custom/css/smoothness/jquery-ui-1.8.12.custom.css" />
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/smoothness/jquery-ui.css" />
 
 <!-- include checkboxTree plugin -->
 <script type="text/javascript" src="jquery.checkboxtree.min.js"></script>
