@@ -4,7 +4,7 @@
 <wiki:toc />
 = What's jQuery checkboxTree? =
 
-= Download =
+= Downloading =
 http://code.google.com/p/checkboxtree/downloads/list
 
 = After download =
@@ -45,7 +45,7 @@ An online version of checkboxtree plugin is hosted on googlecode and can be dire
 }}}
 where X.X.X is desidered release version.
 
-= Options =
+= Customize to your needs =
 
 ~~Striked~~ options are deprecated: they still working in this release, but will be removed from next release.
 
