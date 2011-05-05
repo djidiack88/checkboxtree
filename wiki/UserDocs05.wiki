@@ -5,7 +5,7 @@
 = What's jQuery checkboxTree? =
 checkboxTree is a jQuery UI widget that you ca use to add advanced features to an html tree (built using nested unordered lists) that contains a checkbox input for each li element.
 
-This guide is designed to help you to deploy and configure version 0.5.x of the widget.
+This guide is designed to help you to deploy and configure version 0.5.x of the widget. If you are migrating from a previous release (0.4.x, 0.3.x, etc.), please check [Changelog] and [MigrationNotes] to get help for upgrade.
 
 == Compatibility ==
 Because of the plugin is build on top of jQuery library, it follows the same [http://docs.jquery.com/Browser_Compatibility browser compatility].
