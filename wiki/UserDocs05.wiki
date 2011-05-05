@@ -49,7 +49,7 @@ An online version of checkboxtree plugin is hosted on googlecode and can be dire
 }}}
 where X.X.X is desidered release version.
 
-= Customize to your needs =
+= Set/get options =
 The widget can be customized by passing option values directly during initialization, in the following way:
 {{{
 // Initialize
