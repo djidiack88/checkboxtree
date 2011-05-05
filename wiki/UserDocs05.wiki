@@ -13,12 +13,12 @@ Because of the plugin is build on top of jQuery library, it follows the same [ht
 As jQueryUI widget, it also follows [http://jqueryui.com/docs/Developer_Guide jQueryUI development guidelines] and can be graphically customized as described in [http://jqueryui.com/docs/Theming jQueryUI theming guide].
 
 = Download =
-Please, download the latest release from [http://code.google.com/p/checkboxtree/downloads/list here]. The package contains development code, mified code, jQuery/jQueryUI library used for development and some demo files.
+Please, download the latest release from [http://code.google.com/p/checkboxtree/downloads/list here]. Package contains development code, mified code, jQuery/jQueryUI library used for development and some demo files.
 
 Alternatively, you can include the script directly from googlecode as described in [#Deployment Deployment section].
 
 = Deployment =
-checkboxTree needs jQuery 1.4+ and jQueryUI 1.8+ (Core, Effect, Widget) library to work. To deploy it, the following code can be included in html page:
+checkboxTree needs jQuery 1.4+ and jQueryUI 1.8+ (Core, Effect, Widget) library to work correctly. To deploy it, the following code can be included in html page:
 
 {{{
 <!-- include jQuery and jQueryUI libraries -->
