@@ -34,7 +34,7 @@ checkboxTree needs jQuery 1.4+ and jQueryUI 1.8+ (Core, Effect, Widget) library 
 <script type="text/javascript">
 //<!--
   $(document).ready(function() {
-    $('#tree').checkboxTree({
+    $('.selector').checkboxTree({
       /* specify here your options */
     });
   });
@@ -50,6 +50,25 @@ An online version of checkboxtree plugin is hosted on googlecode and can be dire
 where X.X.X is desidered release version.
 
 = Customize to your needs =
+The widget can be customized as an ordinary jQueryUI widget by passing option values directly during initialization, in the following way:
+{{{
+// Initialize
+$( '.selector' ).checkboxTree({
+    collapseDuration: 200,
+    expandDuration: 200
+});
+}}}
+
+Alternatively, options value can be get/set after initialization in the following way:
+{{{
+Get or set the collapseDuration option, after init.
+//getter
+var collapseDuration = $( '.selector' ).dialog( 'option', 'collapseDuration' );
+//setter
+$( '.selector' ).dialog( 'option', 'collapseDuration', 300);
+}}}
+
+The following table contains a list of all available options with a short description. Complex options will be explained below.
 
 ~~Striked~~ options are deprecated: they still working in this release, but will be removed from next release.
 
