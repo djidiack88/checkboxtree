@@ -50,7 +50,7 @@ An online version of checkboxtree plugin is hosted on googlecode and can be dire
 where X.X.X is desidered release version.
 
 = Customize to your needs =
-The widget can be customized as an ordinary jQueryUI widget by passing option values directly during initialization, in the following way:
+The widget can be customized by passing option values directly during initialization, in the following way:
 {{{
 // Initialize
 $( '.selector' ).checkboxTree({
@@ -111,9 +111,29 @@ onUncheck: {
     node: '' // or 'collapse', 'expand'
 }
 }}}
-= Events =
+= Handling events =
+Events can be handled suppling a callback function as an init option:
+{{{
+$( ".selector" ).checkboxTree({
+   collapse: function(event, ui) { ... }
+});
+}}}
+Alternatively, you can bind to the event by type: checkboxTree<eventName> as follow:
+{{{
+$( ".selector" ).bind( "checkboxTreecollapse", function(event, ui) {
+  ...
+});
+}}}
 
-= Methods =
+== Available events ==
+
+= Calling methods =
+Methods can be called as follow:
+{{{
+$( ".selector" ).checkboxTree( method, arg1, arg2, ... );
+}}}
+
+== Available methods ==
 
 || check(li)     || Check passed node. ||
 || checkAll()    || Check all nodes. ||
