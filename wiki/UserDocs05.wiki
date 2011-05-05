@@ -138,3 +138,5 @@ tree.collapse($('#nodeIWantToCheck'));
 }}}
 
 = Theming =
+
+= Support =
