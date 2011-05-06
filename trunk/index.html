@@ -34,10 +34,11 @@
     <!-- start checkboxTree configuration -->
     <script type="text/javascript" src="library/jquery-1.4.4.js"></script>
     <script type="text/javascript" src="library/jquery-ui-1.8.12.custom/js/jquery-ui-1.8.12.custom.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="library/jquery-ui-1.8.12.custom/css/smoothness/jquery-ui-1.8.12.custom.css" />
+    <link rel="stylesheet" type="text/css"
+          href="library/jquery-ui-1.8.12.custom/css/smoothness/jquery-ui-1.8.12.custom.css"/>
 
     <script type="text/javascript" src="jquery.checkboxtree.js"></script>
-    <link rel="stylesheet" type="text/css" href="jquery.checkboxtree.css" />
+    <link rel="stylesheet" type="text/css" href="jquery.checkboxtree.css"/>
     <!-- end checkboxTree configuration -->
 
     <script type="text/javascript" src="library/jquery.cookie.js"></script>
@@ -70,7 +71,6 @@
     <li><a href="#tabs-7">(07) check if full</a></li>
     <li><a href="#tabs-8">(08) single branch</a></li>
     <li><a href="#tabs-9">(09) events handling</a></li>
-    <li><a href="#tabs-10">(10) tree manipulation</a></li>
 </ul>
 
 <div id="tabs-1">
@@ -235,14 +235,14 @@
 <div id="tabs-5">
     <p>This example show how to use public methods.</p>
     <code class="jquery" lang="text/javascript">
-        tree = $('#tree5').checkboxTree();
+        $('#tree5').checkboxTree();
 
         $('#tabs-5-checkAll').click(function(){
             $('#tree5').checkboxTree('checkAll');
         });
 
         $('#tabs-5-uncheckAll').click(function(){
-           $('#tree5').checkboxTree('uncheckAll');
+            $('#tree5').checkboxTree('uncheckAll');
         });
 
         $('#tabs-5-collapse').click(function(){
@@ -421,17 +421,22 @@
 
 <div id="tabs-9">
     <p>This example show default script behaviour.</p>
-    <code class="jquery" lang="text/javascript">
+    <code class="jquerya" lang="text/javascript">
         $('#tree9').checkboxTree({
-
+            collapse: function(){
+                alert('collapse event triggered (passed as option)');
+            },
+            expand: function(){
+                alert('collapse event triggered (passed as option)');
+            }
         });
 
         $('#tree9').bind('collapse', function() {
-            alert('collapse event triggered');
+            alert('collapse event triggered (externally binded)');
         });
 
-        $('#tree9').bind('expand', function() {
-            alert('expand event triggered');
+        $('#tree9').bind('checkboxtreeexpand', function() {
+            alert('expand event triggered (externally binded)');
         });
 
     </code>
@@ -449,57 +454,6 @@
                         <li><input type="checkbox"><label>Node 1.2.3</label>
                             <ul>
                                 <li><input type="checkbox"><label>Node 1.2.3.1</label>
-                                <li><input type="checkbox"><label>Node 1.2.3.2</label>
-                            </ul>
-                        <li><input type="checkbox"><label>Node 1.2.4</label>
-                        <li><input type="checkbox"><label>Node 1.2.5</label>
-                        <li><input type="checkbox"><label>Node 1.2.6</label>
-                    </ul>
-            </ul>
-        <li><input type="checkbox"><label>Node 2</label>
-            <ul>
-                <li><input type="checkbox"><label>Node 2.1</label>
-                    <ul>
-                        <li><input type="checkbox"><label>Node 2.1.1</label>
-                    </ul>
-                <li><input type="checkbox"><label>Node 2.2</label>
-                    <ul>
-                        <li><input type="checkbox"><label>Node 2.2.1</label>
-                        <li><input type="checkbox"><label>Node 2.2.2</label>
-                        <li><input type="checkbox"><label>Node 2.2.3</label>
-                            <ul>
-                                <li><input type="checkbox"><label>Node 2.2.3.1</label>
-                                <li><input type="checkbox"><label>Node 2.2.3.2</label>
-                            </ul>
-                        <li><input type="checkbox"><label>Node 2.2.4</label>
-                        <li><input type="checkbox"><label>Node 2.2.5</label>
-                        <li><input type="checkbox"><label>Node 2.2.6</label>
-                    </ul>
-            </ul>
-    </ul>
-</div>
-
-<div id="tabs-10">
-    <p>This example show default script behaviour.</p>
-    <code class="jquery" lang="text/javascript">
-        $('#tree10').checkboxTree();
-
-        $('#tree10').checkboxTree('addNode', $('#y'));
-    </code>
-    <ul id="tree10">
-        <li><input type="checkbox"><label>Node 1</label>
-            <ul>
-                <li><input type="checkbox"><label>Node 1.1</label>
-                    <ul>
-                        <li><input type="checkbox"><label>Node 1.1.1</label>
-                    </ul>
-                <li><input type="checkbox"><label>Node 1.2</label>
-                    <ul>
-                        <li><input type="checkbox"><label>Node 1.2.1</label>
-                        <li><input type="checkbox"><label>Node 1.2.2</label>
-                        <li><input type="checkbox"><label>Node 1.2.3</label>
-                            <ul>
-                                <li id="y"><input type="checkbox"><label>Node 1.2.3.1</label>
                                 <li><input type="checkbox"><label>Node 1.2.3.2</label>
                             </ul>
                         <li><input type="checkbox"><label>Node 1.2.4</label>
