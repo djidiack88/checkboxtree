@@ -421,14 +421,15 @@
 
 <div id="tabs-9">
     <p>This example show default script behaviour.</p>
-    <code class="jquerya" lang="text/javascript">
+    <code class="jquery" lang="text/javascript">
         $('#tree9').checkboxTree({
+/*          Commented because annoying for other examples
             collapse: function(){
                 alert('collapse event triggered (passed as option)');
             },
             expand: function(){
                 alert('collapse event triggered (passed as option)');
-            }
+            }//*/
         });
 
         $('#tree9').bind('collapse', function() {
