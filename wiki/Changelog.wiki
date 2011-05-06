@@ -1,6 +1,6 @@
 #summary releases changelog
 #labels Featured
-=== 0.5 (not released yet) ===
+=== 0.5 ===
  * issue 26: added jQueryUI support and replaced text collapse/expand anchors with jQueryUI icons
  * issue 41: fixed incompatibility with UI/API jQuery
  * issue 38: fixed error on multiple selector usage
