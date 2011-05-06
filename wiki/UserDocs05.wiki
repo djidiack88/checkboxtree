@@ -137,31 +137,35 @@ The following table contains a list of all available options with a short descri
 || initializeUnchecked || string         || 'expanded'             || Defines if unchecked node are collapsed or not at tree initializing. Can be set to 'expanded' or 'collapsed'. ||
 || ~~leafImage~~       || string         || ''                     || Defines URL of image used for leaf anchor. ||
 || leafUiIcon          || string         || ''                      || Defines jQueryUI icon class used for leaf nodes. See jQueryUI themes documentation to discover available icons. ||
-|| onCheck             || object         || [#onCheck Read more]   || Contains operations to perform when a node is checked. [#onCheck Read more] ||
-|| onUncheck           || object         || [#onUncheck Read more] || Contains operations to perform when a node is unchecked. [#onUncheck Read more] ||
+|| onCheck             || object         || [#onCheck Read more]   || Defines which actions trigger when a node is checked. [#onCheck Read more] ||
+|| onUncheck           || object         || [#onUncheck Read more] || Defines which actions trigger when a node is unchecked. [#onUncheck Read more] ||
 
-== onCheck/onUncheck ==
-This two options are objects formed by options:
- * ancestors: specify what should ----- to ancestors of a checked/unchecked node.
- * descendants: specify what should  ---- to descendants of a checked/unchecked node.
- * node: specify what should ----- to a node when user click to check/uncheck it.
+== onCheck ==
+This option is an object composed by following options:
+ || ancestors   || string || 'check' || Defines action to perform on ancestors of the checked node. Available values: null, 'check', 'uncheck', 'checkIfFull'. ||
+ || descendants || string || 'check' || Defines action to perform on descendants of the checked node. Available values: null, 'check', 'uncheck'.              ||
+ || node        || string || ''      || Defines action to perform on checked node. Available values: null, 'collapse', 'expand'.                               ||
+ || other       || string || ''      || Defines action to perform on each other node (checked one excluded). Available values: null, 'check', 'uncheck'.       ||
 
-=== default configuration ===
-{{{
-onCheck: {
-    ancestors: 'check', //or '', 'uncheck', 'checkIfFull'
-    descendants: 'check', //or '', 'uncheck'
-    node: '' // or 'collapse', 'expand'
-},
-}}}
+Actions are triggered in the following order:
+ 1) node
+ 2) others
+ 3) descendants
+ 4) ancestors
 
-{{{
-onUncheck: {
-    ancestors: '', //or 'check', 'uncheck'
-    descendants: 'uncheck', //or '', 'check'
-    node: '' // or 'collapse', 'expand'
-}
-}}}
+== onUncheck ==
+This option is an object composed by following options:
+ || ancestors   || string || ''        || Defines action to perform on ancestors of the unchecked node. Available values: null, 'check', 'uncheck'.          ||
+ || descendants || string || 'uncheck' || Defines action to perform on descendants of the unchecked node. Available values: null, 'check', 'uncheck'.        ||
+ || node        || string || ''        || Defines action to perform on unchecked node. Available values: null, 'collapse', 'expand'.                         ||
+ || other       || string || ''        || Defines action to perform on each other node (unchecked one excluded). Available values: null, 'check', 'uncheck'. ||
+
+Actions are triggered in the following order:
+ 1) node
+ 2) others
+ 3) descendants
+ 4) ancestors
+
 = Handle events =
 Events can be handled suppling a callback function as an init option:
 {{{
