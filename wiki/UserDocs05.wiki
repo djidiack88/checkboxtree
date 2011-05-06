@@ -142,29 +142,33 @@ The following table contains a list of all available options with a short descri
 
 == onCheck ==
 This option is an object composed by following options:
- || ancestors   || string || 'check' || Defines action to perform on ancestors of the checked node. Available values: null, 'check', 'uncheck', 'checkIfFull'. ||
- || descendants || string || 'check' || Defines action to perform on descendants of the checked node. Available values: null, 'check', 'uncheck'.              ||
- || node        || string || ''      || Defines action to perform on checked node. Available values: null, 'collapse', 'expand'.                               ||
- || other       || string || ''      || Defines action to perform on each other node (checked one excluded). Available values: null, 'check', 'uncheck'.       ||
+
+|| *options*           || *type*         || *default value*        || *description* ||
+|| ancestors   || string || 'check' || Defines action to perform on ancestors of the checked node. Available values: null, 'check', 'uncheck', 'checkIfFull'. ||
+|| descendants || string || 'check' || Defines action to perform on descendants of the checked node. Available values: null, 'check', 'uncheck'. ||
+|| node        || string || ''      || Defines action to perform on checked node. Available values: null, 'collapse', 'expand'. ||
+|| other       || string || ''      || Defines action to perform on each other node (checked one excluded). Available values: null, 'check', 'uncheck'. ||
 
 Actions are triggered in the following order:
- 1) node
- 2) others
- 3) descendants
- 4) ancestors
+ # node
+ # others
+ # descendants
+ # ancestors
 
 == onUncheck ==
 This option is an object composed by following options:
- || ancestors   || string || ''        || Defines action to perform on ancestors of the unchecked node. Available values: null, 'check', 'uncheck'.          ||
- || descendants || string || 'uncheck' || Defines action to perform on descendants of the unchecked node. Available values: null, 'check', 'uncheck'.        ||
- || node        || string || ''        || Defines action to perform on unchecked node. Available values: null, 'collapse', 'expand'.                         ||
- || other       || string || ''        || Defines action to perform on each other node (unchecked one excluded). Available values: null, 'check', 'uncheck'. ||
+
+|| *options*           || *type*         || *default value*        || *description* ||
+|| ancestors   || string || ''        || Defines action to perform on ancestors of the unchecked node. Available values: null, 'check', 'uncheck'.          ||
+|| descendants || string || 'uncheck' || Defines action to perform on descendants of the unchecked node. Available values: null, 'check', 'uncheck'.        ||
+|| node        || string || ''        || Defines action to perform on unchecked node. Available values: null, 'collapse', 'expand'.                         ||
+|| other       || string || ''        || Defines action to perform on each other node (unchecked one excluded). Available values: null, 'check', 'uncheck'. ||
 
 Actions are triggered in the following order:
- 1) node
- 2) others
- 3) descendants
- 4) ancestors
+ # node
+ # others
+ # descendants
+ # ancestors
 
 = Handle events =
 Events can be handled suppling a callback function as an init option:
