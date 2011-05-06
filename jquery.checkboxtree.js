@@ -9,43 +9,43 @@
  */
 $.widget("daredevel.checkboxTree", {
 
-    /**
-     * Add a new node as children of passed one
-     *
-     * @private
-     *
-     * @param parentLi node under which new node will be attached
-     */
-/*    _addNode: function(parentLi) {
-        input = $('<input/>', {
-            type: 'checkbox'
-        });
+/**
+ * Add a new node as children of passed one
+ *
+ * @private
+ *
+ * @param parentLi node under which new node will be attached
+ */
+    /*    _addNode: function(parentLi) {
+     input = $('<input/>', {
+     type: 'checkbox'
+     });
 
-        label = $('<label/>', {
-            html: 'new'
-        });
+     label = $('<label/>', {
+     html: 'new'
+     });
 
-        span = $('<span/>', {
-            html: ''
-        });
+     span = $('<span/>', {
+     html: ''
+     });
 
-        li = $('<li/>', {
-            class: 'leaf'
-        });
+     li = $('<li/>', {
+     class: 'leaf'
+     });
 
-        li.append(span).append(input).append(label);
+     li.append(span).append(input).append(label);
 
-        if (parentLi.hasClass('leaf')) {
-            ul = $('<ul/>');
-            span = $('<span/>', {
-                html: '-'
-            });
-            parentLi.append(ul.append(li)).removeClass('leaf').addClass('expanded');
-            span.prependTo(parentLi);
-        } else {
-            parentLi.find('ul:first').append(li);
-        }
-    },*/
+     if (parentLi.hasClass('leaf')) {
+     ul = $('<ul/>');
+     span = $('<span/>', {
+     html: '-'
+     });
+     parentLi.append(ul.append(li)).removeClass('leaf').addClass('expanded');
+     span.prependTo(parentLi);
+     } else {
+     parentLi.find('ul:first').append(li);
+     }
+     },*/
 
     /**
      * Check if all descendant of passed node are checked
@@ -405,7 +405,6 @@ $.widget("daredevel.checkboxTree", {
         $(this.element).find('input:checkbox:not(:checked)').attr('checked', 'checked').change();
     },
 
-
     /**
      * Collapse node
      *
@@ -421,12 +420,12 @@ $.widget("daredevel.checkboxTree", {
         var t = this;
 
         li.children("ul").hide(this.options.collapseEffect, {}, this.options.collapseDuration);
-        
+
         setTimeout(function() {
             t._markAsCollapsed(li, t.options);
         }, t.options.collapseDuration);
 
-        li.trigger('collapse');
+        t._trigger('collapse', li);
     },
 
     /**
@@ -461,7 +460,7 @@ $.widget("daredevel.checkboxTree", {
             t._markAsExpanded(li, t.options);
         }, t.options.expandDuration);
 
-        li.trigger('expand');
+        t._trigger('expand', li);
     },
 
     /**
@@ -612,18 +611,22 @@ $.widget("daredevel.checkboxTree", {
          */
         onCheck: {
             /**
+             * Defines action to perform on ancestors of the checked node.
              * Available values: null, 'check', 'uncheck', 'checkIfFull'.
              */
             ancestors: 'check',
             /**
+             * Defines action to perform on descendants of the checked node.
              * Available values: null, 'check', 'uncheck'.
              */
             descendants: 'check',
             /**
+             * Defines action to perform on checked node.
              * Available values: null, 'collapse', 'expand'.
              */
             node: '',
             /**
+             * Defines action to perform on each other node (checked one excluded).
              * Available values: null, 'check', 'uncheck'.
              */
             others: ''
@@ -638,18 +641,22 @@ $.widget("daredevel.checkboxTree", {
          */
         onUncheck: {
             /**
+             * Defines action to perform on ancestors of the unchecked node.
              * Available values: null, 'check', 'uncheck'.
              */
             ancestors: '',
             /**
+             * Defines action to perform on descendants of the unchecked node.
              * Available values: null, 'check', 'uncheck'.
              */
             descendants: 'uncheck',
             /**
+             * Defines action to perform on unchecked node.
              * Available values: null, 'collapse', 'expand'.
              */
             node: '',
             /**
+             * Defines action to perform on each other node (unchecked one excluded).
              * Available values: null, 'check', 'uncheck'.
              */
             others: ''
