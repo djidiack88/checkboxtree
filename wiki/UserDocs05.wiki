@@ -51,7 +51,7 @@ where X.X.X is desidered release version.
 
 The object to attach the plugin instance to must be a valid nested unordered list containing checkbox inputs. Something like this:
 {{{
-<ul id="tree1">
+<ul id=".selector">
     <li><input type="checkbox"><label>Node 1</label>
         <ul>
             <li><input type="checkbox"><label>Node 1.1</label>
