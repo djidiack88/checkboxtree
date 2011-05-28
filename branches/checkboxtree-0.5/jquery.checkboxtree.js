@@ -57,7 +57,7 @@ $.widget("daredevel.checkboxTree", {
      * @return true if all descendant checked
      */
     _allDescendantChecked: function(li) {
-        return (li.parents('li:first').find('li input:checkbox:not(:checked)').length == 0);
+        return (li.find('li input:checkbox:not(:checked)').length == 0);
     },
 
     /**
@@ -234,7 +234,8 @@ $.widget("daredevel.checkboxTree", {
      * @param li node to check
      */
     _isRoot: function(li) {
-        return ($(li.parents('ul:first'))[0] == $(this.element)[0]);
+        var parents = li.parentsUntil('.ui-widget-daredevel-checkboxTree');
+        return 0 == parents.length;
     },
 
     /**
@@ -388,7 +389,7 @@ $.widget("daredevel.checkboxTree", {
         } else
 
         if (this.options.onCheck.ancestors == 'checkIfFull') {
-            if (this._allDescendantChecked(li) && !this._isRoot(li)) {
+            if (!this._isRoot(li) && this._allDescendantChecked(this._parentNode(li))) {
                 this.check(this._parentNode(li));
             }
         }
