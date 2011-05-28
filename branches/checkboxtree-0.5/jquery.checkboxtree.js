@@ -234,7 +234,7 @@ $.widget("daredevel.checkboxTree", {
      * @param li node to check
      */
     _isRoot: function(li) {
-        return li.parents('ul:first') == this.element;
+        return ($(li.parents('ul:first'))[0] == $(this.element)[0]);
     },
 
     /**
