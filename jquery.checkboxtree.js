@@ -5,47 +5,9 @@
  *
  * @see http://checkboxtree.daredevel.it
  *
- * @version 0.5
+ * @version 0.5.1
  */
 $.widget("daredevel.checkboxTree", {
-
-/**
- * Add a new node as children of passed one
- *
- * @private
- *
- * @param parentLi node under which new node will be attached
- */
-    /*    _addNode: function(parentLi) {
-     input = $('<input/>', {
-     type: 'checkbox'
-     });
-
-     label = $('<label/>', {
-     html: 'new'
-     });
-
-     span = $('<span/>', {
-     html: ''
-     });
-
-     li = $('<li/>', {
-     class: 'leaf'
-     });
-
-     li.append(span).append(input).append(label);
-
-     if (parentLi.hasClass('leaf')) {
-     ul = $('<ul/>');
-     span = $('<span/>', {
-     html: '-'
-     });
-     parentLi.append(ul.append(li)).removeClass('leaf').addClass('expanded');
-     span.prependTo(parentLi);
-     } else {
-     parentLi.find('ul:first').append(li);
-     }
-     },*/
 
     /**
      * Check if all descendant of passed node are checked
@@ -57,7 +19,7 @@ $.widget("daredevel.checkboxTree", {
      * @return true if all descendant checked
      */
     _allDescendantChecked: function(li) {
-        return (li.parents('li:first').find('li input:checkbox:not(:checked)').length == 0);
+        return (li.find('li input:checkbox:not(:checked)').length == 0);
     },
 
     /**
@@ -234,7 +196,8 @@ $.widget("daredevel.checkboxTree", {
      * @param li node to check
      */
     _isRoot: function(li) {
-        return li.parents('ul:first') == this.element;
+        var parents = li.parentsUntil('.ui-widget-daredevel-checkboxTree');
+        return 0 == parents.length;
     },
 
     /**
@@ -388,7 +351,7 @@ $.widget("daredevel.checkboxTree", {
         } else
 
         if (this.options.onCheck.ancestors == 'checkIfFull') {
-            if (this._allDescendantChecked(li) && !this._isRoot(li)) {
+            if (!this._isRoot(li) && this._allDescendantChecked(this._parentNode(li))) {
                 this.check(this._parentNode(li));
             }
         }
@@ -663,15 +626,4 @@ $.widget("daredevel.checkboxTree", {
         }
     }
 
-    /*
-     function descendants(li) {
-     return li.find('li :checkbox:checkbox');
-     }
-
-     function checkParent(li){
-     parentNode(li).find(':checkbox:first:not(:checked)').each(function(){
-     check(this.element.parent('li:first'), this.options);
-     });
-     }
-     //*/
 });

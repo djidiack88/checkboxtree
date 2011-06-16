@@ -38,7 +38,7 @@
           href="library/jquery-ui-1.8.12.custom/css/smoothness/jquery-ui-1.8.12.custom.css"/>
 
     <script type="text/javascript" src="jquery.checkboxtree.js"></script>
-    <link rel="stylesheet" type="text/css" href="jquery.checkboxtree.css"/>
+    <link rel="stylesheet" type="text/css" href="jquery.checkboxtree.min.css"/>
     <!-- end checkboxTree configuration -->
 
     <script type="text/javascript" src="library/jquery.cookie.js"></script>
@@ -432,7 +432,7 @@
             }//*/
         });
 
-        $('#tree9').bind('collapse', function() {
+        $('#tree9').bind('checkboxtreecollapse', function() {
             alert('collapse event triggered (externally binded)');
         });
 
