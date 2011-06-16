@@ -1,5 +1,8 @@
 #summary releases changelog
 #labels Featured
+=== 0.5.1 ==
+ * issue 44: fixed out of stack problem
+ * issue 45: resolved speed problem
 === 0.5 ===
  * issue 26: added jQueryUI support and replaced text collapse/expand anchors with jQueryUI icons
  * issue 41: fixed incompatibility with UI/API jQuery
