@@ -9,44 +9,6 @@
  */
 $.widget("daredevel.checkboxTree", {
 
-/**
- * Add a new node as children of passed one
- *
- * @private
- *
- * @param parentLi node under which new node will be attached
- */
-    /*    _addNode: function(parentLi) {
-     input = $('<input/>', {
-     type: 'checkbox'
-     });
-
-     label = $('<label/>', {
-     html: 'new'
-     });
-
-     span = $('<span/>', {
-     html: ''
-     });
-
-     li = $('<li/>', {
-     class: 'leaf'
-     });
-
-     li.append(span).append(input).append(label);
-
-     if (parentLi.hasClass('leaf')) {
-     ul = $('<ul/>');
-     span = $('<span/>', {
-     html: '-'
-     });
-     parentLi.append(ul.append(li)).removeClass('leaf').addClass('expanded');
-     span.prependTo(parentLi);
-     } else {
-     parentLi.find('ul:first').append(li);
-     }
-     },*/
-
     /**
      * Check if all descendant of passed node are checked
      *
@@ -664,15 +626,4 @@ $.widget("daredevel.checkboxTree", {
         }
     }
 
-    /*
-     function descendants(li) {
-     return li.find('li :checkbox:checkbox');
-     }
-
-     function checkParent(li){
-     parentNode(li).find(':checkbox:first:not(:checked)').each(function(){
-     check(this.element.parent('li:first'), this.options);
-     });
-     }
-     //*/
 });
