@@ -5,7 +5,7 @@
  *
  * @see http://checkboxtree.daredevel.it
  *
- * @version 0.5.1
+ * @version 0.5.2
  */
 $.widget("daredevel.checkboxTree", {
 
