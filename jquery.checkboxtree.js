@@ -5,47 +5,9 @@
  *
  * @see http://checkboxtree.daredevel.it
  *
- * @version 0.6
+ * @version 0.5.2
  */
 $.widget("daredevel.checkboxTree", {
-
-/**
- * Add a new node as children of passed one
- *
- * @private
- *
- * @param parentLi node under which new node will be attached
- */
-    /*    _addNode: function(parentLi) {
-     input = $('<input/>', {
-     type: 'checkbox'
-     });
-
-     label = $('<label/>', {
-     html: 'new'
-     });
-
-     span = $('<span/>', {
-     html: ''
-     });
-
-     li = $('<li/>', {
-     class: 'leaf'
-     });
-
-     li.append(span).append(input).append(label);
-
-     if (parentLi.hasClass('leaf')) {
-     ul = $('<ul/>');
-     span = $('<span/>', {
-     html: '-'
-     });
-     parentLi.append(ul.append(li)).removeClass('leaf').addClass('expanded');
-     span.prependTo(parentLi);
-     } else {
-     parentLi.find('ul:first').append(li);
-     }
-     },*/
 
     /**
      * Check if all descendant of passed node are checked
@@ -177,7 +139,7 @@ $.widget("daredevel.checkboxTree", {
      * @param li node
      */
     _checkAncestors: function(li) {
-        li.parentsUntil(".ui-widget").filter('li').find('input:checkbox:first:not(:checked)').prop('checked', true).change();
+        li.parentsUntil(".ui-widget").filter('li').find('input:checkbox:first:not(:checked)').attr('checked', true).change();
     },
 
     /**
@@ -190,7 +152,7 @@ $.widget("daredevel.checkboxTree", {
      * @param li node
      */
     _checkDescendants: function(li) {
-        li.find('li input:checkbox:not(:checked)').prop('checked', true).change();
+        li.find('li input:checkbox:not(:checked)').attr('checked', true).change();
     },
 
     /**
@@ -203,13 +165,12 @@ $.widget("daredevel.checkboxTree", {
      * @param li node
      */
     _checkOthers: function(li) {
-        var t = this;
         li.addClass('exclude');
         li.parents('li').addClass('exclude');
         li.find('li').addClass('exclude');
         $(this.element).find('li').each(function() {
             if (!$(this).hasClass('exclude')) {
-                $(this).find('input:checkbox:first:not(:checked)').prop('checked', true).change();
+                $(this).find('input:checkbox:first:not(:checked)').attr('checked', true).change();
             }
         });
         $(this.element).find('li').removeClass('exclude');
@@ -312,7 +273,7 @@ $.widget("daredevel.checkboxTree", {
      * @param li node
      */
     _uncheckAncestors: function(li) {
-        li.parentsUntil(".ui-widget").filter('li').find('input:checkbox:first:checked').prop('checked', false).change();
+        li.parentsUntil(".ui-widget").filter('li').find('input:checkbox:first:checked').attr('checked', false).change();
     },
 
     /**
@@ -325,7 +286,7 @@ $.widget("daredevel.checkboxTree", {
      * @param li node
      */
     _uncheckDescendants: function(li) {
-        li.find('li input:checkbox:checked').prop('checked', false).change();
+        li.find('li input:checkbox:checked').attr('checked', false).change();
     },
 
     /**
@@ -343,7 +304,7 @@ $.widget("daredevel.checkboxTree", {
         li.find('li').addClass('exclude');
         $(this.element).find('li').each(function() {
             if (!$(this).hasClass('exclude')) {
-                $(this).find('input:checkbox:first:checked').prop('checked', false).change();
+                $(this).find('input:checkbox:first:checked').attr('checked', false).change();
             }
         });
         $(this.element).find('li').removeClass('exclude');
@@ -358,7 +319,7 @@ $.widget("daredevel.checkboxTree", {
      */
     check: function(li) {
 
-        li.find('input:checkbox:first:not(:checked)').prop('checked', true).change();
+        li.find('input:checkbox:first:not(:checked)').attr('checked', true).change();
 
         // handle others
         if (this.options.onCheck.others == 'check') {
@@ -402,7 +363,7 @@ $.widget("daredevel.checkboxTree", {
      * @public
      */
     checkAll: function() {
-        $(this.element).find('input:checkbox:not(:checked)').prop('checked', true).change();
+        $(this.element).find('input:checkbox:not(:checked)').attr('checked', true).change();
     },
 
     /**
@@ -484,7 +445,7 @@ $.widget("daredevel.checkboxTree", {
      */
     uncheck: function(li) {
 
-        li.find('input:checkbox:first:checked').prop('checked', false).change();
+        li.find('input:checkbox:first:checked').attr('checked', false).change();
 
         // handle others
         if (this.options.onUncheck.others == 'check') {
@@ -523,7 +484,7 @@ $.widget("daredevel.checkboxTree", {
      * @public
      */
     uncheckAll: function() {
-        $(this.element).find('input:checkbox:checked').prop('checked', false).change();
+        $(this.element).find('input:checkbox:checked').attr('checked', false).change();
     },
 
     /**
@@ -663,15 +624,4 @@ $.widget("daredevel.checkboxTree", {
         }
     }
 
-    /*
-     function descendants(li) {
-     return li.find('li :checkbox:checkbox');
-     }
-
-     function checkParent(li){
-     parentNode(li).find(':checkbox:first:not(:checked)').each(function(){
-     check(this.element.parent('li:first'), this.options);
-     });
-     }
-     //*/
 });
