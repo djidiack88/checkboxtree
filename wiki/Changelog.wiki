@@ -1,6 +1,8 @@
 #summary releases changelog
 #labels Featured
-=== 0.5.1 ==
+=== 0.5.2 ===
+ * issue 48: fixed jQuery 1.6 compatibility problem
+=== 0.5.1 ===
  * issue 44: fixed out of stack problem
  * issue 45: resolved speed problem
 === 0.5 ===
