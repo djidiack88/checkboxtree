@@ -29,7 +29,7 @@ $.widget("daredevel.checkboxTree", {
      */
     _create: function() {
 
-        var t = this
+        var t = this;
 
         // setup collapse engine tree
         if (this.options.collapsable) {
@@ -59,7 +59,7 @@ $.widget("daredevel.checkboxTree", {
 
             // bind collapse/expand event
             this.element.find('li span').live("click", function() {
-                li = $(this).parents("li:first");
+                var li = $(this).parents("li:first");
 
                 if (li.hasClass('collapsed')) {
                     t.expand(li);
@@ -165,7 +165,6 @@ $.widget("daredevel.checkboxTree", {
      * @param li node
      */
     _checkOthers: function(li) {
-        var t = this;
         li.addClass('exclude');
         li.parents('li').addClass('exclude');
         li.find('li').addClass('exclude');
@@ -300,7 +299,6 @@ $.widget("daredevel.checkboxTree", {
      * @param li node
      */
     _uncheckOthers: function(li) {
-        var t = this;
         li.addClass('exclude');
         li.parents('li').addClass('exclude');
         li.find('li').addClass('exclude');
